@@ -1,0 +1,293 @@
+-- 유치원 정보 시퀀스
+drop sequence k_seq;
+create sequence k_seq
+	increment by 1
+	start with 1
+	minvalue 1
+	nocache;
+
+
+
+-- 유치원 정보
+
+drop table kindergarten cascade constraints;
+create table kindergarten(
+	k_no number primary key,
+	k_name varchar2(60) not null,
+	k_addr1 varchar2(10) not null,
+	k_addr2 varchar2(100) not null,
+	k_addr3 varchar2(100) not null
+);
+
+select * from kindergarten;
+commit;
+
+
+
+
+-- 직급 테이블
+
+drop table emp cascade constraints;
+create table emp(
+	k_no number,
+	e_no number primary key,
+	e_name varchar2(20) not null
+);
+
+select * from emp;
+commit;
+
+
+
+
+
+-- 회원
+
+drop table user cascade constraints;
+create table teacher(
+	id varchar2(20) primary key, --영소문자 + 숫자 6~20
+	pw varchar2(16) not null, -- 대문자 소문자 숫자 8~16
+	c_no number not null,
+	k_no number not null,
+	e_no number not null,
+	u_name varchar2(30) not null, -- 한글10글자, 영어30자
+	u_hp1 number not null,
+	u_hp2 number not null,
+	u_hp3 number not null,
+	u_rrn1 number not null,
+	u_rrn2 number not null
+);
+
+select * from teacher;
+commit;
+
+
+
+
+-- 교실
+
+drop sequence c_seq;
+create sequence c_seq
+	increment by 1
+	start with 1
+	minvalue 1
+	nocache;
+
+drop table classroom cascade constraints;
+create table classroom(
+	c_no number primary key,
+	c_name varchar2(20) not null,
+	c_age number not null
+);
+
+select * from classroom;
+commit;
+
+
+
+
+-- 학생
+
+drop table student cascade constraints;
+create table student(
+	k_no number,
+	s_no number primary key,
+	s_name varchar2(30) not null,
+	s_birth date not null,
+	gender varchar2(3) default '남' check(gender in('남','여')),
+	entran date default sysdate not null , --입학일
+	addr1 varchar2(10) not null,
+	addr2 varchar2(100) not null,
+	addr3 varchar2(100) not null,
+	img_id varchar2(50),
+	c_no number,
+	dp_id number,
+	note varchar2(100),
+	after varchar2(10) default '참여' check(after in('참여','미참여'))
+);
+
+
+select * from student;
+commit;
+
+
+
+
+-- 학번시퀀스
+
+drop sequence p_seq;
+create sequence p_seq
+	increment by 1
+	start with 1
+	minvalue 1
+	nocache;
+
+
+
+
+-- 학생번호부여 함수 (yy0000)
+-- 값을 넘길 때 (entran, p_seq.nextval)
+
+drop function stunum;
+create or replace function stunum(entran date, seq number)
+return varchar2 as
+
+snum varchar2(10);
+dnum varchar2(10);
+
+
+begin
+	dnum := to_char(entran, 'yy');
+	
+	if seq<10 then snum := dnum || '000'|| to_char(seq);
+	elsif seq<100 then snum := dnum || '00'|| to_char(seq);
+	elsif seq<1000 then snum := dnum || '0'|| to_char(seq);
+	else snum := dnum || '0'|| to_char(seq);
+	
+	end if;
+	
+return snum;
+
+end;
+/
+
+
+-- select stunum('2023-03-10', p_seq.nextval) from dual;
+
+
+
+
+-- 이미지
+
+drop table img cascade constraints;
+create table img(
+	img_id number primary key,
+	img_name varchar2(1000)
+);
+
+select * from img;
+commit;
+
+
+
+
+
+-- 서류
+
+drop table documentpaper cascade constraints;
+create table documentpaper(
+	dp_no number primary key,
+	dp_name varchar2(1000),
+	dpdate date default sysdate not null,
+	dp_category varchar2(50)
+);
+
+select * from documentpaper;
+commit;
+
+
+
+
+-- 가족
+
+drop table family cascade constraints;
+create table family(
+	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	f_relations varchar2(10) not null,
+	f_name varchar2(30) not null,
+	f_birth date,
+	f_hp1 number not null,
+	f_hp2 number not null,
+	f_hp3 number not null
+);
+
+select * from family;
+commit;
+
+
+
+
+-- 신체발달
+
+drop table physicalDev cascade constraints;
+create table physicalDev(
+	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	page varchar2(20) not null,
+	pdate varchar2(20) ,
+	weight number default 0.0,
+	height number default 0.0
+);
+
+select * from physicalDev;
+commit;
+
+
+
+
+
+-- 출결상황
+
+drop table attendManage cascade constraints;
+create table attendManage(
+	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	attend number default 0 check(attend in(0,1)), -- 출석여부
+	absence number default 0 check(absence in(0,1)), -- 결석여부
+	earlier number default 0 check(earlier in(0,1)), -- 조퇴여부 
+	classday number default 180, -- 수업일수
+	adate date default sysdate -- 출결날짜관리
+);
+
+
+select * from attendManage;
+commit;
+
+
+
+
+-- 관찰일지
+
+drop table observe cascade constraints;
+create table observe(
+	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	o_no number primary key,
+	odate date default sysdate not null,
+	o_content varchar2(4000)
+);
+
+
+select * from observe;
+commit;
+
+
+
+
+-- 발달상황
+
+drop table developmental cascade constraints;
+create table developmental(
+	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	d_no number primary key,
+	scope varchar2(100),
+	d_content varchar2(4000),
+	ddate date default sysdate not null
+);
+
+
+select * from developmental;
+commit;
+
+
+
+
+-- 행사
+
+drop table schedule cascade constraints;
+create table schedule(
+	sdate date default sysdate not null,
+	title varchar2(50) not null,
+	s_content varchar2(4000) not null
+);
+
+
+select * from schedule;
+commit;

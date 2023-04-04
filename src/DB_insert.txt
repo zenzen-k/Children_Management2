@@ -1,0 +1,144 @@
+col k_no for 99
+col k_name for a10
+col k_addr1 for a5
+col k_addr2 for a20
+col k_addr3 for a15
+col e_name for a10
+col e_no for 999
+
+
+-- 유치원 정보
+
+insert into kindergarten values(k_seq.nextval, '쌍용유치원', '04001', '서울시 마포구 월드컵북로 21', '풍성빌딩 2층');
+
+select * from kindergarten;
+commit;
+
+
+
+
+-- 직급 테이블 - 원장이 직급 추가(201~시작), 유치원이 추가되면 해당 유치원 번호로 자동 직급테이블 생성됨
+
+insert into emp values(1, 501, '원장');
+insert into emp values(1, 201, '주임교사');
+insert into emp values(1, 202, '담임교사');
+insert into emp values(1, 203, '부담임교사');
+insert into emp values(1, 204, '일반교사');
+
+select * from emp;
+commit;
+
+
+
+
+-- 회원(교사)
+
+
+
+select * from teacher;
+commit;
+
+
+
+
+-- 교실
+
+
+
+select * from classroom;
+commit;
+
+
+
+
+-- 학생
+
+
+
+
+select * from student;
+commit;
+
+
+
+
+
+-- 이미지
+
+
+select * from img;
+commit;
+
+
+
+
+
+-- 서류
+
+
+
+select * from documentpaper;
+commit;
+
+
+
+
+-- 가족
+
+
+
+select * from family;
+commit;
+
+
+
+
+-- 신체발달
+
+
+
+select * from physicalDev;
+commit;
+
+
+
+
+
+-- 출결상황
+
+
+
+select * from attendManage;
+commit;
+
+
+
+
+-- 관찰일지
+
+
+
+
+select * from observe;
+commit;
+
+
+
+
+-- 발달상황
+
+
+
+select * from developmental;
+commit;
+
+
+
+
+-- 행사
+
+
+
+
+select * from schedule;
+commit;

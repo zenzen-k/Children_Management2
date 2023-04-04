@@ -1,0 +1,42 @@
+
+시퀀스 자릿수 맞추기
+
+SELECT LPAD(k_seq.NEXTVAL,4,0) FROM DUAL;
+
+
+
+
+
+-- 만약에 파일관리 추가할거면 파일 카테고리 추가할지/? 정하기
+
+
+
+
+-- 학생번호부여 함수 (yy0000)
+-- 값을 넘길 때 (entran, p_seq.nextval)
+
+drop function stunum;
+create or replace function stunum(entran date, seq number)
+return varchar2 as
+
+snum varchar2(10);
+dnum varchar2(10);
+
+
+begin
+	dnum := to_char(entran, 'yy');
+	
+	if seq<10 then snum := dnum || '000'|| to_char(seq);
+	elsif seq<100 then snum := dnum || '00'|| to_char(seq);
+	elsif seq<1000 then snum := dnum || '0'|| to_char(seq);
+	else snum := dnum || '0'|| to_char(seq);
+	
+	end if;
+	
+return snum;
+
+end;
+/
+
+
+-- select stunum('2023-03-10', p_seq.nextval) from dual;
