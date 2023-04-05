@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<!-- 로그인페이지 -->
 <%
 	String path = request.getContextPath();
 %>
@@ -57,19 +57,19 @@
 									<h5 class="card-title text-center pb-0 fs-4">Login</h5>
 								</div>
 
-								<form class="row g-3" >
+								<form class="row g-3" action="<%=path%>/user/loginProc.jsp" method="post">
 
 									<div class="col-12">
 										<label for="yourUsername" class="form-label">id</label>
 										<div class="input-group has-validation">
-											<input type="text" name="" class="form-control" id="yourUsername" >
+											<input type="text" name="id" class="form-control" id="yourUsername" >
 											<div class="invalid-feedback"></div><!-- 아이디입력하세요 경고창 -->
 										</div>
 									</div>
 
 									<div class="col-12">
 										<label for="yourPassword" class="form-label">Password</label>
-										<input type="password" name="" class="form-control" id="yourPassword" >
+										<input type="password" name="pw" class="form-control" id="yourPassword" >
 										<div class="invalid-feedback"></div><!-- 비밀번호입력하세요 경고창 -->
 									</div>
 

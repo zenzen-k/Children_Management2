@@ -19,11 +19,11 @@ commit;
 
 -- 직급 테이블 - 원장이 직급 추가(201~시작), 유치원이 추가되면 해당 유치원 번호로 자동 직급테이블 생성됨
 
-insert into emp values(1, 501, '원장');
-insert into emp values(1, 201, '주임교사');
-insert into emp values(1, 202, '담임교사');
-insert into emp values(1, 203, '부담임교사');
-insert into emp values(1, 204, '일반교사');
+insert into emp values(501, '원장');
+insert into emp values(201, '주임교사');
+insert into emp values(202, '담임교사');
+insert into emp values(203, '부담임교사');
+insert into emp values(204, '일반교사');
 
 select * from emp;
 commit;
