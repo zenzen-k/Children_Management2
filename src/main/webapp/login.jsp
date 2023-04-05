@@ -32,6 +32,9 @@
 <!-- Template Main CSS File -->
 <link href="<%=path%>/bootstrap/assets/css/style.css" rel="stylesheet">
 
+<!-- js파일 -->    
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/script.js"></script>
 
 <main>
 	<div class="container">
@@ -60,17 +63,17 @@
 								<form class="row g-3" action="<%=path%>/user/loginProc.jsp" method="post">
 
 									<div class="col-12">
-										<label for="yourUsername" class="form-label">id</label>
+										<label for="yourId" class="form-label">id</label>
 										<div class="input-group has-validation">
-											<input type="text" name="id" class="form-control" id="yourUsername" >
-											<div class="invalid-feedback"></div><!-- 아이디입력하세요 경고창 -->
+											<input type="text" name="id" class="form-control" id="yourId" >
+											<div class="msgNone invalid-msgId"></div><!-- 아이디입력하세요 경고창 -->
 										</div>
 									</div>
 
 									<div class="col-12">
 										<label for="yourPassword" class="form-label">Password</label>
 										<input type="password" name="pw" class="form-control" id="yourPassword" >
-										<div class="invalid-feedback"></div><!-- 비밀번호입력하세요 경고창 -->
+										<div class="msgNone invalid-msgPw"></div><!-- 비밀번호입력하세요 경고창 -->
 									</div>
 
 									<div class="col-12">
@@ -78,8 +81,8 @@
 									</div>
 									<div class="col-12" align="center">
 										<p class="small mb-0">
-											<a href="">아이디 찾기</a> / 
-											<a href="">비밀번호 찾기</a>
+											<a href="<%=path%>/user/searchId.jsp">아이디 찾기</a> / 
+											<a href="<%=path%>/user/searchPw.jsp">비밀번호 찾기</a>
 										</p>
 									</div>
 								</form>

@@ -2,7 +2,7 @@
 <%@page import="info.KindergartenDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 회원가입 처리 페이지 -->
+<!-- 관리자 회원가입 처리 페이지 -->
 
 <%
 	request.setCharacterEncoding("UTF-8");

@@ -4,6 +4,7 @@
 
 <%
 	String path = request.getContextPath();
+	int seno = (Integer)session.getAttribute("seno");
 %>
 
 <head>
@@ -86,7 +87,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="<%=path%>/logout.jsp">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>로그아웃</span>
               </a>
@@ -111,7 +112,9 @@
           <span>Home</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
+	
+	
+	<% if(seno == 501) { %>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>유치원관리</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -124,7 +127,7 @@
           </li>
           <li>
             <a href="#">
-              <i class="bi bi-circle"></i><span>교사조회</span>
+              <i class="bi bi-circle"></i><span>교사관리</span>
             </a>
           </li>
           <li>
@@ -134,7 +137,8 @@
           </li>
         </ul>
       </li><!-- End Components Nav -->
-      
+	<% } %>
+	
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-person"></i><span>학생관리</span><i class="bi bi-chevron-down ms-auto"></i>

@@ -51,6 +51,12 @@
 	}
 </style>
 
+<script>
+	function getKname() {
+		return document.getElementsByName("k_name").value;
+	}
+</script>
+
 <!-- 가입 -->    
 <div class="container">
 
@@ -78,90 +84,76 @@
                     <label for="yourId" class="form-label">*아이디</label>
                     <input type="button" onclick="duplicate()" value="중복체크" style="float: right;">
                     <input type="text" name="id" class="form-control" placeholder="영소문자 6~15자" id="yourId" onkeydown="keyId()">
-                    <div id="inv" class="invalid-msgId"></div>
+                    <div id="inv" class="msgNone invalid-msgId"></div>
                   </div>
 				  
                   <div class="col-12">
                     <label for="yourPassword" class="form-label">*비밀번호</label>
-                    <input type="password" name="pw" class="form-control" placeholder="영문자+숫자 8~16자" id="yourPassword" onkeydown="keyPw()">
-                    <div id="inv" class="invalid-msgPw"></div>
+                    <input type="password" name="pw" class="form-control" placeholder="영문자+숫자 8~16자" id="yourPassword" onkeydown="keyNone()">
+                    <div id="inv" class="msgNone invalid-msgPw"></div>
                   </div>
                   
                   <div class="col-12">
                     <label for="yourPassword2" class="form-label">*비밀번호 확인</label>
                     <input type="password" name="pw2" class="form-control" placeholder="영문자+숫자 8~16자" id="yourPassword2" onkeyup="keyPw2()">
-                    <div id="inv" class="invalid-msgPw2"></div>
+                    <div id="inv" class="msgNone invalid-msgPw2"></div>
                   </div>
                   
                   <div class="col-12">
                     <label for="yourName" class="form-label">*이름</label>
-                    <input type="text" name="u_name" class="form-control" id="yourName" onkeydown="keyName()">
-                    <div id="inv" class="invalid-msgName"></div>
+                    <input type="text" name="u_name" class="form-control" id="yourName" onkeydown="keyNone()">
+                    <div id="inv" class="msgNone invalid-msgName"></div>
                   </div>
                   
                   <div class="col-12">
                   	<!-- 라벨 for~ -->
                     <label for="yourRRN" class="form-label" style="display: block;">*주민등록번호</label>
-                    <input type="text" name="u_rrn1" class="form-control" id="yourRRN" style="display: inline; width: 45%" maxlength="6" onkeydown="keyRrn()">
+                    <input type="text" name="u_rrn1" class="form-control" id="yourRRN" style="display: inline; width: 45%" maxlength="6" onkeydown="keyNone()">
                     -
-                    <input type="text" name="u_rrn2" class="form-control" id="yourRRN" style="display: inline; width: 45%" maxlength="7" onkeydown="keyRrn()">
-                    <div id="inv" class="invalid-msgRrn"></div>
+                    <input type="text" name="u_rrn2" class="form-control" id="yourRRN" style="display: inline; width: 45%" maxlength="7" onkeydown="keyNone()">
+                    <div id="inv" class="msgNone invalid-msgRrn"></div>
                   </div>
 
                   <div class="col-12">
                     <label for="yourPhone" class="form-label" style="display: block;">*전화번호</label>
-                    <input type="text" name="u_hp1" class="form-control" id="yourPhone" style="display: inline; width: 30%" maxlength="4" onkeydown="keyHp()">
+                    <input type="text" name="u_hp1" class="form-control" id="yourPhone" style="display: inline; width: 30%" maxlength="4" onkeydown="keyNone()">
                     -
-                    <input type="text" name="u_hp2" class="form-control" id="yourPhone" style="display: inline; width: 30%" maxlength="4" onkeydown="keyHp()">
+                    <input type="text" name="u_hp2" class="form-control" id="yourPhone" style="display: inline; width: 30%" maxlength="4" onkeydown="keyNone()">
                     -
-                    <input type="text" name="u_hp3" class="form-control" id="yourPhone" style="display: inline; width: 30%" maxlength="4" onkeydown="keyHp()">
-                    <div id="inv" class="invalid-msgPhone"></div>
+                    <input type="text" name="u_hp3" class="form-control" id="yourPhone" style="display: inline; width: 30%" maxlength="4" onkeydown="keyNone()">
+                    <div id="inv" class="msgNone invalid-msgPhone"></div>
                   </div>
                   
                   <div class="col-12">
                     <label class="form-label">*유치원 검색</label>
                     <input type="button" onclick="searchKinder()" value="검색하기" style="float: right;">
                     <input type="text" name="k_name" placeholder="유치원 이름을 정확하게 입력하세요" class="form-control">
-                    <div id="inv" class="invalid-msgKinder"></div>
+                    <div id="inv" class="msgNone invalid-msgKinder"></div>
                     
                   </div>
                   
                   <div class="col-12">
                     <label class="form-label">*직급선택</label>
-                    <select name="e_no">
+                    <select name="e_no" style="width: 100%">
                     	<option value="201">주임교사</option>
                     	<option value="202">담임교사</option>
                     	<option value="203">부담임교사</option>
                     	<option value="204">일반교사</option>
                     </select>
-                    <div id="inv" class="invalid-msgEmp"></div>
-                  </div>
-                  
-                  <div class="col-12">
-                    <label class="form-label">*담당 교실 선택</label>
-                    <select name="c_no">
-                    	<%
-                    	KindergartenDao kdao = KindergartenDao.getInstance();
-                    	int k_no = kdao.getKinderByKnum(k_name);
-                    	
-                    	ClassroomDao cdao = ClassroomDao.getInstance();
-                    	ArrayList<ClassroomBean> clist = cdao.getAllClassroom(k_no);
-                    	%>
-                    </select>
-                    <div id="inv" class="invalid-msgEmp"></div>
+                    <div id="inv" class="msgNone invalid-msgEmp"></div>
                   </div>
                   
                   <div class="col-12">
                     <label for="yourEmail" class="form-label">이메일</label>
-                    <input type="email" name="email" class="form-control" id="yourEmail" onkeydown="keyEmail()">
-                    <div id="inv" class="invalid-msgEmail"></div>
+                    <input type="email" name="email" class="form-control" id="yourEmail" onkeydown="keyNone()">
+                    <div id="inv" class="msgNone invalid-msgEmail"></div>
                   </div>
                   
                   <div class="col-12">
                     <div class="form-check">
                       <input class="form-check-input" name="terms" type="checkbox" id="acceptTerms">
                       <label class="form-check-label" for="acceptTerms">약관동의 <a href="#">개인정보 처리 방침 보기</a></label>
-                      <div id="inv" class="invalid-msgTerms"></div>
+                      <div id="inv" class="msgNone invalid-msgTerms"></div>
                     </div>
                   </div>
                   

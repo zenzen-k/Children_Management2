@@ -13,19 +13,44 @@
  var rrnCheckNum = false;
  var hpCheckNum = false;
  
+ function Chk(){
+	//alert(1);
+	//return false;
+	if($('input[name=u_name]').val()==""){
+		$(".invalid-msgName").html('이름을 입력하세요').show();
+		$('input[name=u_name]').focus();
+		return false;
+	}
+	if($('input[name=email]').val()==""){
+		$(".invalid-msgEmail").html('이메일을 입력하세요').show();
+		$('input[name=email]').focus();
+		return false;
+	}
+ }
+ 
  function validationChk(){
 	//alert(1);
+	/*if($('input[name=id]').val()==undefined){
+		alert("u");
+		return false;
+	}
+	alert("u2");
+	return false;*/
+	
 	//id
 	if($('input[name=id]').val()==""){
 		$(".invalid-msgId").html('아이디를 입력하세요').show();
 		$('input[name=id]').focus();
 		return false;
 	}
+	
 	if($('input[name=id]').val().length<6 || $('input[name=id]').val().length>15){
 		$(".invalid-msgId").html('아이디는 6~15자 가능합니다.').show();
 		$('input[name=id]').focus();
 		return false;
 	}
+	//alert("u2");
+	//return false;
 	if($('input[name=id]').val().length<4){
 		$(".invalid-msgId").html('아이디는 6~20자 가능합니다.').show();
 		$('input[name=id]').focus();
@@ -298,17 +323,21 @@ function searchKinder(){
 
 //키보드눌렀을때 48~57 e.keyCode => 
 //e.target.value -> input 입력된ㄹ거
+function keyNone(){
+	$(".msgNone").css('display','none');
+}
+
 function keyId(){
 	//alert(e);
-	$(".invalid-msgId").css('display','none');
+	keyNone();
+	//$(".invalid-msgId").css('display','none');
 	use = "";
 	isCheck = false;
 }
-function keyPw(){
-	$(".invalid-msgPw").css('display','none');
-}
+
 function keyPw2(){
-	$(".invalid-msgPw2").css('display','none');
+	keyNone();
+	//$(".invalid-msgPw2").css('display','none');
 	
 	if($('input[name=pw]').val()!=$('input[name=pw2]').val()){
 		$(".invalid-msgPw2").html('입력된 비밀번호가 다릅니다.').show();
@@ -319,23 +348,5 @@ function keyPw2(){
 		$('input[name=pw2]').focus();
 		pwCheckNum = true;
 	}
+}
 
-}
-function keyName(){
-	$(".invalid-msgName").css('display','none');
-}
-function keyRrn(){
-	$(".invalid-msgRrn").css('display','none');
-}
-function keyHp(){
-	$(".invalid-msgPhone").css('display','none');
-}
-function keyKinder(){
-	$(".invalid-msgKinder").css('display','none');
-}
-function keyAddr(){
-	$(".invalid-msgAddr").css('display','none');
-}
-function keyEmail(){
-	$(".invalid-msgEmail").css('display','none');
-}

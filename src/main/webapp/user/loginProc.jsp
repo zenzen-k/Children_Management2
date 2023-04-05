@@ -15,6 +15,7 @@
 	
 	if(ub!=null && ub.getApproval().equals("Y")){
 		session.setAttribute("sid", ub.getId());
+		session.setAttribute("seno", ub.getE_no());
 		msg = "로그인 성공";
 		url = request.getContextPath() + "/userPage/home.jsp";
 	}else if(ub!=null && ub.getApproval().equals("N")){

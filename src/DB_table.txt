@@ -46,7 +46,7 @@ drop table users cascade constraints;
 create table users(
 	id varchar2(20) primary key, --영소문자 + 숫자 6~20
 	pw varchar2(16) not null, -- 대문자 소문자 숫자 8~16
-	c_no number not null, -- 관리자는 0
+	c_no number not null, -- 관리자는 0, 교사 기본값은 1, 교사관리 페이지에서 설정 가능.
 	k_no number not null,
 	e_no number not null,
 	u_name varchar2(30) not null, -- 한글10글자, 영어30자
@@ -71,8 +71,7 @@ commit;
 drop sequence c_seq;
 create sequence c_seq
 	increment by 1
-	start with 1
-	minvalue 1
+	start with 2
 	nocache;
 
 drop table classroom cascade constraints;
