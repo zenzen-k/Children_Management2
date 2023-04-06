@@ -1,3 +1,4 @@
+<%@page import="info.EmpDao"%>
 <%@page import="info.UsersBean"%>
 <%@page import="info.UsersDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,7 @@
 	
 	UsersDao udao = UsersDao.getInstance();
 	UsersBean ub = udao.getUserInfo(id, pw);
+	EmpDao edao = EmpDao.getInstance();
 	
 	String msg = "";
 	String url = "";
@@ -16,6 +18,7 @@
 	if(ub!=null && ub.getApproval().equals("Y")){
 		session.setAttribute("sid", ub.getId());
 		session.setAttribute("seno", ub.getE_no());
+		session.setAttribute("sename", edao.getEnameByEnum(ub.getE_no()));
 		msg = "로그인 성공";
 		url = request.getContextPath() + "/userPage/home.jsp";
 	}else if(ub!=null && ub.getApproval().equals("N")){

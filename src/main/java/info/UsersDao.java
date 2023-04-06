@@ -51,11 +51,11 @@ public class UsersDao {
 			ps.setInt(4, ub.getK_no());
 			ps.setInt(5, ub.getE_no());
 			ps.setString(6, ub.getU_name());
-			ps.setInt(7, ub.getU_hp1());
-			ps.setInt(8, ub.getU_hp2());
-			ps.setInt(9, ub.getU_hp3());
-			ps.setInt(10, ub.getU_rrn1());
-			ps.setInt(11, ub.getU_rrn2());
+			ps.setString(7, ub.getU_hp1());
+			ps.setString(8, ub.getU_hp2());
+			ps.setString(9, ub.getU_hp3());
+			ps.setString(10, ub.getU_rrn1());
+			ps.setString(11, ub.getU_rrn2());
 			ps.setString(12, ub.getEmail());
 			ps.setString(13, ub.getApproval());
 			ps.setString(14, ub.getTerms());
@@ -63,6 +63,13 @@ public class UsersDao {
 			cnt = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return cnt;
 	}
@@ -110,18 +117,82 @@ public class UsersDao {
 				ub.setK_no(rs.getInt("k_no"));
 				ub.setE_no(rs.getInt("e_no"));
 				ub.setU_name(rs.getString("u_name"));
-				ub.setU_hp1(rs.getInt("u_hp1"));
-				ub.setU_hp2(rs.getInt("u_hp2"));
-				ub.setU_hp3(rs.getInt("u_hp3"));
-				ub.setU_rrn1(rs.getInt("u_rrn1"));
-				ub.setU_rrn2(rs.getInt("u_rrn2"));
+				ub.setU_hp1(rs.getString("u_hp1"));
+				ub.setU_hp2(rs.getString("u_hp2"));
+				ub.setU_hp3(rs.getString("u_hp3"));
+				ub.setU_rrn1(rs.getString("u_rrn1"));
+				ub.setU_rrn2(rs.getString("u_rrn2"));
 				ub.setEmail(rs.getString("email"));
 				ub.setApproval(rs.getString("approval"));
 				ub.setTerms(rs.getString("terms"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return ub;
 	}
+	
+	//id찾기
+	public String getSearchId(String u_name, String email) {
+		String id = null;
+		String sql = "select id from users where u_name=? and email=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, u_name);
+			ps.setString(2, email);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				id = rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return id;
+	}
+	
+	//pw찾기
+		public String getSearchPw(String id, String u_name, String email) {
+			String pw = null;
+			String sql = "select pw from users where id=? and u_name=? and email=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setString(2, u_name);
+				ps.setString(3, email);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					pw = rs.getString("pw");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(ps!=null)
+						ps.close();
+					if(rs!=null)
+						rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return pw;
+		}
 }

@@ -16,6 +16,11 @@
  function Chk(){
 	//alert(1);
 	//return false;
+	if($('input[name=id]').val()==""){
+		$(".invalid-msgId").html('아이디를 입력하세요').show();
+		$('input[name=id]').focus();
+		return false;
+	}
 	if($('input[name=u_name]').val()==""){
 		$(".invalid-msgName").html('이름을 입력하세요').show();
 		$('input[name=u_name]').focus();

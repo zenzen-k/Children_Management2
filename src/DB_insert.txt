@@ -17,7 +17,7 @@ commit;
 
 
 
--- 직급 테이블 - 원장이 직급 추가(201~시작), 유치원이 추가되면 해당 유치원 번호로 자동 직급테이블 생성됨
+-- 직급 테이블
 
 insert into emp values(501, '원장');
 insert into emp values(201, '주임교사');
@@ -31,18 +31,21 @@ commit;
 
 
 
--- 회원(교사)
+-- 회원
+insert into users values('admin123','asdasd11', 0, 1, 501, '김원장', '010', '1234', '1234', '123456', '1234567', 'admin123@naver.com', 'Y', 'Y');
+insert into users values('kim123','asdasd11', 1, 1, 201, '김주임', '010', '1234', '1234', '123456', '1234567', 'kim123@naver.com', 'Y', 'Y');
 
 
-
-select * from teacher;
+select * from users;
 commit;
 
 
 
 
 -- 교실
-
+insert into classroom values(1, c_seq.nextval, '새싹반', 3);
+insert into classroom values(1, c_seq.nextval, '개나리반', 4);
+insert into classroom values(1, c_seq.nextval, '햇님반', 5);
 
 
 select * from classroom;

@@ -50,11 +50,11 @@ create table users(
 	k_no number not null,
 	e_no number not null,
 	u_name varchar2(30) not null, -- 한글10글자, 영어30자
-	u_hp1 number not null,
-	u_hp2 number not null,
-	u_hp3 number not null,
-	u_rrn1 number not null,
-	u_rrn2 number not null,
+	u_hp1 varchar2(4) not null,
+	u_hp2 varchar2(4) not null,
+	u_hp3 varchar2(4) not null,
+	u_rrn1 varchar2(6) not null,
+	u_rrn2 varchar2(7) not null,
 	email varchar2(30),
 	approval varchar2(2) default 'N' check(approval in('Y','N')) not null, -- 승인
 	terms varchar2(2) default 'N' check(terms in('Y','N')) not null -- 약관동의
@@ -105,7 +105,8 @@ create table student(
 	c_no number,
 	dp_id number,
 	note varchar2(100),
-	after varchar2(10) default '참여' check(after in('참여','미참여'))
+	after varchar2(10) default '참여' check(after in('참여','미참여')),
+	imgname varchar2(1000)
 );
 
 
@@ -155,23 +156,6 @@ end;
 
 
 -- select stunum('2023-03-10', p_seq.nextval) from dual;
-
-
-
-
--- 이미지
-
-drop table img cascade constraints;
-create table img(
-	img_id number primary key,
-	img_name varchar2(1000)
-);
-
-select * from img;
-commit;
-
-
-
 
 
 -- 서류
