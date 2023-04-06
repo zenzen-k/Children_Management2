@@ -42,7 +42,7 @@ public class ClassroomDao {
 	//유치원별 전체 반 조회
 	public ArrayList<ClassroomBean> getAllClassroom(int k_no){
 		ArrayList<ClassroomBean> clist = new ArrayList<ClassroomBean>();
-		String sql = "select * from classroom where k_no=? and c_age>0 order by c_age";
+		String sql = "select * from classroom where k_no=? and c_age>0 order by c_age, c_name";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, k_no);
@@ -86,7 +86,39 @@ public class ClassroomDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return cb;
+	}
+	
+	// 유치원등록하기
+	public int insertCroom(ClassroomBean cb) {
+		int cnt = -1;
+		String sql = "insert into classroom values(?, c_seq.nextval, ?, ?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cb.getK_no());
+			ps.setString(2, cb.getC_name());
+			ps.setInt(3, cb.getC_age());
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
 	}
 }

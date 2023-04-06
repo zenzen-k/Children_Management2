@@ -19,7 +19,7 @@
 	UsersDao udao = UsersDao.getInstance();
 	int cnt =udao.updateUser(ub);
 
-	String msg = "";
+	String msg = "수정 실패";
 	String url = request.getContextPath() + "/userPage/user_profile.jsp";
 	
 	if(cnt == 1){
