@@ -3,7 +3,7 @@
 
 <%@ include file="home_top.jsp"%>
 
-<title>Home / Management / ClassroomUpdate</title>
+<title>Home / Management / ClassroomInsert</title>
 <div class="pagetitle">
 	<h1>교실관리</h1>
 	<nav>

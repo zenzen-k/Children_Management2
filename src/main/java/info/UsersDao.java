@@ -311,8 +311,56 @@ public class UsersDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return ulist;
 	}
 	
+	// 유치원 전체 교사 조회 (원장 제외)
+	public ArrayList<UsersBean> getAllUser(int skno){
+		ArrayList<UsersBean> ulist = new ArrayList<UsersBean>();
+		String sql = "select * from users where e_no > 505 and k_no=" + skno;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				UsersBean ub = new UsersBean();
+				ub.setId(rs.getString("id"));
+				ub.setPw(rs.getString("pw"));
+				ub.setC_no(rs.getInt("c_no"));
+				ub.setK_no(rs.getInt("k_no"));
+				ub.setE_no(rs.getInt("e_no"));
+				ub.setU_name(rs.getString("u_name"));
+				ub.setU_hp1(rs.getString("u_hp1"));
+				ub.setU_hp2(rs.getString("u_hp2"));
+				ub.setU_hp3(rs.getString("u_hp3"));
+				ub.setU_rrn1(rs.getString("u_rrn1"));
+				ub.setU_rrn2(rs.getString("u_rrn2"));
+				ub.setEmail(rs.getString("email"));
+				ub.setApproval(rs.getString("approval"));
+				ub.setTerms(rs.getString("terms"));
+				ulist.add(ub);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ulist;
+	}
 }

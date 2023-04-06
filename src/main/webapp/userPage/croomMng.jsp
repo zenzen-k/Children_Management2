@@ -73,7 +73,7 @@
 									</td>
 									<td>만 <%=clist.get(i).getC_age()%>세</td>
 									<td>
-										<button type="button" class="btn btn-outline-danger btn-sm">수정</button>
+										<button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='croom_update.jsp?c_no=<%=clist.get(i).getC_no()%>'">수정</button>
 									</td>
 								</tr>
 							<%}%>
