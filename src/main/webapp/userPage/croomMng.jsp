@@ -5,6 +5,10 @@
 
 <%@ include file="home_top.jsp"%>
 
+<!-- js파일 -->    
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/userPage/script.js"></script>
+
 <%
 	ArrayList<ClassroomBean> clist = cdao.getAllClassroom(skno);
 %>
@@ -29,14 +33,16 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">교실조회</h5>
-					<button type="button" class="btn btn-outline-primary" style="float: right;" onclick="location.href=''">선택삭제</button>
+					<button type="button" class="btn btn-outline-primary" style="float: right;" onclick="delSelct()">선택삭제</button>
 					<button type="button" class="btn btn-outline-primary" style="float: right; margin-right: 20" onclick="location.href='croom_Insert.jsp'">교실등록</button>
 					<!-- Table with stripped rows -->
+					
+					<form name="f" action="croom_deleteProc.jsp">
 					<table class="table " style="text-align: center;"><!-- datatable -->
 						<thead>
 							<tr>
 								<th scope="col">
-									<input class="form-check-input me-1" type="checkbox" name="allchk">
+									<input class="form-check-input me-1" type="checkbox" name="allchk" onclick="delAll()">
 								</th>
 								<th scope="col">No</th>
 								<th scope="col">교실명</th>
@@ -49,7 +55,7 @@
 							<%for(int i=0; i<clist.size(); i++){%>
 								<tr>
 									<td>
-										<input class="form-check-input me-1" type="checkbox" name="">
+										<input class="form-check-input me-1" type="checkbox" name="rowchk" value="<%=clist.get(i).getC_no()%>">
 									</td>
 									<th><%=i+1%></th>
 									<td><%=clist.get(i).getC_name()%></td>
@@ -73,6 +79,7 @@
 							<%}%>
 						</tbody>
 					</table>
+					</form>
 					<!-- End Table with stripped rows -->
 
 				</div>

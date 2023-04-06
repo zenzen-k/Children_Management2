@@ -99,7 +99,7 @@ public class ClassroomDao {
 		return cb;
 	}
 	
-	// 유치원등록하기
+	// 교실등록하기
 	public int insertCroom(ClassroomBean cb) {
 		int cnt = -1;
 		String sql = "insert into classroom values(?, c_seq.nextval, ?, ?)";
@@ -110,6 +110,34 @@ public class ClassroomDao {
 			ps.setInt(3, cb.getC_age());
 			cnt = ps.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	//교시ㅣㄹ삭제
+	public int deleteCroom(int skno, String[] no) {
+		int cnt = 0;
+		String sql = "delete classroom where k_no=? and c_no=? ";
+		if(no.length > 1) {
+			sql += "or no=? ";
+		}
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, skno);
+			for(int i=0; i<no.length; i++) {
+				ps.setString(i+2, no[i]);
+				cnt = ps.executeUpdate();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
