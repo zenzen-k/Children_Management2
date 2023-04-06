@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -91,7 +92,7 @@ public class KindergartenDao {
 	}
 	
 	// 유치원번호 조회하기
-	public int getKinderByKnum(String k_name) {
+	public int getKinderByKname(String k_name) {
 		int result = 0;
 		String sql = "select k_no from kindergarten where k_name=?";
 		try {
@@ -114,5 +115,75 @@ public class KindergartenDao {
 			}
 		}
 		return result;
+	}
+	
+	// 유치원 정보 불러오기
+	public KindergartenBean getKinderByKno(int k_no) {
+		KindergartenBean kb = null;
+		String sql = "select * from kindergarten where k_no=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, k_no);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				kb = new KindergartenBean();
+				kb.setK_no(k_no);
+				kb.setK_name(rs.getString("k_name"));
+				kb.setK_addr1(rs.getString("k_addr1"));
+				kb.setK_addr2(rs.getString("k_addr2"));
+				kb.setK_addr3(rs.getString("k_addr3"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return kb;
+	}
+	
+	//유치원 학급별 인원수
+	public ArrayList<KindergartenBean> getCountByK(int skno) {
+		ArrayList<KindergartenBean> kList = new ArrayList<KindergartenBean>();
+		String sql = "select c_age, cnt from "
+				+ "(select * from  "
+				+ "(select c_age, c.c_no as cno from student s full outer join classroom c on c.c_no=s.c_no order by c_age) "
+				+ "where c_age>0) s  "
+				+ "full outer join  "
+				+ "(select c_no, count(*) as cnt from student where k_no=? GROUP BY c_no) c  "
+				+ "on s.cno=c.c_no ";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, skno);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				KindergartenBean kb = new KindergartenBean();
+				int cnt = rs.getInt("cnt");
+				String c_age = rs.getString("c_age");
+				
+				kb.setK_no(cnt);
+				kb.setK_name(c_age);
+				
+				kList.add(kb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return kList;
 	}
 }

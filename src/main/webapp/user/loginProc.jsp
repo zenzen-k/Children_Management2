@@ -9,7 +9,7 @@
 	String pw = request.getParameter("pw");
 	
 	UsersDao udao = UsersDao.getInstance();
-	UsersBean ub = udao.getUserInfo(id, pw);
+	UsersBean ub = udao.getUserLogin(id, pw); 
 	EmpDao edao = EmpDao.getInstance();
 	
 	String msg = "";
@@ -18,6 +18,7 @@
 	if(ub!=null && ub.getApproval().equals("Y")){
 		session.setAttribute("sid", ub.getId());
 		session.setAttribute("seno", ub.getE_no());
+		session.setAttribute("skno", ub.getK_no());
 		session.setAttribute("sename", edao.getEnameByEnum(ub.getE_no()));
 		msg = "로그인 성공";
 		url = request.getContextPath() + "/userPage/home.jsp";

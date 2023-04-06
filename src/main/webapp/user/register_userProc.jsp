@@ -34,7 +34,7 @@
 	
 	KindergartenDao kdao = KindergartenDao.getInstance();
 	UsersDao udao = UsersDao.getInstance();
-	int result = kdao.getKinderByKnum(kb.getK_name());
+	int result = kdao.getKinderByKname(kb.getK_name());
 	ub.setK_no(result);
 	
 	String msg = "";

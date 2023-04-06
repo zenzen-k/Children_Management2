@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -101,13 +102,12 @@ public class UsersDao {
 	}
 	
 	// 회원정보 가져오기
-	public UsersBean getUserInfo(String id, String pw) {
+	public UsersBean getUserInfo(String id) {
 		UsersBean ub = null;
-		String sql = "select * from users where id=? and pw=?";
+		String sql = "select * from users where id=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
-			ps.setString(2, pw);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				ub = new UsersBean();
@@ -141,6 +141,47 @@ public class UsersDao {
 		return ub;
 	}
 	
+	// 로그인
+		public UsersBean getUserLogin(String id, String pw) {
+			UsersBean ub = null;
+			String sql = "select * from users where id=? and pw=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setString(2, pw);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					ub = new UsersBean();
+					ub.setId(rs.getString("id"));
+					ub.setPw(rs.getString("pw"));
+					ub.setC_no(rs.getInt("c_no"));
+					ub.setK_no(rs.getInt("k_no"));
+					ub.setE_no(rs.getInt("e_no"));
+					ub.setU_name(rs.getString("u_name"));
+					ub.setU_hp1(rs.getString("u_hp1"));
+					ub.setU_hp2(rs.getString("u_hp2"));
+					ub.setU_hp3(rs.getString("u_hp3"));
+					ub.setU_rrn1(rs.getString("u_rrn1"));
+					ub.setU_rrn2(rs.getString("u_rrn2"));
+					ub.setEmail(rs.getString("email"));
+					ub.setApproval(rs.getString("approval"));
+					ub.setTerms(rs.getString("terms"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(ps!=null)
+						ps.close();
+					if(rs!=null)
+						rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return ub;
+		}
+	
 	//id찾기
 	public String getSearchId(String u_name, String email) {
 		String id = null;
@@ -169,30 +210,109 @@ public class UsersDao {
 	}
 	
 	//pw찾기
-		public String getSearchPw(String id, String u_name, String email) {
-			String pw = null;
-			String sql = "select pw from users where id=? and u_name=? and email=?";
+	public String getSearchPw(String id, String u_name, String email) {
+		String pw = null;
+		String sql = "select pw from users where id=? and u_name=? and email=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, u_name);
+			ps.setString(3, email);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				pw = rs.getString("pw");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, id);
-				ps.setString(2, u_name);
-				ps.setString(3, email);
-				rs = ps.executeQuery();
-				if(rs.next()) {
-					pw = rs.getString("pw");
-				}
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					if(ps!=null)
-						ps.close();
-					if(rs!=null)
-						rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			}
+		}
+		return pw;
+	}
+	
+	//정보수정
+	public int updateUser(UsersBean ub) {
+		int cnt = -1;
+		String sql = "update users set email=?, u_hp1=?, u_hp2=?, u_hp3=? where id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, ub.getEmail());
+			ps.setString(2, ub.getU_hp1());
+			ps.setString(3, ub.getU_hp2());
+			ps.setString(4, ub.getU_hp3());
+			ps.setString(5, ub.getId());
+			
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	//비밀번호 수정
+	public int updatePw(String id, String pw, String newpw) {
+		int cnt = -1;
+		String sql = "select pw from users where id = ?";
+		String sql2 = "update users set pw=? where id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("pw").equals(pw)) {
+					ps = conn.prepareStatement(sql2);
+					ps.setString(1, newpw);
+					ps.setString(2, id);
+					cnt = ps.executeUpdate();
+				}else {
+					cnt = -2;
 				}
 			}
-			return pw;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		return cnt;
+	}
+	
+	//담당교사별이름,직급 구하기
+	public ArrayList<UsersBean> getUnameByCno(int cno) {
+		ArrayList<UsersBean> ulist = new ArrayList<UsersBean>();
+		String sql = "select u_name, e_name from emp natural join (select u_name, e_no, k_no from users where c_no = ?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cno);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				UsersBean ub = new UsersBean();
+				ub.setU_name(rs.getString("u_name"));
+				ub.setId(rs.getString("e_name"));
+				ulist.add(ub);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ulist;
+	}
+	
 }

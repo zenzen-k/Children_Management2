@@ -42,7 +42,7 @@ public class ClassroomDao {
 	//유치원별 전체 반 조회
 	public ArrayList<ClassroomBean> getAllClassroom(int k_no){
 		ArrayList<ClassroomBean> clist = new ArrayList<ClassroomBean>();
-		String sql = "select * from classroom where k_no=?";
+		String sql = "select * from classroom where k_no=? and c_age>0 order by c_age";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, k_no);
@@ -69,5 +69,24 @@ public class ClassroomDao {
 			}
 		}
 		return clist;
+	}
+	
+	//개인 담당 반 조회
+	public ClassroomBean getClassByCno(int c_no) {
+		ClassroomBean cb = new ClassroomBean();
+		String sql = "select * from classroom where c_no=" + c_no;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				cb.setK_no(rs.getInt("k_no"));
+				cb.setC_no(rs.getInt("c_no"));
+				cb.setC_name(rs.getString("c_name"));
+				cb.setC_age(rs.getInt("c_age"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cb;
 	}
 }

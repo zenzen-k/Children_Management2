@@ -1,7 +1,18 @@
+<%@page import="info.KindergartenBean"%>
+<%@page import="info.EmpBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 메인홈 -->
 <%@ include file="home_top.jsp" %>
+
+<%
+	ArrayList<EmpBean> elist = edao.getAllEmp(); // 전체 직급 가져오기
+	ArrayList<EmpBean> ecntList = edao.getCountByEmp(skno); // 유치원 전체 직급별 교사 인원 수
+	ArrayList<KindergartenBean> kcntList = kdao.getCountByK(skno); // 유치원 전체 반별 유아 인원 수
+	
+	int sum = 0;
+%> 
 
   <title>Home</title>
 
@@ -31,25 +42,26 @@
                 <div class="card-body">
                   <h5 class="card-title">유치원 현황</h5>
                     <div class="ps-3">
+					  
+					  <table width="100%" >
+					  	<%
+					  	for(KindergartenBean kb : kcntList){
+					  		sum += kb.getK_no();
+					  	%>
+						  	<tr class="text-muted small pt-2 ps-1">
+						  		<td align="center" width="40%">만 <%=kb.getK_name() %>세</td>
+						  		<td align="center"><span class="text-success small pt-1 fw-bold"><%=kb.getK_no() %></span>명</td>
+						  	</tr>
+					  	<%
+					  	}
+					  	%>
+					  </table>
+					  <hr>
+					  
 					  <table width="100%">
 					  	<tr class="text-muted small pt-2 ps-1">
 					  		<td align="center" width="40%">총원</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
-					  	</tr>
-					  </table>
-					  <hr>
-					  <table width="100%" >
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">만 3세</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
-					  	</tr>
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">만 4세</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
-					  	</tr>
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">만 5세</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
+					  		<td align="center"><span class="text-success small pt-1 fw-bold"><%=sum %></span>명</td>
 					  	</tr>
 					  </table>
                     </div>
@@ -66,26 +78,18 @@
                   <h5 class="card-title">교사 현황</h5>
                     <div class="ps-3">
 					  <table width="100%" height="125">
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">원장</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
+					  <%//for문사용, 교사직급, count값 
+					  for(EmpBean eb : ecntList){
+					  %>
+						  <tr class="text-muted small pt-2 ps-1">
+					  		<td align="center" width="40%"><%=eb.getE_name()%></td>
+					  		<td align="center">
+					  			<span class="text-success small pt-1 fw-bold"><%=eb.getE_no()%></span>명
+					  		</td>
 					  	</tr>
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">주임교사</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
-					  	</tr>
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">담임교사</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
-					  	</tr>
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">부담임교사</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
-					  	</tr>
-					  	<tr class="text-muted small pt-2 ps-1">
-					  		<td align="center" width="40%">일반교사</td>
-					  		<td align="center"><span class="text-success small pt-1 fw-bold">00</span>명</td>
-					  	</tr>
+					  <%
+					  }
+					  %>
 					  </table>
                     </div>
                 </div>
@@ -151,7 +155,7 @@
                       left: 'center'
                     },
                     series: [{
-                      name: 'Access From',
+                      name: '출결사항',
                       type: 'pie',
                       radius: ['40%', '70%'],
                       avoidLabelOverlap: false,

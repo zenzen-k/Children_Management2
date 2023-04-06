@@ -1,0 +1,28 @@
+select e_name, e.e_no as e_no from users u full outer join emp e on u.e_no=e.e_no;
+
+select e_no, count(*) as cnt from users where k_no=1 GROUP BY e_no;
+
+select e_name, cnt from
+(select e_name, e.e_no as e_no from users u full outer join emp e on u.e_no=e.e_no) u 
+full outer join 
+(select e_no, count(*) as cnt from users where k_no=1 GROUP BY e_no) e 
+on u.e_no=e.e_no;
+
+
+
+
+select c_age, c.c_no as c_no from student s full outer join classroom c on c.c_no=s.c_no and c_age>0 order by c_age;
+
+select * from 
+(select c_age, c.c_no as cno from student s full outer join classroom c on c.c_no=s.c_no order by c_age)
+where c_age>0;
+
+select c_no, count(*) as cnt from student where k_no=1 GROUP BY c_no;
+
+select c_age, cnt from
+(select * from 
+(select c_age, c.c_no as cno from student s full outer join classroom c on c.c_no=s.c_no order by c_age)
+where c_age>0) s 
+full outer join 
+(select c_no, count(*) as cnt from student where k_no=1 GROUP BY c_no) c 
+on s.cno=c.c_no;

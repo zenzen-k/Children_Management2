@@ -1,12 +1,31 @@
+<%@page import="info.UsersBean"%>
+<%@page import="info.EmpDao"%>
+<%@page import="info.KindergartenDao"%>
+<%@page import="info.ClassroomDao"%>
+<%@page import="info.UsersDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 
 <%
+	//경로
 	String path = request.getContextPath();
+
+	//세션
 	int seno = (Integer)session.getAttribute("seno"); // 직급번호
+	int skno = (Integer)session.getAttribute("skno");
 	String sid = (String)session.getAttribute("sid"); 
-	String sename = (String)session.getAttribute("sename"); 
+	String sename = (String)session.getAttribute("sename");
+	
+	//다오객체
+	UsersDao udao = UsersDao.getInstance();
+	ClassroomDao cdao = ClassroomDao.getInstance();
+	KindergartenDao kdao = KindergartenDao.getInstance();
+	EmpDao edao = EmpDao.getInstance();
+	
+	//
+	UsersBean ub = udao.getUserInfo(sid);
+	
 %>
 
 <head>
@@ -60,27 +79,17 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>사용자 이름 작성하기</h6>
-              <span>직급 작성하기</span>
+              <h6><%=ub.getU_name()%></h6>
+              <span><%=sename %></span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="user_profile.jsp">
                 <i class="bi bi-person"></i>
                 <span>내 프로필</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-gear"></i>
-                <span>설정</span>
               </a>
             </li>
             <li>
@@ -122,7 +131,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="croomMng.jsp">
               <i class="bi bi-circle"></i><span>교실관리</span>
             </a>
           </li>

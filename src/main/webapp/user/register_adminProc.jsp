@@ -40,7 +40,7 @@
 	String msg = "";
 	String url = "";
 	if(cnt == 1){
-		int result = kdao.getKinderByKnum(kb.getK_name());
+		int result = kdao.getKinderByKname(kb.getK_name());
 		ub.setK_no(result);
 		UsersDao udao = UsersDao.getInstance();
 		int cnt2 = udao.insertUsers(ub);

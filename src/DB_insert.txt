@@ -43,6 +43,8 @@ commit;
 
 
 -- 교실
+insert into classroom values(1, 0, '총괄', 0);
+insert into classroom values(1, 1, '미정', 0);
 insert into classroom values(1, c_seq.nextval, '새싹반', 3);
 insert into classroom values(1, c_seq.nextval, '개나리반', 4);
 insert into classroom values(1, c_seq.nextval, '햇님반', 5);

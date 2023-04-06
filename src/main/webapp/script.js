@@ -13,6 +13,88 @@
  var rrnCheckNum = false;
  var hpCheckNum = false;
  
+ function ch(){ // update
+	//alert(1);
+	//전화번호
+	var hp1 = $('input[name=u_hp1]').val();
+	var hp2 = $('input[name=u_hp2]').val();
+	var hp3 = $('input[name=u_hp3]').val();
+	if($('input[name=u_hp1]').val()==""){
+		$(".invalid-msgPhone").html('전화번호를 입력하세요').show();
+		$('input[name=u_hp1]').focus();
+		return false;
+	} else if(hp1.search(/[0-9]/) < 0){
+		$(".invalid-msgPhone").html('전화번호는 숫자만 입력하세요').show();
+		$('input[name=u_hp1]').select();
+		return false;
+	}
+	
+	if($('input[name=u_hp2]').val()==""){
+		$(".invalid-msgPhone").html('전화번호를 입력하세요').show();
+		$('input[name=u_hp2]').focus();
+		return false;
+	} else if(hp2.search(/[0-9]/) < 0){
+		$(".invalid-msgPhone").html('전화번호는 숫자만 입력하세요').show();
+		$('input[name=u_hp2]').select();
+		return false;
+	}
+	
+	if($('input[name=u_hp3]').val()==""){
+		$(".invalid-msgPhone").html('전화번호를 입력하세요').show();
+		$('input[name=u_hp3]').focus();
+		return false;
+	} else if(hp3.search(/[0-9]/) < 0){
+		$(".invalid-msgPhone").html('전화번호는 숫자만 입력하세요').show();
+		$('input[name=u_hp3]').select();
+		return false;
+	}
+	
+	if($('input[name=email]').val()==""){
+		$(".invalid-msgEmail").html('이메일을 입력하세요').show();
+		$('input[name=email]').focus();
+		return false;
+	}
+}
+
+function pwch(){//updatepw
+	var reg = /^[a-z0-9]{8,16}$/i;
+	var pw = $('input[name=newpw]').val();
+	
+	var chk_num = pw.search(/[0-9]/); // 숫자
+	var chk_eng = pw.search(/[a-z]/i); // 대소문자무시
+	if($('input[name=pw]').val()==""){
+		$(".invalid-msgPw").html('비밀번호를 입력하세요').show();
+		$('input[name=pw]').focus();
+		return false;
+	}
+	if($('input[name=newpw]').val()==""){
+		$(".invalid-msgNewpw").html('새로운 비밀번호를 입력하세요').show();
+		$('input[name=newpw]').focus();
+		return false;
+	}
+	if(!(reg.test(pw))){ 
+		$(".invalid-msgNewpw").html('비밀번호 형식이 틀렸습니다').show();
+		$('input[name=newpw]').focus();
+		return false;
+	}
+	else if(chk_num < 0 || chk_eng < 0){
+		$(".invalid-msgNewpw").html('영문자와 숫자의 조합으로 작성하세요').show();
+		$('input[name=newpw]').focus();
+		return false;
+	}
+	
+	//pw2
+	if($('input[name=newpw2]').val()==""){
+		$("invalid-msgNewpw2").html('비밀번호 확인을 입력하세요').show();
+		$('input[name=newpw2]').focus();
+		return false;
+	}
+	if(!pwCheckNum){
+		$('input[name=newpw2]').focus();
+		return false;
+	}
+}
+ 
  function Chk(){
 	//alert(1);
 	//return false;
@@ -355,3 +437,17 @@ function keyPw2(){
 	}
 }
 
+function keyNPw2(){
+	keyNone();
+	//$(".invalid-msgPw2").css('display','none');
+	
+	if($('input[name=newpw]').val()!=$('input[name=newpw2]').val()){
+		$(".invalid-msgNewpw2").html('입력된 비밀번호가 다릅니다.').show();
+		$('input[name=newpw2]').focus();
+		pwCheckNum = false;
+	}else{ 
+		$(".invalid-msgNewpw2").html('<font color=blue>비밀번호 일치</font>').show();
+		$('input[name=newpw2]').focus();
+		pwCheckNum = true;
+	}
+}
