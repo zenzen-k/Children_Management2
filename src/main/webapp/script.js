@@ -285,29 +285,40 @@ function pwch(){//updatepw new
 		return false;
 	}
 	
+	if($('input[name=k_name2]').val()==""){
+		$(".invalid-msgKinder2").html('유치원명을 입력하세요').show();
+		$('input[name=k_name2]').focus();
+		return false;
+	}
+	
+	if($('input[name=k_name]').val()!=undefined){
+		
+	
 	if(isCheckKinder == false){
 		alert("유치원 찾기를 클릭 하세요");
 		return false;
 	}
 	else if(useKinder=="impossible"){
 		$(".invalid-msgId").html('이미 등록된 유치원입니다.').show();
-		$('input[name=id]').select();
+		$('input[name=k_name]').select();
 		return false;
 	}else if(useKinder=="missing"){
 		$(".invalid-msgId").html('유치원을 입력해주세요').show();
-		$('input[name=id]').focus();
+		$('input[name=k_name]').focus();
 		return false;
 	}
+	}
 	
+	/*
 	if(useKinder2=="impossible"){
 		$(".invalid-msgId").html('등록되지 않은 유치원입니다.').show();
-		$('input[name=id]').select();
+		$('input[name=k_name]').select();
 		return false;
 	}else if(useKinder2=="missing"){
 		$(".invalid-msgId").html('유치원을 입력해주세요').show();
-		$('input[name=id]').focus();
+		$('input[name=k_name]').focus();
 		return false;
-	}
+	}*/
 	
 	//이메일
 	reg = /[a-zA-Z0-9]+@[a-zA-Z0-9]+/;
@@ -356,6 +367,7 @@ function duplicate(){
 	});
 }
 
+
 // 유치원 중복체크
 function duplicate_kinder(){
 	isCheckKinder = true;
@@ -381,33 +393,6 @@ function duplicate_kinder(){
 		}
 	});
 }
-
-//유치원 검색
-function searchKinder(){
-	isCheckKinder = true;
-	$.ajax({
-		url : "KinderCheckProc.jsp",
-		data : ({
-			userKinder : $('input[name=k_name]').val()
-		}),
-		success : function(data){
-			//alert(data);
-			if($('input[name=k_name]').val() == ""){
-				$(".invalid-msgKinder").html('유치원을 입력해주세요').show();
-				$('input[name=k_name]').focus();
-				useKinder = "missing";
-			} else if($.trim(data) == "N"){
-				$(".invalid-msgKinder").html('<font color=blue>등록 가능한 유치원입니다.</font>').show();
-				$('input[name=k_name]').select();
-				useKinder = "possible";
-			} else if($.trim(data) == "Y"){
-				$(".invalid-msgKinder").html('등록되지 않은 유치원 입니다.').show();
-				useKinder = "impossible";
-			}
-		}
-	});
-}
-
 
 //키보드눌렀을때 48~57 e.keyCode => 
 //e.target.value -> input 입력된ㄹ거

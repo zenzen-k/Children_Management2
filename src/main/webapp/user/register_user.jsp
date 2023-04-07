@@ -57,6 +57,16 @@
 	function getKname() {
 		return document.getElementsByName("k_name").value;
 	}
+	
+	function showPopup() { 
+		window.open("searchKinder.jsp", "유치원검색", "width=500, height=500, left=100, top=50");
+		
+	}
+	
+	function setValue(k_name){
+		document.getElementById("searchK_name").value = k_name;
+	}
+	
 </script>
 
 <%
@@ -133,10 +143,9 @@
                   
                   <div class="col-12">
                     <label class="form-label">*유치원 검색</label>
-                    <input type="button" onclick="searchKinder()" value="검색하기" style="float: right;">
-                    <input type="text" name="k_name" placeholder="유치원 이름을 정확하게 입력하세요" class="form-control">
-                    <div id="inv" class="msgNone invalid-msgKinder"></div>
-                    
+					<input type="button" onclick="showPopup();" value="검색하기" style="float: right;">
+					<input type="text" name="k_name2" class="form-control" id="searchK_name" disabled>
+					<div id="inv" class="msgNone invalid-msgKinder2"></div>
                   </div>
                   
                   <div class="col-12">

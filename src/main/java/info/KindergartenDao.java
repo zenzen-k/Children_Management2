@@ -45,7 +45,7 @@ public class KindergartenDao {
 		String sql = "select * from kindergarten where k_name = ?";
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, userKinder);
+			ps.setString(1, "'%" + userKinder + "%'");
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				result = true;
@@ -187,4 +187,38 @@ public class KindergartenDao {
 		}
 		return kList;
 	}
+	
+	// 모든 유치원 조회하기
+	public ArrayList<KindergartenBean> getAllKinder() {
+		ArrayList<KindergartenBean> klist = new ArrayList<KindergartenBean>();
+		String sql = "select * from kindergarten";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				KindergartenBean kb = new KindergartenBean();
+				kb.setK_no(rs.getInt("k_no"));
+				kb.setK_name(rs.getString("k_name"));
+				kb.setK_addr1(rs.getString("k_addr1"));
+				kb.setK_addr2(rs.getString("k_addr2"));
+				kb.setK_addr3(rs.getString("k_addr3"));
+				
+				klist.add(kb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return klist;
+	}
+	
+	//
 }
