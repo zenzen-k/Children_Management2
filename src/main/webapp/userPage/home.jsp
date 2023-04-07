@@ -7,7 +7,7 @@
 <%@ include file="home_top.jsp" %>
 
 <%
-	ArrayList<EmpBean> elist = edao.getAllEmp(); // 전체 직급 가져오기
+	ArrayList<EmpBean> elist = edao.getAllEmp();  // 전체 직급 가져오기
 	ArrayList<EmpBean> ecntList = edao.getCountByEmp(skno); // 유치원 전체 직급별 교사 인원 수
 	ArrayList<KindergartenBean> kcntList = kdao.getCountByK(skno); // 유치원 전체 반별 유아 인원 수
 	

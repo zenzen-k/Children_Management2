@@ -136,12 +136,12 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="usersMng.jsp">
               <i class="bi bi-circle"></i><span>교사관리</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="approval.jsp">
               <i class="bi bi-circle"></i><span>가입승인</span>
             </a>
           </li>
