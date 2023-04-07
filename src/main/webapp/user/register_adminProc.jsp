@@ -1,3 +1,4 @@
+<%@page import="info.ClassroomDao"%>
 <%@page import="info.UsersDao"%>
 <%@page import="info.KindergartenDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -42,6 +43,8 @@
 	if(cnt == 1){
 		int result = kdao.getKinderByKname(kb.getK_name());
 		ub.setK_no(result);
+		ClassroomDao cdao = ClassroomDao.getInstance();
+		cdao.insertKinderBasic(result); // 0총괄, 1미정 자동 생성
 		UsersDao udao = UsersDao.getInstance();
 		int cnt2 = udao.insertUsers(ub);
 		if(cnt2 == 1){

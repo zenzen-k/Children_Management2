@@ -1,3 +1,5 @@
+<%@page import="info.EmpDao"%>
+<%@page import="info.EmpBean"%>
 <%@page import="info.KindergartenDao"%>
 <%@page import="info.ClassroomDao"%>
 <%@page import="info.ClassroomBean"%>
@@ -56,6 +58,11 @@
 		return document.getElementsByName("k_name").value;
 	}
 </script>
+
+<%
+	EmpDao edao = EmpDao.getInstance();
+	ArrayList<EmpBean> elist = edao.getAllEmp();
+%>
 
 <!-- 가입 -->    
 <div class="container">
@@ -135,10 +142,15 @@
                   <div class="col-12">
                     <label class="form-label">*직급선택</label>
                     <select name="e_no" style="width: 100%">
-                    	<option value="201">주임교사</option>
-                    	<option value="202">담임교사</option>
-                    	<option value="203">부담임교사</option>
-                    	<option value="204">일반교사</option>
+                    	<%
+                    	for(EmpBean eb : elist){
+                    		if(eb.getE_no()>505){
+                    		%>
+                    			<option value="<%=eb.getE_no()%>"><%=eb.getE_name()%></option>
+                    		<%
+                    		}
+                    	}
+                    	%>
                     </select>
                     <div id="inv" class="msgNone invalid-msgEmp"></div>
                   </div>
