@@ -151,16 +151,17 @@ public class KindergartenDao {
 	//유치원 학급별 인원수
 	public ArrayList<KindergartenBean> getCountByK(int skno) {
 		ArrayList<KindergartenBean> kList = new ArrayList<KindergartenBean>();
-		String sql = "select c_age, cnt from "
-				+ "(select * from  "
-				+ "(select c_age, c.c_no as cno from student s full outer join classroom c on c.c_no=s.c_no order by c_age) "
-				+ "where c_age>0) s  "
-				+ "full outer join  "
-				+ "(select c_no, count(*) as cnt from student where k_no=? GROUP BY c_no) c  "
-				+ "on s.cno=c.c_no ";
+		String sql = "select c_age, count(s_name) as cnt from "
+				+ "(select c.c_age, s_name from "
+				+ "(select c_age from classroom where k_no=? and c_age>0 group by c_age) c "
+				+ "left outer join "
+				+ "(select c_age, s_name from student where k_no=?) s "
+				+ "on c.c_age = s.c_age) "
+				+ "group by c_age order by c_age";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, skno);
+			ps.setInt(2, skno);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				KindergartenBean kb = new KindergartenBean();

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -362,5 +363,134 @@ public class UsersDao {
 			}
 		}
 		return ulist;
+	}
+	
+	// 교사 직급, 교실 , 이름 조회
+	public ArrayList<JoinBean> getAllTeachers(int k_no){
+		ArrayList<JoinBean> jlist = new ArrayList<JoinBean>();
+		String sql = "select u_name, id, c_no, c_name, c_age, e_name, e_no from "
+				+ "(select u_name, id, c_no, c_name, c_age, e_no from "
+				+ "(select * from users where k_no = ?) natural join classroom) "
+				+ "natural join emp e order by e_no";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, k_no);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				JoinBean jb = new JoinBean();
+				jb.setU_name(rs.getString("u_name"));
+				jb.setC_name(rs.getString("c_name"));
+				jb.setE_name(rs.getString("e_name"));
+				jb.setId(rs.getString("id"));
+				jb.setC_no(rs.getInt("c_no"));
+				jb.setE_no(rs.getInt("e_no"));
+				jb.setC_age(rs.getInt("c_age"));
+				
+				jlist.add(jb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(jlist.get(0).getC_no());
+		return jlist;
+	}
+	
+	// 교사 직급, 등 수정
+	public int updateUsersT(String id, String c_no, String e_no) {
+		int cnt = -1;
+		String sql = "update users set c_no=?, e_no=? where id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, c_no);
+			ps.setString(2, e_no);
+			ps.setString(3, id);
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	//미승인 교사 리스트 조회
+	public ArrayList<UsersBean> getApprovalForUser(int k_no) {
+		ArrayList<UsersBean> ulist = new ArrayList<UsersBean>();
+		String sql = "select * from users where approval='N' and k_no=" + k_no;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				UsersBean ub = new UsersBean();
+				ub.setId(rs.getString("id"));
+				ub.setPw(rs.getString("pw"));
+				ub.setC_no(rs.getInt("c_no"));
+				ub.setK_no(rs.getInt("k_no"));
+				ub.setE_no(rs.getInt("e_no"));
+				ub.setU_name(rs.getString("u_name"));
+				ub.setU_hp1(rs.getString("u_hp1"));
+				ub.setU_hp2(rs.getString("u_hp2"));
+				ub.setU_hp3(rs.getString("u_hp3"));
+				ub.setU_rrn1(rs.getString("u_rrn1"));
+				ub.setU_rrn2(rs.getString("u_rrn2"));
+				ub.setEmail(rs.getString("email"));
+				ub.setApproval(rs.getString("approval"));
+				ub.setTerms(rs.getString("terms"));
+				
+				ulist.add(ub);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ulist;
+	}
+	
+	// 가입승인 
+	public int updateApproval(String[] id) {
+		int cnt = 0;
+		String sql = "update users set approval='Y' where id=?";
+		for(int i=1; i<id.length; i++) {
+			sql += "or id=? ";
+		}
+		try {
+			ps = conn.prepareStatement(sql);
+			for(int i=0; i<id.length; i++) {
+				ps.setString(i+1, id[i]);
+			}
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
 	}
 }
