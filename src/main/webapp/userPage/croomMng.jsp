@@ -52,31 +52,37 @@
 							</tr>
 						</thead>
 						<tbody>
-							<%for(int i=0; i<clist.size(); i++){%>
-								<tr>
-									<td>
-										<input class="form-check-input me-1" type="checkbox" name="rowchk" value="<%=clist.get(i).getC_no()%>">
-									</td>
-									<th><%=i+1%></th>
-									<td><%=clist.get(i).getC_name()%></td>
-									<td>
-									<%
-									ArrayList<UsersBean> ulist = udao.getUnameByCno(clist.get(i).getC_no());
-									if(ulist.size() == 0){
-										out.print("교사 미배정");
-									}else{
-										for(UsersBean ubl : ulist){
-											out.print(ubl.getU_name() + "(" + ubl.getId() + ")");
+							<%
+							if(clist.size() == 0){
+								out.print("<tr><td colspan='6'> 등록한 교실이 없습니다. </td></tr>");
+							}else{
+								for(int i=0; i<clist.size(); i++){%>
+									<tr>
+										<td>
+											<input class="form-check-input me-1" type="checkbox" name="rowchk" value="<%=clist.get(i).getC_no()%>">
+										</td>
+										<th><%=i+1%></th>
+										<td><%=clist.get(i).getC_name()%></td>
+										<td>
+										<%
+										ArrayList<UsersBean> ulist = udao.getUnameByCno(clist.get(i).getC_no());
+										if(ulist.size() == 0){
+											out.print("교사 미배정");
+										}else{
+											for(UsersBean ubl : ulist){
+												out.println(ubl.getU_name() + "(" + ubl.getId() + ")");
+											}
 										}
-									}
-									%>
-									</td>
-									<td>만 <%=clist.get(i).getC_age()%>세</td>
-									<td>
-										<button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='croom_update.jsp?c_no=<%=clist.get(i).getC_no()%>'">수정</button>
-									</td>
-								</tr>
-							<%}%>
+										%>
+										</td>
+										<td>만 <%=clist.get(i).getC_age()%>세</td>
+										<td>
+											<button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='croom_update.jsp?c_no=<%=clist.get(i).getC_no()%>'">수정</button>
+										</td>
+									</tr>
+								<%
+								}
+							}%>
 						</tbody>
 					</table>
 					</form>

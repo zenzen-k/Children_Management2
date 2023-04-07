@@ -19,9 +19,9 @@
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="<%=path%>/home.jsp">Home</a></li>
-			<li class="breadcrumb-item"><a
-				href="<%=path%>/userPage/croomMng.jsp">유치원관리</a></li>
-			<li class="breadcrumb-item active">교실관리</li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">유치원관리</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">교실관리</a></li>
+			<li class="breadcrumb-item active">교실수정</li>
 		</ol>
 	</nav>
 </div>
@@ -45,11 +45,11 @@
 							</div>
 						</div>
 						
-						<div class="row mb-3">
+						<%-- <div class="row mb-3">
 							<label for="inputEmail3" class="col-sm-2 col-form-label">교사선택</label>
 							<div class="col-sm-10">
 								<div class="col-sm-10">
-									<select class="form-select" name="id">
+									<select class="form-select" name="id" multiple="multiple">
 										<option value="1">===선택하기===</option> <!-- 1이면 미정 -->
 										<%
 										for(UsersBean u : ulist){
@@ -61,7 +61,7 @@
 									</select>
 								</div>
 							</div>
-						</div>
+						</div> --%>
 						
 						<fieldset class="row mb-3">
 							<legend class="col-form-label col-sm-2 pt-0">연령선택</legend>
@@ -77,8 +77,8 @@
 							</div>
 						</fieldset>
 						<div class="text-center">
-							<button type="submit" class="btn btn-primary">Submit</button>
-							<button type="reset" class="btn btn-secondary">Reset</button>
+							<button type="submit" class="btn btn-primary">수정하기</button>
+							<button type="reset" class="btn btn-secondary">되돌리기</button>
 						</div>
 					</form>
 					<!-- End Horizontal Form -->

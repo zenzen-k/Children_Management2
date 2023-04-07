@@ -9,9 +9,9 @@
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="<%=path%>/home.jsp">Home</a></li>
-			<li class="breadcrumb-item"><a
-				href="<%=path%>/userPage/croomMng.jsp">유치원관리</a></li>
-			<li class="breadcrumb-item active">교실관리</li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">유치원관리</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">교실관리</a></li>
+			<li class="breadcrumb-item active">교실등록</li>
 		</ol>
 	</nav>
 </div>

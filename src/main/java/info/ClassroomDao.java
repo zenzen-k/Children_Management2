@@ -123,21 +123,73 @@ public class ClassroomDao {
 	}
 	
 	//교시ㅣㄹ삭제
-	public int deleteCroom(int skno, String[] no) {
+	public int deleteCroom(int skno, String[] no) { // 2
+		System.out.println("no.length : " + no.length);
 		int cnt = 0;
-		String sql = "delete classroom where k_no=? and c_no=? ";
-		if(no.length > 1) {
-			sql += "or no=? ";
+		String sql = "delete classroom where k_no=? and (c_no=? ";
+		for(int i=1; i<no.length; i++) {
+			sql += "or c_no=? ";
 		}
+		sql += ")";
+		System.out.println("sql : " + sql);
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, skno);
+			int j=1;
 			for(int i=0; i<no.length; i++) {
-				ps.setString(i+2, no[i]);
-				cnt = ps.executeUpdate();
+				ps.setString(++j, no[i]);
 			}
+			cnt = ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	//유치원생성시 0, 1자동생성하기
+	public int insertKinderBasic(int k_no) {
+		int cnt = 0;
+		String sql = "insert into classroom values(?, 0, '총괄', 0)";
+		String sql2 = "insert into classroom values(?, 1, '미정', 0)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, k_no);
+			cnt += ps.executeUpdate();
+			
+			ps = conn.prepareStatement(sql2);
+			ps.setInt(1, k_no);
+			cnt += ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	public int updateCroom(ClassroomBean cb) {
+		int cnt = -1;
+		String sql = "update classroom set c_name=? , c_age=? where k_no=? and c_no=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cb.getC_name());
+			ps.setInt(2, cb.getC_age());
+			ps.setInt(3, cb.getK_no());
+			ps.setInt(4, cb.getC_no());
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
