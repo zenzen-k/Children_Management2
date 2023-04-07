@@ -13,7 +13,7 @@
  var rrnCheckNum = false;
  var hpCheckNum = false;
  
- function ch(){ // update
+ function ch(){ // users update
 	//alert(1);
 	//전화번호
 	var hp1 = $('input[name=u_hp1]').val();
@@ -56,7 +56,7 @@
 	}
 }
 
-function pwch(){//updatepw
+function pwch(){//updatepw new
 	var reg = /^[a-z0-9]{8,16}$/i;
 	var pw = $('input[name=newpw]').val();
 	
@@ -115,7 +115,7 @@ function pwch(){//updatepw
 	}
  }
  
- function validationChk(){
+ function validationChk(){ // 유저 회원가입 검사
 	//alert(1);
 	/*if($('input[name=id]').val()==undefined){
 		alert("u");
@@ -125,6 +125,7 @@ function pwch(){//updatepw
 	return false;*/
 	
 	//id
+		
 	if($('input[name=id]').val()==""){
 		$(".invalid-msgId").html('아이디를 입력하세요').show();
 		$('input[name=id]').focus();

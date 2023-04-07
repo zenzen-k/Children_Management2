@@ -31,7 +31,7 @@ function delSelct() {
 	}
 	
 	if(!flag){
-		alert('삭제할 체크박스를 하나라도 선택하세요');
+		alert('체크박스를 하나 이상 선택하세요');
 		return;
 	}
 	
