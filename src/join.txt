@@ -8,21 +8,30 @@ full outer join
 (select e_no, count(*) as cnt from users where k_no=1 GROUP BY e_no) e 
 on u.e_no=e.e_no;
 
-
-
-
-select c_age, c.c_no as c_no from student s full outer join classroom c on c.c_no=s.c_no and c_age>0 order by c_age;
-
-select * from 
-(select c_age, c.c_no as cno from student s full outer join classroom c on c.c_no=s.c_no order by c_age)
-where c_age>0;
-
-select c_no, count(*) as cnt from student where k_no=1 GROUP BY c_no;
-
-select c_age, cnt from
-(select * from 
-(select c_age, c.c_no as cno from student s full outer join classroom c on c.c_no=s.c_no order by c_age)
-where c_age>0) s 
+select e_name, cnt from
+(select e_name, e.e_no as e_no from 
+(select * from users where k_no=1) u full outer join emp e on u.e_no=e.e_no) u 
 full outer join 
-(select c_no, count(*) as cnt from student where k_no=1 GROUP BY c_no) c 
-on s.cno=c.c_no;
+(select e_no, count(*) as cnt from users where k_no=1 GROUP BY e_no) e 
+on u.e_no=e.e_no;
+
+
+--교실별인원수
+select c_age, count(s_name) from 
+(select c.c_age, s_name from
+(select c_age from classroom where k_no=1 and c_age>0 group by c_age) c
+left outer join
+(select c_age, s_name from student where k_no=1) s
+on c.c_age = s.c_age)
+group by c_age order by c_age;
+
+
+
+-- 전체 교사이름, 직급이름, 교실이름, 조건= 유치원
+(select * from users where k_no=1);
+
+select u_name, id, c_name, c_age, e_no from (select * from users where k_no=1) natural join classroom;
+
+select u_name, id, c_name, c_age, e_name from
+(select u_name, id, c_name, c_age, e_no from (select * from users where k_no=1) natural join classroom) u
+natural join emp e;
