@@ -144,7 +144,7 @@
                   <div class="col-12">
                     <label class="form-label">*유치원 검색</label>
 					<input type="button" onclick="showPopup();" value="검색하기" style="float: right;">
-					<input type="text" name="k_name2" class="form-control" id="searchK_name" disabled>
+					<input type="text" name="k_name2" class="form-control" id="searchK_name" readonly >
 					<div id="inv" class="msgNone invalid-msgKinder2"></div>
                   </div>
                   

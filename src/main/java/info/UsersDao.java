@@ -368,9 +368,9 @@ public class UsersDao {
 	// 교사 직급, 교실 , 이름 조회
 	public ArrayList<JoinBean> getAllTeachers(int k_no){
 		ArrayList<JoinBean> jlist = new ArrayList<JoinBean>();
-		String sql = "select u_name, id, c_no, c_name, c_age, e_name, e_no from "
-				+ "(select u_name, id, c_no, c_name, c_age, e_no from "
-				+ "(select * from users where k_no = ?) natural join classroom) "
+		String sql = "select u_name, id, c_no, c_name, c_age, e_name, e_no from  "
+				+ "(select u_name, id, c_no, c_name, c_age, e_no from  "
+				+ "(select * from users where k_no = ? and approval='Y') natural join classroom)  "
 				+ "natural join emp e order by e_no";
 		try {
 			ps = conn.prepareStatement(sql);

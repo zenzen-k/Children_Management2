@@ -97,15 +97,17 @@ public class EmpDao {
 	public ArrayList<EmpBean> getCountByEmp(int skno) {
 		ArrayList<EmpBean> elist = new ArrayList<EmpBean>();
 		String sql = "select e_name, cnt from "
-				+ "(select e_name, e.e_no as e_no from "
-				+ "(select * from users where k_no=?) u full outer join emp e on u.e_no=e.e_no) u  "
-				+ "full outer join "
-				+ "(select e_no, count(*) as cnt from users where k_no=? GROUP BY e_no) e  "
-				+ "on u.e_no=e.e_no";
+				+ "(select e_no, count(u_name) as cnt from  "
+				+ "(select e.e_no, u_name from "
+				+ "(select e_no from emp group by e_no) e "
+				+ "left outer join "
+				+ "(select e_no, u_name from users where k_no=?) u "
+				+ "on e.e_no = u.e_no) "
+				+ "group by e_no order by e_no) "
+				+ "natural join emp";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, skno);
-			ps.setInt(2, skno);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				EmpBean eb = new EmpBean();

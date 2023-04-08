@@ -21,9 +21,11 @@
 <jsp:setProperty property="u_hp3" name="ub"/>
 <jsp:setProperty property="e_no" name="ub"/>
 
-<jsp:setProperty property="k_name" name="kb"/>
 
 <%
+	String k_name = request.getParameter("k_name2");
+	kb.setK_name(k_name);	
+
 	ub.setC_no(1); // 1 : 교실 미배정 상태
 	ub.setApproval("N"); // 교사 승인 필요
 
@@ -39,14 +41,15 @@
 	
 	String msg = "";
 	String url = "";
-	
-	int cnt2 = udao.insertUsers(ub);
-	if(cnt2 == 1){
-		msg = "회원가입 완료";
-		url = request.getContextPath() + "/login.jsp";
-	}else{
-		msg = "회원가입 실패";
-		url = request.getContextPath() + "/main.jsp";
+	if(result > 0) {
+		int cnt2 = udao.insertUsers(ub);
+		if(cnt2 == 1){
+			msg = "회원가입 완료";
+			url = request.getContextPath() + "/login.jsp";
+		}else{
+			msg = "회원가입 실패";
+			url = request.getContextPath() + "/main.jsp";
+		}
 	}
 %>
 

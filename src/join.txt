@@ -1,22 +1,17 @@
-select e_name, e.e_no as e_no from users u full outer join emp e on u.e_no=e.e_no;
-
-select e_no, count(*) as cnt from users where k_no=1 GROUP BY e_no;
-
+-- 교사별 인원 수 
 select e_name, cnt from
-(select e_name, e.e_no as e_no from users u full outer join emp e on u.e_no=e.e_no) u 
-full outer join 
-(select e_no, count(*) as cnt from users where k_no=1 GROUP BY e_no) e 
-on u.e_no=e.e_no;
-
-select e_name, cnt from
-(select e_name, e.e_no as e_no from 
-(select * from users where k_no=1) u full outer join emp e on u.e_no=e.e_no) u 
-full outer join 
-(select e_no, count(*) as cnt from users where k_no=1 GROUP BY e_no) e 
-on u.e_no=e.e_no;
+(select e_no, count(u_name) as cnt from 
+(select e.e_no, u_name from
+(select e_no from emp group by e_no) e
+left outer join
+(select e_no, u_name from users where k_no=1) u
+on e.e_no = u.e_no)
+group by e_no order by e_no)
+natural join emp;
 
 
---교실별인원수
+
+-- 교실별 인원 수
 select c_age, count(s_name) from 
 (select c.c_age, s_name from
 (select c_age from classroom where k_no=1 and c_age>0 group by c_age) c
@@ -33,5 +28,11 @@ group by c_age order by c_age;
 select u_name, id, c_name, c_age, e_no from (select * from users where k_no=1) natural join classroom;
 
 select u_name, id, c_name, c_age, e_name from
-(select u_name, id, c_name, c_age, e_no from (select * from users where k_no=1) natural join classroom) u
+(select u_name, id, c_name, c_age, e_no from 
+(select * from users where k_no=1) natural join classroom) u
 natural join emp e;
+
+select u_name, id, c_no, c_name, c_age, e_name, e_no from 
+(select u_name, id, c_no, c_name, c_age, e_no from 
+(select * from users where k_no = 1 and approval='Y') natural join classroom) 
+natural join emp e order by e_no;

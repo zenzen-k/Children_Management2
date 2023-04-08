@@ -71,7 +71,8 @@ create table users(
 insert into users values('admin123','aaaa1111', 0, 1, 501, '김원장', '010', '1234', '1234', '123456', '1234567', 'admin123@naver.com', 'Y', 'Y');
 insert into users values('hong123','aaaa1111', 0, 2, 501, '홍원장', '010', '5678', '5678', '123456', '1234567', 'hong123@naver.com', 'Y', 'Y');
 insert into users values('kim123','aaaa1111', 1, 1, 510, '김주임', '010', '1234', '1234', '123456', '1234567', 'kim123@naver.com', 'Y', 'Y');
-insert into users values('park123','aaaa1111', 1, 1, 511, '박교사', '010', '1234', '1234', '123456', '1234567', 'park123@daum.net', 'N', 'Y');
+insert into users values('park123','aaaa1111', 1, 1, 511, '박교사', '010', '1234', '1234', '123456', '1234567', 'park123@daum.net', 'Y', 'Y');
+insert into users values('aaaa1111','aaaa1111', 1, 1, 511, '에이', '010', '1234', '1234', '123456', '1234567', 'aaaa1111@daum.net', 'N', 'Y');
 insert into users values('lee123','aaaa1111', 1, 1, 512, '이교사', '010', '1234', '1234', '123456', '1234567', 'lee123@daum.net', 'N', 'Y');
 insert into users values('kang123','aaaa1111', 1, 1, 513, '강교사', '010', '1234', '1234', '123456', '1234567', 'kang123@daum.net', 'N', 'Y');
 
@@ -108,34 +109,6 @@ insert into classroom values(2, 1, '미정', 0);
 
 
 select * from classroom;
-commit;
-
-
-
-
--- 학생
-
-drop table student cascade constraints;
-create table student(
-	k_no number,
-	s_no number primary key,
-	s_name varchar2(30) not null,
-	s_birth date not null,
-	gender varchar2(3) default '남' check(gender in('남','여')),
-	entran date default sysdate not null , --입학일
-	addr1 varchar2(10) not null,
-	addr2 varchar2(100) not null,
-	addr3 varchar2(100) not null,
-	c_no number,
-	c_age number,
-	dp_id number,
-	note varchar2(100),
-	after varchar2(10) default '참여' check(after in('참여','미참여')),
-	imgname varchar2(1000)
-);
-
-
-select * from student;
 commit;
 
 
@@ -183,18 +156,39 @@ end;
 -- select stunum('2023-03-10', p_seq.nextval) from dual;
 
 
--- 서류
 
-drop table documentpaper cascade constraints;
-create table documentpaper(
-	dp_no number primary key,
-	dp_name varchar2(1000),
-	dpdate date default sysdate not null,
-	dp_category varchar2(50)
+
+
+-- 학생
+
+drop table student cascade constraints;
+create table student(
+	k_no number,
+	s_no number primary key,
+	s_name varchar2(30) not null,
+	s_birth date not null,
+	gender varchar2(3) default '남' check(gender in('남','여')),
+	entran date default sysdate not null , --입학일
+	addr1 varchar2(10) not null,
+	addr2 varchar2(100) not null,
+	addr3 varchar2(100) not null,
+	c_no number,
+	c_age number,
+	note varchar2(100),
+	after varchar2(10) default '미참여' check(after in('참여','미참여')),
+	imgname varchar2(1000)
 );
 
-select * from documentpaper;
+
+insert into student values(1, stunum('2023-03-02', p_seq.nextval), '혜인', '2020-02-18', '여', '2023-03-02', '12345', '서울시 강남구' , '포이동', 2, 3, '계란 알러지 있음', '미참여', '');
+insert into student values(1, stunum('2023-03-02', p_seq.nextval), '해린', '2019-12-08', '남', '2023-03-02', '12345', '서울시 강남구' , '양재동', 3, 4, '없음', '미참여', '');
+insert into student values(1, stunum('2023-03-02', p_seq.nextval), '다니엘', '2019-05-19', '여', '2023-03-02', '12345', '서울시 강남구' , '도곡동', 3, 4, '다문화 가정', '미참여', '');
+insert into student values(1, stunum('2022-03-02', p_seq.nextval), '하니', '2018-08-05', '남', '2022-03-02', '12345', '서울시 강남구' , '대치동', 4, 5, '없음', '미참여', '');
+insert into student values(1, stunum('2022-03-02', p_seq.nextval), '민지', '2018-11-02', '여', '2022-03-02', '12345', '서울시 서초구' , '방배동', 4, 5, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
+
+select * from student;
 commit;
+
 
 
 

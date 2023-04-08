@@ -155,7 +155,7 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="<%=path%>/userchildrenPage/children.jsp">
               <i class="bi bi-circle"></i><span>유아 전체 조회</span>
             </a>
           </li>
