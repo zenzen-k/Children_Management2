@@ -15,7 +15,7 @@
 
 <title>Home / Management / Classroom</title>
 <div class="pagetitle">
-	<h1>교실관리</h1>
+	<h1>가입승인</h1>
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>

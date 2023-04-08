@@ -164,7 +164,7 @@ end;
 drop table student cascade constraints;
 create table student(
 	k_no number,
-	s_no number primary key,
+	s_no varchar2(6) primary key,
 	s_name varchar2(30) not null,
 	s_birth date not null,
 	gender varchar2(3) default '남' check(gender in('남','여')),
@@ -180,11 +180,18 @@ create table student(
 );
 
 
-insert into student values(1, stunum('2023-03-02', p_seq.nextval), '혜인', '2020-02-18', '여', '2023-03-02', '12345', '서울시 강남구' , '포이동', 2, 3, '계란 알러지 있음', '미참여', '');
-insert into student values(1, stunum('2023-03-02', p_seq.nextval), '해린', '2019-12-08', '남', '2023-03-02', '12345', '서울시 강남구' , '양재동', 3, 4, '없음', '미참여', '');
-insert into student values(1, stunum('2023-03-02', p_seq.nextval), '다니엘', '2019-05-19', '여', '2023-03-02', '12345', '서울시 강남구' , '도곡동', 3, 4, '다문화 가정', '미참여', '');
-insert into student values(1, stunum('2022-03-02', p_seq.nextval), '하니', '2018-08-05', '남', '2022-03-02', '12345', '서울시 강남구' , '대치동', 4, 5, '없음', '미참여', '');
-insert into student values(1, stunum('2022-03-02', p_seq.nextval), '민지', '2018-11-02', '여', '2022-03-02', '12345', '서울시 서초구' , '방배동', 4, 5, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
+insert into student values(1, stunum('2023-03-02', p_seq.nextval), '혜인', '2019-02-18', '여', '2023-03-02', '12345', '서울시 강남구' , '포이동', 2, 3, '계란 알러지 있음', '미참여', '');
+insert into student values(1, stunum('2023-03-02', p_seq.nextval), '해린', '2019-12-08', '남', '2023-03-02', '12345', '서울시 강남구' , '양재동', 2, 3, '없음', '미참여', '');
+insert into student values(1, stunum('2023-03-02', p_seq.nextval), '다니엘', '2019-05-19', '여', '2023-03-02', '12345', '서울시 강남구' , '도곡동', 2, 3, '다문화 가정', '미참여', '');
+insert into student values(1, stunum('2022-03-02', p_seq.nextval), '하니', '2018-08-05', '남', '2022-03-02', '12345', '서울시 강남구' , '대치동', 3, 4, '없음', '미참여', '');
+insert into student values(1, stunum('2022-03-02', p_seq.nextval), '민지', '2018-11-02', '여', '2022-03-02', '12345', '서울시 서초구' , '방배동', 3, 4, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
+insert into student values(1, stunum('2022-03-02', p_seq.nextval), '이서', '2018-04-30', '여', '2022-03-02', '12345', '서울시 서초구' , '방배동', 3, 4, '방과 후 피아노 학원에서 데리러 옴', '미참여', '');
+insert into student values(1, stunum('2021-03-02', p_seq.nextval), '리즈', '2017-08-05', '남', '2021-03-02', '12345', '경기도 성남시 분당구' , '정자동', 4, 5, '없음', '미참여', '');
+insert into student values(1, stunum('2021-03-02', p_seq.nextval), '장원영', '2017-09-25', '남', '2021-03-02', '12345', '경기도 성남시 분당구' , '분당동', 4, 5, '밀가루 알러지 있음', '미참여', '');
+insert into student values(1, stunum('2021-03-02', p_seq.nextval), '레이', '2017-05-13', '여', '2021-03-02', '12345', '경기도 성남시 분당구' , '서현동', 4, 5, '없음', '미참여', '');
+insert into student values(1, stunum('2021-03-02', p_seq.nextval), '미미', '2017-06-03', '남', '2021-03-02', '12345', '인천시 남동구' , '간석동', 4, 5, '없음', '미참여', '');
+insert into student values(1, stunum('2021-03-02', p_seq.nextval), '안유진', '2017-03-21', '여', '2021-03-02', '12345', '인천시 계양구' , '계산동', 4, 5, '없음', '미참여', '');
+insert into student values(1, stunum('2021-03-02', p_seq.nextval), '이영지', '2017-12-05', '남', '2021-03-02', '12345', '인천시 부평구' , '십정동', 4, 5, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
 
 select * from student;
 commit;

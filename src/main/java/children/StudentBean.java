@@ -2,7 +2,7 @@ package children;
 
 public class StudentBean {
 	private int k_no;
-	private int s_no;
+	private String s_no;
 	private String s_name;
 	private String s_birth;
 	private String gender;
@@ -12,7 +12,6 @@ public class StudentBean {
 	private String addr3;
 	private int c_no;
 	private int c_age;
-	private int dp_id;
 	private String note;
 	private String after;
 	private String imgname;
@@ -24,10 +23,10 @@ public class StudentBean {
 	public void setK_no(int k_no) {
 		this.k_no = k_no;
 	}
-	public int getS_no() {
+	public String getS_no() {
 		return s_no;
 	}
-	public void setS_no(int s_no) {
+	public void setS_no(String s_no) {
 		this.s_no = s_no;
 	}
 	public String getS_name() {
@@ -83,12 +82,6 @@ public class StudentBean {
 	}
 	public void setC_age(int c_age) {
 		this.c_age = c_age;
-	}
-	public int getDp_id() {
-		return dp_id;
-	}
-	public void setDp_id(int dp_id) {
-		this.dp_id = dp_id;
 	}
 	public String getNote() {
 		return note;

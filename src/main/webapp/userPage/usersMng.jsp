@@ -14,7 +14,7 @@
 
 <title>Home / Management / Teacher</title>
 <div class="pagetitle">
-	<h1>교실관리</h1>
+	<h1>교사관리</h1>
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>

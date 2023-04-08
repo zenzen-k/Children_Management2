@@ -1,3 +1,4 @@
+<%@page import="children.StudentDao"%>
 <%@page import="info.UsersBean"%>
 <%@page import="info.EmpDao"%>
 <%@page import="info.KindergartenDao"%>
@@ -22,6 +23,7 @@
 	ClassroomDao cdao = ClassroomDao.getInstance();
 	KindergartenDao kdao = KindergartenDao.getInstance();
 	EmpDao edao = EmpDao.getInstance();
+	StudentDao sdao = StudentDao.getInstance();
 	
 	//
 	UsersBean ub = udao.getUserInfo(sid);
@@ -61,7 +63,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="home.jsp" class="logo d-flex align-items-center">
+      <a href="<%=path%>/home.jsp" class="logo d-flex align-items-center">
         <img src="<%=path%>/bootstrap/assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">NiceAddmin</span>
       </a>
@@ -87,7 +89,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="user_profile.jsp">
+              <a class="dropdown-item d-flex align-items-center" href="<%=path%>/userPage/user_profile.jsp">
                 <i class="bi bi-person"></i>
                 <span>내 프로필</span>
               </a>
@@ -117,7 +119,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="home.jsp">
+        <a class="nav-link " href="<%=path%>/home.jsp">
           <i class="bi bi-grid"></i>
           <span>Home</span>
         </a>
@@ -131,17 +133,17 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="croomMng.jsp">
+            <a href="<%=path%>/userPage/croomMng.jsp">
               <i class="bi bi-circle"></i><span>교실관리</span>
             </a>
           </li>
           <li>
-            <a href="usersMng.jsp">
+            <a href="<%=path%>/userPage/usersMng.jsp">
               <i class="bi bi-circle"></i><span>교사관리</span>
             </a>
           </li>
           <li>
-            <a href="approval.jsp">
+            <a href="<%=path%>/userPage/approval.jsp">
               <i class="bi bi-circle"></i><span>가입승인</span>
             </a>
           </li>

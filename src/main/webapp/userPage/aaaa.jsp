@@ -23,3 +23,22 @@
 <!-- End Page Title -->
 
 <%@ include file="home_bottom.jsp" %>
+
+
+
+<%@ include file="../userPage/home_top.jsp"%>
+
+<title>Home / ChildManagement / ChildRetreive</title>
+<div class="pagetitle">
+	<h1>학생관리</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="<%=path%>/home.jsp">Home</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">학생관리</a></li>
+			<li class="breadcrumb-item active">유아조회</li>
+		</ol>
+	</nav>
+</div>
+<!-- End Page Title -->
+
+<%@ include file="../userPage/home_bottom.jsp"%>
