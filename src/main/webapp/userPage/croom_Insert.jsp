@@ -8,7 +8,7 @@
 	<h1>교실관리</h1>
 	<nav>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<%=path%>/home.jsp">Home</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">유치원관리</a></li>
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">교실관리</a></li>
 			<li class="breadcrumb-item active">교실등록</li>
@@ -44,8 +44,8 @@
 							</div>
 						</fieldset>
 						<div class="text-center">
-							<button type="submit" class="btn btn-primary">Submit</button>
-							<button type="reset" class="btn btn-secondary">Reset</button>
+							<button type="submit" class="btn btn-primary">등록하기</button>
+							<button type="reset" class="btn btn-secondary">취소하기</button>
 						</div>
 					</form>
 					<!-- End Horizontal Form -->

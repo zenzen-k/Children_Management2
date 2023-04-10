@@ -14,7 +14,7 @@
 	<h1>교실관리</h1>
 	<nav>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<%=path%>/home.jsp">Home</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">Management</a></li>
 			<li class="breadcrumb-item active">Classroom</li>
 		</ol>
@@ -33,7 +33,7 @@
 	<h1>학생관리</h1>
 	<nav>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<%=path%>/home.jsp">Home</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">학생관리</a></li>
 			<li class="breadcrumb-item active">유아조회</li>
 		</ol>
