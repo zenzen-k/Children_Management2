@@ -65,7 +65,7 @@
 									<div class="col-12">
 										<label for="yourId" class="form-label">id</label>
 										<div class="input-group has-validation">
-											<input type="text" name="id" class="form-control" id="yourId" >
+											<input type="text" name="id" class="form-control" id="yourId">
 											<div class="msgNone invalid-msgId"></div><!-- 아이디입력하세요 경고창 -->
 										</div>
 									</div>

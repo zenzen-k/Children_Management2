@@ -3,7 +3,7 @@
 <!-- 주소찾기 -->
 
 <input type="text" name="k_addr1" id="sample4_postcode" placeholder="우편번호" class="form-control" style="display: inline; width: 40%">
-<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="float: right;"><br>
+<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="float: right;" class="btn btn-secondary"><br>
 <input type="text" name="k_addr2" id="sample4_roadAddress" placeholder="도로명주소" class="form-control">
 <!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소"> -->
 <span id="guide" style="color:#999;display:none"></span>

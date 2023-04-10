@@ -63,7 +63,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="<%=path%>/home.jsp" class="logo d-flex align-items-center">
+      <a href="<%=path%>/userPage/home.jsp" class="logo d-flex align-items-center">
         <img src="<%=path%>/bootstrap/assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">NiceAddmin</span>
       </a>
@@ -119,7 +119,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="<%=path%>/home.jsp">
+        <a class="nav-link " href="<%=path%>/userPage/home.jsp">
           <i class="bi bi-grid"></i>
           <span>Home</span>
         </a>
@@ -157,7 +157,7 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<%=path%>/userchildrenPage/children.jsp">
+            <a href="<%=path%>/userchildrenPage/children.jsp?searchC_no=0">
               <i class="bi bi-circle"></i><span>유아 전체 조회</span>
             </a>
           </li>

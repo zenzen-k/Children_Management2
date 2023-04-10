@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="info.ClassroomBean"%>
 <%@page import="children.StudentBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -7,13 +8,9 @@
 
 <%@ include file="../userPage/home_top.jsp"%>
 
-<!-- js파일 -->    
-<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
-<script type="text/javascript" src="<%=path%>/userPage/script.js"></script>
-
 <style>
 	#scrolltable { 
-		height: 420;
+		height: 480;
 		overflow-x: hidden;
 	}
 	#scrolltable table { 
@@ -21,8 +18,44 @@
 	}
 </style>
 
+<!-- js파일 -->    
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/userPage/script.js"></script>
+<script type="text/javascript" src="<%=path%>/script.js"></script>
+<script>
+	function search(e) {
+		c_no = e.value;
+		//alert(c_no);		
+		location.href='children.jsp?searchC_no=' + c_no;
+	}
+	
+</script>
+
 <%
-	ArrayList<StudentBean> slist = sdao.getAllStudent(skno);
+	String searchC_no = request.getParameter("searchC_no");
+	int c_no = 0;
+	
+	String selectS_no = request.getParameter("selectS_no");
+	
+	System.out.println("searchC_no : " + searchC_no);
+	System.out.println("c_no : " + c_no);
+	System.out.println("s_no : " + selectS_no);
+	
+	
+	//목록보기 학생
+	ArrayList<StudentBean> slist;
+	
+	if(searchC_no==null || searchC_no.equals("") || searchC_no.equals("0")){
+		c_no = 0;
+		slist = sdao.getAllStudent(skno);
+	}
+	else{
+		c_no = Integer.parseInt(searchC_no);
+		slist = sdao.getAllStudentByCno(skno, searchC_no);
+	}
+	
+	ArrayList<ClassroomBean> clist = cdao.getAllClassroom(skno);
+	
 %>
 
 <title>Home / ChildManagement / ChildRetreive</title>
@@ -45,9 +78,18 @@
 			<div class="card-body">
 				<h5 class="card-title">유아 테이블</h5>
 
-				<form action="" method="post">
-				<div>
-					<button type="button" class="btn btn-outline-primary" style="float: right; " onclick="delSelct()">선택삭제</button>
+				<form name="f" action="" method="post">
+				<div style="height: 50;">
+					<select id="searchC_no" onchange="search(this)" width="500">
+						<option value="0">전체</option>
+						<%for(ClassroomBean cb : clist){ %>
+						<option value="<%=cb.getC_no()%>" <%if(cb.getC_no() == c_no){%>selected<%}%>><%=cb.getC_name()%></option>
+						<%
+						}
+						%>
+					</select>
+					<button type="button" class="btn btn-outline-primary" style="float: right;" onclick="delSelct()">선택삭제</button>
+					<button type="button" class="btn btn-outline-primary" style="float: right; margin-right: 20" onclick="">학생추가</button>
 				</div>
 				<div id="scrolltable">
 				<table class="table table-striped">
@@ -66,7 +108,7 @@
 						
 						<%
 						if(slist.size() == 0){
-							out.print("<tr><td>등록된 학생정보가 없습니다.</td></tr>");
+							out.print("<tr><td colspan='4'>등록된 학생정보가 없습니다.</td></tr>");
 						}else{
 							for(int i=0; i<slist.size(); i++){
 							%>
@@ -74,7 +116,9 @@
 								<td>
 									<input class="form-check-input me-1" type="checkbox" name="rowchk" value="<%=slist.get(i).getS_no()%>">
 								</td>
-								<th scope="row"><%=slist.get(i).getS_no()%></th>
+								<th scope="row">
+									<a href="children.jsp?selectS_no=<%=slist.get(i).getS_no()%>&searchC_no=<%=searchC_no%>"><%=slist.get(i).getS_no()%></a>
+								</th> <!-- 학번클릭 -->
 								<td><%=slist.get(i).getS_name()%></td>
 								<td><%ClassroomBean cb = cdao.getClassByCno(slist.get(i).getC_no());
 									out.print(cb.getC_name());%></td>
@@ -101,42 +145,34 @@
 				<!-- Default Tabs -->
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-							data-bs-target="#h" type="button" role="tab"
-							aria-controls="home" aria-selected="true">학생정보</button>
+						<button class="nav-link active" data-bs-toggle="tab"
+							data-bs-target="#student" type="button" role="tab">학생정보</button>
 					</li>
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-							data-bs-target="#profile" type="button" role="tab"
-							aria-controls="profile" aria-selected="false">출석조회</button>
+						<button class="nav-link" data-bs-toggle="tab"
+							data-bs-target="#studentUpdate" type="button" role="tab">정보수정</button>
 					</li>
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-							data-bs-target="#contact" type="button" role="tab"
-							aria-controls="contact" aria-selected="false">신체발달</button>
+						<button class="nav-link" data-bs-toggle="tab"
+							data-bs-target="#attend" type="button" role="tab">출석조회</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" data-bs-toggle="tab"
+							data-bs-target="#physical" type="button" role="tab">신체발달</button>
 					</li>
 				</ul>
 				<div class="tab-content pt-2" id="myTabContent">
-					<div class="tab-pane fade show active" id="h" role="tabpanel" aria-labelledby="home-tab">
-						Sunt est soluta temporibus
-						accusantium neque nam maiores cumque temporibus. Tempora libero
-						non est unde veniam est qui dolor. Ut sunt iure rerum quae
-						quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe
-						at unde.
+					<div class="tab-pane fade show active" id="student" role="tabpanel" >
+						<%@ include file="childrenInfo.jsp"%>						
 					</div>
-					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-						Nesciunt totam et.
-						Consequuntur magnam aliquid eos nulla dolor iure eos quia.
-						Accusantium distinctio omnis et atque fugiat. Itaque doloremque
-						aliquid sint quasi quia distinctio similique. Voluptate nihil
-						recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+					<div class="tab-pane fade" id="studentUpdate" role="tabpanel">
+						<%@ include file="childrenUpdate.jsp"%>
 					</div>
-					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-						Saepe animi et soluta ad odit
-						soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium
-						quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus
-						impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos
-						fuga tempore dolor.
+					<div class="tab-pane fade" id="attend" role="tabpanel">
+						출석
+					</div>
+					<div class="tab-pane fade" id="physical" role="tabpanel">
+						신체
 					</div>
 				</div>
 				<!-- End Default Tabs -->
@@ -145,4 +181,6 @@
 		<!-- End Default Card -->
 	</div>
 </div>
-	<%@ include file="../userPage/home_bottom.jsp"%>
+
+
+<%@ include file="../userPage/home_bottom.jsp"%>
