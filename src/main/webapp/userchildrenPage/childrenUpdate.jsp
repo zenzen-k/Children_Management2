@@ -1,18 +1,18 @@
+<%@page import="children.FamilyBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
 <h5 class="card-title">정보수정</h5>
+<%
+if(selectS_no == null){
+	out.print("<tr><td>수정할 학생의 학번을 클릭하세요.<td></tr>");
+}
+else if(selectS_no != null){
+	StudentBean sb = sdao.getStudentBySno(selectS_no); // 선택한 학생 정보 가져오기
+%>
 
-<form action="childrenUpdateProc.jsp" method="post" enctype="multipart/form-data">
+<form name="f" action="childrenUpdateProc.jsp" method="post" enctype="multipart/form-data">
 <table class="table">
-		<%
-		if(selectS_no == null){
-			out.print("<tr><td>수정할 학생의 학번을 클릭하세요.<td></tr>");
-		}
-		else if(selectS_no != null){
-			StudentBean sb = sdao.getStudentBySno(selectS_no); // 선택한 학생 정보 가져오기
-		%>
 		<tr>
 			<td rowspan="7" width="10%">
 				<input type="hidden" name="searchC_no" value="<%=searchC_no%>">
@@ -84,8 +84,46 @@
 		</tr>
 		
 </table>
+
+
+<!-- 가족정보 -->
+<h5 class="card-title">긴급연락처</h5>
+<%
+	FamilyBean fb = fdao.getFamilyBySno(sb.getS_no());
+	String[] fam = {"부", "모", "조부", "조모", "친척", "기타"};
+%>
+<table class="table">
+		<tr>
+			<th scope="col" class="table-active" width="15%">가족관계</th>
+			<td>
+				<select name="f_relations" class="form-select">
+					<% for(int i=0; i<fam.length; i++){ %>
+					<option value="<%=fam[i]%>"><%=fam[i]%></option>
+					<% } %>
+				</select>
+			</td>
+			<th scope="col" class="table-active" width="15%">이름</th>
+			<td>
+				<input type="text" name="f_name" value="<%=fb.getF_name()%>" class="form-control">
+			</td>
+		</tr>
+		<tr>
+			<th scope="col" class="table-active">생년월일</th>
+			<td>
+				<input type="date" name="f_birth" class="form-control" value="<%=fb.getF_birth()%>">
+			</td>
+			<th scope="col" class="table-active">연락처</th>
+			<td>
+				<input type="text" name="f_hp1" value="<%=fb.getF_hp1()%>" class="form-control" style="display: inline; width: 30%" maxlength="4"> - 
+				<input type="text" name="f_hp2" value="<%=fb.getF_hp2()%>" class="form-control" style="display: inline; width: 30%" maxlength="4"> - 
+				<input type="text" name="f_hp3" value="<%=fb.getF_hp3()%>" class="form-control" style="display: inline; width: 30%" maxlength="4">
+			</td>
+		</tr>
+</table>
+
 <div class="text-center">
-	<button type="submit" class="btn btn-primary" onclick="childCheck()">수정하기</button>
+	<button type="submit" class="btn btn-primary" onclick="return childCheck()">수정하기</button>
 </div>
-	<%}%>
+
 </form>
+<%}%>

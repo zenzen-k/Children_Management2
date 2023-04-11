@@ -1,3 +1,6 @@
+<%@page import="children.AttendManageDao"%>
+<%@page import="children.PhysicalDevDao"%>
+<%@page import="children.FamilyDao"%>
 <%@page import="children.StudentDao"%>
 <%@page import="info.UsersBean"%>
 <%@page import="info.EmpDao"%>
@@ -24,6 +27,9 @@
 	KindergartenDao kdao = KindergartenDao.getInstance();
 	EmpDao edao = EmpDao.getInstance();
 	StudentDao sdao = StudentDao.getInstance();
+	FamilyDao fdao = FamilyDao.getInstance();
+	PhysicalDevDao pdao = PhysicalDevDao.getInstance();
+	AttendManageDao adao = AttendManageDao.getInstance();
 	
 	//
 	UsersBean ub = udao.getUserInfo(sid);
@@ -164,11 +170,6 @@
           <li>
             <a href="#">
               <i class="bi bi-circle"></i><span>출석조회</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>신체발달</span>
             </a>
           </li>
           <li>

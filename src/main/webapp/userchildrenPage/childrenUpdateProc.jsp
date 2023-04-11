@@ -1,3 +1,4 @@
+<%@page import="children.FamilyDao"%>
 <%@page import="info.ClassroomBean"%>
 <%@page import="info.ClassroomDao"%>
 <%@page import="children.StudentDao"%>
@@ -43,10 +44,12 @@
 	System.out.println("cb.getC_age() : " + cb.getC_age());
 	int c_age = cb.getC_age();
 	
+	FamilyDao fdao = FamilyDao.getInstance();
 	StudentDao sdao = StudentDao.getInstance();
 	int cnt = sdao.updateStudent(mr, img, c_age); // 입력항목, 이미지
+	int cnt2 = fdao.updateFamily(mr);
 	
-	if(cnt==1){
+	if(cnt==1 && cnt2 == 1){
 	%>
 		<script>
 			alert('수정성공');

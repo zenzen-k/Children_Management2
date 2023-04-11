@@ -221,8 +221,35 @@ public class StudentDao {
 		return cnt;
 	}
 	
+	// 학번부여
+	public String insertSno(String entran) {
+		String s_no = null;
+		String sql = "select stunum(?, p_seq.nextval) as sno from dual";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, entran);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				s_no = rs.getString("sno");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return s_no;
+	}
+	
+	
 	// 값 삽입
-	public int insertStudent(MultipartRequest mr, int k_no) {
+	public int insertStudent(MultipartRequest mr, int k_no, String s_no) {
 		int cnt = -1;
 		String c = mr.getParameter("c_no");
 		String[] c2 = c.split(" ");
@@ -230,11 +257,11 @@ public class StudentDao {
 		System.out.println("c : " + c);
 		System.out.println("c2 : " + c2[0] + ", " + c2[1]);
 		
-		String sql = "insert into student values(?, stunum(?, p_seq.nextval), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into student values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, k_no);
-			ps.setString(2, mr.getParameter("entran"));
+			ps.setString(2, s_no);
 			ps.setString(3, mr.getParameter("s_name"));
 			ps.setString(4, mr.getParameter("s_birth"));
 			ps.setString(5, mr.getParameter("gender"));
@@ -259,8 +286,7 @@ public class StudentDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("cnt : " + cnt);
-
+		//System.out.println("cnt : " + cnt);
 		return cnt;
 	}
 }

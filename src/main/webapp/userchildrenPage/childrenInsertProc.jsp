@@ -12,12 +12,19 @@
 	
 	/* 주소는 k_addr로 들어감, 반번호와 나이 공백 기준으로 나눌것(c_no, c_age) */
 	StudentDao sdao = StudentDao.getInstance();
-	int cnt = sdao.insertStudent(mr, skno);
+	
+	String s_no = sdao.insertSno(mr.getParameter("entran"));
+	//System.out.println("s_no : " + s_no);
+	
+	int cnt = sdao.insertStudent(mr, skno, s_no);
 	
 	String msg = "";
 	String url = "";
 	
 	if(cnt == 1){
+		// 학생등록 성공시 가족테이블 값 삽입, 신체발달 값 정보 생성하기.
+		
+		
 		msg = "등록성공";
 		url = "children.jsp?searchC_no=0";
 	}else{

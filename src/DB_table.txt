@@ -204,50 +204,136 @@ commit;
 
 drop table family cascade constraints;
 create table family(
-	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
 	f_relations varchar2(10) not null,
 	f_name varchar2(30) not null,
 	f_birth date,
-	f_hp1 number not null,
-	f_hp2 number not null,
-	f_hp3 number not null
+	f_hp1 varchar2(4) not null,
+	f_hp2 varchar2(4) not null,
+	f_hp3 varchar2(4) not null
 );
+
+insert into family values(230001, '부', '김철수', '1988-01-01', '010', '1234', '1234');
+insert into family values(230002, '모', '강민희', '1985-10-22', '010', '4444', '5555');
+insert into family values(230003, '부', '다니', '1988-02-18', '010', '7777', '8888');
+insert into family values(220004, '모', '하림', '1990-10-22', '010', '9999', '6666');
+insert into family values(220005, '부', '민경훈', '1982-07-13', '010', '4564', '4456');
+insert into family values(220006, '조부', '김정혁', '1960-08-03', '010', '4444', '5555');
+insert into family values(210007, '모', '주현영', '1992-03-27', '010', '2222', '3333');
+insert into family values(210008, '부', '서장훈', '1982-03-27', '010', '7894', '7561');
+insert into family values(210009, '모', '김민지', '1989-12-03', '010', '5000', '1111');
+insert into family values(210010, '부', '김희찰', '1993-06-02', '010', '2222', '3333');
+insert into family values(210011, '부', '신지민', '1981-02-23', '010', '1554', '8984');
+insert into family values(210012, '모', '하지영', '1989-11-13', '010', '2222', '3333');
 
 select * from family;
 commit;
 
 
 
-
+-- 학생객체가 생성되면 자동으로 학기만 데이터 생성하게 만들기
 -- 신체발달
 
 drop table physicalDev cascade constraints;
 create table physicalDev(
-	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
 	page varchar2(20) not null,
 	pdate varchar2(20) ,
 	weight number default 0.0,
 	height number default 0.0
 );
 
+insert into physicalDev values(230001, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230001, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230001, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230001, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230001, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230001, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230002, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230002, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230002, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230002, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230002, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230002, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230003, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230003, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230003, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230003, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230003, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(230003, '만 5세 2학기', ' ' , 0.0 , 0.0);
+
+insert into physicalDev values(220004, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220004, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220004, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220004, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220004, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220004, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220005, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220005, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220005, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220005, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220005, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220005, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220006, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220006, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220006, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220006, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220006, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(220006, '만 5세 2학기', ' ' , 0.0 , 0.0);
+
+insert into physicalDev values(210007, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210007, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210007, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210007, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210007, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210007, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210008, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210008, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210008, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210008, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210008, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210008, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210009, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210009, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210009, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210009, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210009, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210009, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210010, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210010, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210010, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210010, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210010, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210010, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210011, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210011, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210011, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210011, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210011, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210011, '만 5세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210012, '만 3세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210012, '만 3세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210012, '만 4세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210012, '만 4세 2학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210012, '만 5세 1학기', ' ' , 0.0 , 0.0);
+insert into physicalDev values(210012, '만 5세 2학기', ' ' , 0.0 , 0.0);
+
 select * from physicalDev;
 commit;
-
-
-
 
 
 -- 출결상황
 
 drop table attendManage cascade constraints;
 create table attendManage(
-	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
 	attend number default 0 check(attend in(0,1)), -- 출석여부
 	absence number default 0 check(absence in(0,1)), -- 결석여부
 	earlier number default 0 check(earlier in(0,1)), -- 조퇴여부 
 	classday number default 180, -- 수업일수
 	adate date default sysdate -- 출결날짜관리
 );
+
 
 
 select * from attendManage;
@@ -260,7 +346,7 @@ commit;
 
 drop table observe cascade constraints;
 create table observe(
-	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
 	o_no number primary key,
 	odate date default sysdate not null,
 	o_content varchar2(4000)
@@ -277,7 +363,7 @@ commit;
 
 drop table developmental cascade constraints;
 create table developmental(
-	s_no number references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
+	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
 	d_no number primary key,
 	scope varchar2(100),
 	d_content varchar2(4000),

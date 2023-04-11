@@ -21,7 +21,7 @@
 <!-- js파일 -->    
 <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path%>/userPage/script.js"></script>
-<script type="text/javascript" src="<%=path%>/script.js"></script>
+<%-- <script type="text/javascript" src="<%=path%>/script.js"></script> --%>
 <script>
 	function search(e) {
 		c_no = e.value;
@@ -59,7 +59,7 @@
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>
-			<li class="breadcrumb-item"><a href="<%=path%>/userchildrenPage/children.jsp">학생관리</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userchildrenPage/children.jsp?searchC_no=0">학생관리</a></li>
 			<li class="breadcrumb-item active">유아조회</li>
 		</ol>
 	</nav>
@@ -149,10 +149,6 @@
 					</li>
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" data-bs-toggle="tab"
-							data-bs-target="#attend" type="button" role="tab">출석조회</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" data-bs-toggle="tab"
 							data-bs-target="#physical" type="button" role="tab">신체발달</button>
 					</li>
 				</ul>
@@ -163,10 +159,16 @@
 					<div class="tab-pane fade" id="studentUpdate" role="tabpanel">
 						<%@ include file="childrenUpdate.jsp"%>
 					</div>
-					<div class="tab-pane fade" id="attend" role="tabpanel">
-						출석
-					</div>
 					<div class="tab-pane fade" id="physical" role="tabpanel">
+						<%
+						if(selectS_no == null){
+							out.print("<tr><td>조회할 학생의 학번을 클릭하세요.<td></tr>");
+						}
+						else if(selectS_no != null){
+							StudentBean sb = sdao.getStudentBySno(selectS_no); // 선택한 학생 정보 가져오기
+							ClassroomBean cb2 = cdao.getClassByCno(sb.getC_no());
+						}
+						%>
 						신체
 					</div>
 				</div>
