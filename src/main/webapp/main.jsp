@@ -54,7 +54,7 @@
 							<div class="card-body">
 
 								<div class="pt-4 pb-2">
-									<p class="text-center small">~~에 오신것을 환영합니다</p>
+									<p class="text-center small">키즈 매니저에 오신것을 환영합니다</p>
 								</div>
 
 									<div class="col-12">
