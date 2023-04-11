@@ -201,7 +201,6 @@ public class StudentDao {
 		for(int i=1; i<s_no.length; i++) {
 			sql += "or s_no=? ";
 		}
-		sql += ")";
 		System.out.println("sql : " + sql);
 		try {
 			ps = conn.prepareStatement(sql);
@@ -219,6 +218,49 @@ public class StudentDao {
 				e.printStackTrace();
 			}
 		}
+		return cnt;
+	}
+	
+	// 값 삽입
+	public int insertStudent(MultipartRequest mr, int k_no) {
+		int cnt = -1;
+		String c = mr.getParameter("c_no");
+		String[] c2 = c.split(" ");
+		
+		System.out.println("c : " + c);
+		System.out.println("c2 : " + c2[0] + ", " + c2[1]);
+		
+		String sql = "insert into student values(?, stunum(?, p_seq.nextval), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, k_no);
+			ps.setString(2, mr.getParameter("entran"));
+			ps.setString(3, mr.getParameter("s_name"));
+			ps.setString(4, mr.getParameter("s_birth"));
+			ps.setString(5, mr.getParameter("gender"));
+			ps.setString(6, mr.getParameter("entran"));
+			ps.setString(7, mr.getParameter("k_addr1"));
+			ps.setString(8, mr.getParameter("k_addr2"));
+			ps.setString(9, mr.getParameter("k_addr3"));
+			ps.setString(10, c2[0]);
+			ps.setString(11, c2[1]);
+			ps.setString(12, mr.getParameter("note"));
+			ps.setString(13, mr.getParameter("after"));
+			ps.setString(14, mr.getFilesystemName("imgname"));
+			
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("cnt : " + cnt);
+
 		return cnt;
 	}
 }

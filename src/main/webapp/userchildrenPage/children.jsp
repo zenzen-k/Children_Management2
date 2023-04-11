@@ -37,15 +37,10 @@
 	
 	String selectS_no = request.getParameter("selectS_no");
 	
-	System.out.println("searchC_no : " + searchC_no);
-	System.out.println("c_no : " + c_no);
-	System.out.println("s_no : " + selectS_no);
-	
-	
 	//목록보기 학생
 	ArrayList<StudentBean> slist;
 	
-	if(searchC_no==null || searchC_no.equals("") || searchC_no.equals("0")){
+	if(searchC_no == null || searchC_no.equals("") || searchC_no.equals("0")){
 		c_no = 0;
 		slist = sdao.getAllStudent(skno);
 	}

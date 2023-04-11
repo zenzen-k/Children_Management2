@@ -12,7 +12,6 @@
 		}
 		else if(selectS_no != null){
 			StudentBean sb = sdao.getStudentBySno(selectS_no); // 선택한 학생 정보 가져오기
-			System.out.println("proc selectS_no : " + selectS_no);
 		%>
 		<tr>
 			<td rowspan="7" width="10%">

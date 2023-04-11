@@ -30,7 +30,7 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">학생 등록하기</h5>
-					<form name="f" method="post" action="">
+					<form name="f" method="post" action="childrenInsertProc.jsp" enctype="multipart/form-data">
 						<table class="table">
 								<tr>
 									<td rowspan="7" width="20%">
@@ -67,7 +67,7 @@
 									</td>
 									<th scope="col" class="table-active">생년월일</th>
 									<td>
-										<input type="date" name="birth" class="form-control" id="bir">
+										<input type="date" name="s_birth" class="form-control" id="bir">
 									</td>
 								</tr>
 								<tr>
@@ -87,7 +87,7 @@
 									</td>
 								</tr>
 								<tr>
-									<th scope="col" class="table-active">주소</th>
+									<th scope="col" class="table-active">주소</th> 
 									<td colspan="3">
 										<%@ include file="../user/searchAddr.jsp" %>
 									</td>
