@@ -12,8 +12,8 @@
 <meta content="" name="keywords">
 
 <!-- Favicons -->
-<link href="<%=path%>/bootstrap/assets/img/favicon.png" rel="icon">
-<link href="<%=path%>/bootstrap/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="<%=path%>/images/favicon-32x32.png" rel="icon">
+<link href="<%=path%>/images/apple-icon-180x180.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
 <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -43,8 +43,8 @@
 
 						<div class="d-flex justify-content-center py-4">
 							<a href="main.jsp" class="logo d-flex align-items-center w-auto"> 
-								<img src="<%=path%>/bootstrap/assets/img/logo.png" alt=""> 
-								<span class="d-none d-lg-block">NiceAdmin</span>
+								<img src="<%=path%>/images/mainlogo.png" alt=""> 
+								<span class="d-none d-lg-block">kids manager</span>
 							</a>
 						</div>
 						<!-- End Logo -->

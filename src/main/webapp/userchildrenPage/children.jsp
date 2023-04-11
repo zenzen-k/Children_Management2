@@ -63,7 +63,7 @@
 	<h1>학생관리</h1>
 	<nav>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<%=path%>/home.jsp">Home</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>
 			<li class="breadcrumb-item"><a href="<%=path%>/userchildrenPage/children.jsp">학생관리</a></li>
 			<li class="breadcrumb-item active">유아조회</li>
 		</ol>
@@ -78,7 +78,7 @@
 			<div class="card-body">
 				<h5 class="card-title">유아 테이블</h5>
 
-				<form name="f" action="" method="post">
+				<form name="f" action="childrenDeleteProc.jsp" method="post">
 				<div style="height: 50;">
 					<select id="searchC_no" onchange="search(this)" width="500">
 						<option value="0">전체</option>
@@ -89,7 +89,7 @@
 						%>
 					</select>
 					<button type="button" class="btn btn-outline-primary" style="float: right;" onclick="delSelct()">선택삭제</button>
-					<button type="button" class="btn btn-outline-primary" style="float: right; margin-right: 20" onclick="">학생추가</button>
+					<button type="button" class="btn btn-outline-primary" style="float: right; margin-right: 20" onclick="location.href='childrenInsert.jsp'">학생추가</button>
 				</div>
 				<div id="scrolltable">
 				<table class="table table-striped">

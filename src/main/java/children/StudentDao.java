@@ -193,4 +193,32 @@ public class StudentDao {
 		System.out.println("cnt : " + cnt);
 		return cnt;
 	}
+	
+	// 선택 학생 삭제
+	public int deleteCheck(String[] s_no) {
+		int cnt = 0;
+		String sql = "delete student where s_no=? ";
+		for(int i=1; i<s_no.length; i++) {
+			sql += "or s_no=? ";
+		}
+		sql += ")";
+		System.out.println("sql : " + sql);
+		try {
+			ps = conn.prepareStatement(sql);
+			for(int i=0; i<s_no.length; i++) {
+				ps.setString(i+1, s_no[i]);
+			}
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
 }

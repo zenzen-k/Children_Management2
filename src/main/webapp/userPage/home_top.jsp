@@ -37,8 +37,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<%=path%>/bootstrap/assets/img/favicon.png" rel="icon">
-  <link href="<%=path%>/bootstrap/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="<%=path%>/images/favicon-32x32.png" rel="icon">
+  <link href="<%=path%>/images/apple-icon-180x180.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -64,8 +64,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="<%=path%>/userPage/home.jsp" class="logo d-flex align-items-center">
-        <img src="<%=path%>/bootstrap/assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAddmin</span>
+        <img src="<%=path%>/images/mainlogo.png" alt="">
+        <span class="d-none d-lg-block">kids manager</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

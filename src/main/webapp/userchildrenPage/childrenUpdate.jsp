@@ -68,7 +68,7 @@
 				<input class="form-check-input" type="radio" name="after" id="gridRadios1" value="참여" <%if(sb.getAfter().equals("참여")){%>checked<%}%>>
 				<label class="form-check-label" style="margin-right: 20">참여</label>
 				<input class="form-check-input" type="radio" name="after" id="gridRadios1" value="미참여" <%if(sb.getAfter().equals("미참여")){%>checked<%}%>>
-				<label class="form-check-label" style="margin-right: 20">미참여</label>
+				<label class="form-check-label">미참여</label>
 			</td>
 		</tr>
 		<tr>
