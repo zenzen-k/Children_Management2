@@ -11,9 +11,9 @@
 	int cnt = sdao.deleteCheck(s_no);
 	
 	String msg = "삭제 실패";
-	String url = request.getContextPath() + "/userPage/croomMng.jsp";
+	String url = request.getContextPath() + "/userchildrenPage/children.jsp?searchC_no=0";
 	
-	if(cnt == no.length){
+	if(cnt == s_no.length){
 		msg = "삭제 성공";
 	}
 %>
