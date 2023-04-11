@@ -11,7 +11,7 @@ else if(selectS_no != null){
 	StudentBean sb = sdao.getStudentBySno(selectS_no); // 선택한 학생 정보 가져오기
 %>
 
-<form name="f" action="childrenUpdateProc.jsp" method="post" enctype="multipart/form-data">
+<form name="form" action="childrenUpdateProc.jsp" method="post" enctype="multipart/form-data">
 <table class="table">
 		<tr>
 			<td rowspan="7" width="10%">

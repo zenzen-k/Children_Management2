@@ -42,7 +42,8 @@ else if(selectS_no != null){
 			<td><span id="height"><%=pb.getHeight()%></span></td>
 			<td>
 				<button type="button" class="btn btn-outline-danger btn-sm" 
-				onclick="location.href='physicalUpdate.jsp?s_no=<%=sb.getS_no()%>&p_age=<%=pb.getP_age()%>'">수정</button>
+				onclick="location.href='physicalUpdate.jsp?s_no=<%=sb.getS_no()%>&p_age=<%=pb.getP_age()%>&pdate=<%=pb.getPdate()%>&weight=<%=pb.getWeight()%>&height=<%=pb.getHeight()%>'">
+				수정</button>
 			</td>
 		</tr>
 		<%

@@ -150,7 +150,7 @@
                   
                   <div class="col-12">
                     <label class="form-label">*직급선택</label>
-                    <select name="e_no" style="width: 100%">
+                    <select name="e_no" style="width: 100%" class="form-select">
                     	<%
                     	for(EmpBean eb : elist){
                     		if(eb.getE_no()>505){

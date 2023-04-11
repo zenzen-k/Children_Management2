@@ -3,8 +3,8 @@
  */
  
  function delAll() {
-	
 	var check = document.f.allchk.checked;
+	
 	//alert(delAll); 
 	// 체크 - t , 해제 - f
 	

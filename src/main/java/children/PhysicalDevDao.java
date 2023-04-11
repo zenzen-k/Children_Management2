@@ -88,7 +88,42 @@ public class PhysicalDevDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return plist;
+	}
+	
+	// 수정
+	public int updatePhysical(PhysicalDevBean pb) {
+		int cnt = -1;
+		String sql = "update physicalDev set pdate=?, weight=?, height=? where s_no=? and p_age=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pb.getPdate());
+			ps.setDouble(2, pb.getWeight());
+			ps.setDouble(3, pb.getHeight());
+			ps.setString(4, pb.getS_no());
+			ps.setString(5, pb.getP_age());
+			
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
 	}
 }
