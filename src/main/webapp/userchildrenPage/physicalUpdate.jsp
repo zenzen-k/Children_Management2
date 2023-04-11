@@ -3,6 +3,10 @@
 
 <%@ include file="../userPage/home_top.jsp"%>
 
+<%
+	request.setCharacterEncoding("UTF-8");
+	String searchC_no = request.getParameter("searchC_no");
+%>
 <jsp:useBean id="pb" class="children.PhysicalDevBean"/>
 <jsp:setProperty property="*" name="pb"/>
 
@@ -28,7 +32,7 @@
 				<div class="card-body">
 				
 					<h5 class="card-title">신체 발달 수정</h5>
-					<form method="post" action="physicalUpdateProc.jsp">
+					<form method="post" action="physicalUpdateProc.jsp?searchC_no=<%=searchC_no%>">
 						<div class="row mb-3">
 							<label for="inputEmail3" class="col-sm-2 col-form-label">학번<font size="2"> *수정불가</font></label>
 							<div class="col-sm-10">

@@ -41,13 +41,15 @@
 	//목록보기 학생
 	ArrayList<StudentBean> slist;
 	
-	if(searchC_no == null || searchC_no.equals("") || searchC_no.equals("0")){
+	if(searchC_no == null || searchC_no.equals("0")){ // searchC_no.equals("") || 
 		c_no = 0;
 		slist = sdao.getAllStudent(skno);
+		System.out.println("전체" + searchC_no);
 	}
 	else{
 		c_no = Integer.parseInt(searchC_no);
 		slist = sdao.getAllStudentByCno(skno, searchC_no);
+		System.out.println("검색" + searchC_no);
 	}
 	
 	ArrayList<ClassroomBean> clist = cdao.getAllClassroom(skno);
