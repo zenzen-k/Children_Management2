@@ -1,3 +1,5 @@
+<%@page import="children.PhysicalDevDao"%>
+<%@page import="children.FamilyDao"%>
 <%@page import="children.StudentDao"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,7 +14,10 @@
 	
 	/* 주소는 k_addr로 들어감, 반번호와 나이 공백 기준으로 나눌것(c_no, c_age) */
 	StudentDao sdao = StudentDao.getInstance();
+	FamilyDao fdao = FamilyDao.getInstance();
+	PhysicalDevDao pdao = PhysicalDevDao.getInstance();
 	
+	// 학번
 	String s_no = sdao.insertSno(mr.getParameter("entran"));
 	//System.out.println("s_no : " + s_no);
 	
@@ -22,11 +27,14 @@
 	String url = "";
 	
 	if(cnt == 1){
-		// 학생등록 성공시 가족테이블 값 삽입, 신체발달 값 정보 생성하기.
+	// 학생등록 성공시 가족테이블 값 삽입, 신체발달 값 정보 생성하기.
+		int cnt2 = fdao.insertFamily(mr, s_no);
+		int cnt3 = pdao.insertPhysicalDev(s_no);
 		
-		
-		msg = "등록성공";
-		url = "children.jsp?searchC_no=0";
+		if(cnt2==1 || cnt3==6){
+			msg = "등록성공";
+			url = "children.jsp?searchC_no=0";
+		}
 	}else{
 		msg = "등록실패";
 		url = "children.jsp?searchC_no=0";

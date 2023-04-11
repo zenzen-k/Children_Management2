@@ -1,6 +1,6 @@
 
 function childCheck(){
-	alert('childCheck');
+	//alert('childCheck');
 	
 	if($('input[name=entran]').val()==""){
 		alert("입학일을 선택하세요");
@@ -19,12 +19,22 @@ function childCheck(){
 	}
 	
 	// 주소
-	if($('input[name=addr1]').val()=="" || $('input[name=addr2]').val()==""){
+	if($('input[name=k_addr1]').val()=="" || $('input[name=k_addr2]').val()==""){
+		alert("주소를 입력하세요");
+		$('input[name=k_addr1]').focus();
+		return false;
+	}
+	if($('input[name=k_addr3]').val()==""){
+		alert("상세주소를 입력하세요");
+		$('input[name=k_addr3]').focus();
+		return false;
+	}
+	if($('input[name=addr1]').val()=="" || $('input[name=k_addr2]').val()==""){
 		alert("주소를 입력하세요");
 		$('input[name=addr1]').focus();
 		return false;
 	}
-	if($('input[name=addr3]').val()==""){
+	if($('input[name=k_addr3]').val()==""){
 		alert("상세주소를 입력하세요");
 		$('input[name=addr3]').focus();
 		return false;
@@ -64,6 +74,12 @@ function childCheck(){
 	} else if($('input[name=f_hp3]').val().search(/[0-9]/) < 0){
 		alert("긴급연락처 - 전화번호는 숫자만 입력하세요");
 		$('input[name=f_hp3]').select();
+		return false;
+	}
+	
+	if($('input[name=f_birth]').val()==""){
+		alert("긴급연락처 - 생년월일을 입력하세요");
+		$('input[name=f_birth]').focus();
 		return false;
 	}
 }

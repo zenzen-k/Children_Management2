@@ -45,24 +45,6 @@
 							</div>
 						</div>
 						
-						<%-- <div class="row mb-3">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">교사선택</label>
-							<div class="col-sm-10">
-								<div class="col-sm-10">
-									<select class="form-select" name="id" multiple="multiple">
-										<option value="1">===선택하기===</option> <!-- 1이면 미정 -->
-										<%
-										for(UsersBean u : ulist){
-										%>
-										<option value="<%=u.getId()%>"><%=u.getU_name()%></option>
-										<%
-										}
-										%>
-									</select>
-								</div>
-							</div>
-						</div> --%>
-						
 						<fieldset class="row mb-3">
 							<legend class="col-form-label col-sm-2 pt-0">연령선택</legend>
 							<div class="col-sm-10">

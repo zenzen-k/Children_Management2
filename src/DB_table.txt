@@ -237,7 +237,7 @@ commit;
 drop table physicalDev cascade constraints;
 create table physicalDev(
 	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
-	page varchar2(20) not null,
+	p_age varchar2(20) not null,
 	pdate varchar2(20) ,
 	weight number default 0.0,
 	height number default 0.0

@@ -99,4 +99,31 @@ public class FamilyDao {
 		}
 		return cnt;
 	}
+	
+	//가족삽입
+	public int insertFamily(MultipartRequest mr, String s_no) {
+		int cnt = -1;
+		String sql = "insert into family values(?, ?, ?, ?, ?, ?, ?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, s_no);
+			ps.setString(2, mr.getParameter("f_relations"));
+			ps.setString(3, mr.getParameter("f_name"));
+			ps.setString(4, mr.getParameter("f_birth"));
+			ps.setString(5, mr.getParameter("f_hp1"));
+			ps.setString(6, mr.getParameter("f_hp2"));
+			ps.setString(7, mr.getParameter("f_hp3"));
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
 }
