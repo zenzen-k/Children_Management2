@@ -56,7 +56,7 @@
 
 <title>Home / ChildManagement / AttendManage</title>
 <div class="pagetitle">
-	<h1>학생관리</h1>
+	<h1>출석관리</h1>
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>

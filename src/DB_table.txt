@@ -342,14 +342,23 @@ commit;
 
 
 
+-- 관찰일지 시퀀스
+drop sequence o_seq;
+create sequence o_seq
+	increment by 1
+	start with 1
+	minvalue 1
+	nocache;
+
 
 -- 관찰일지
 
 drop table observe cascade constraints;
 create table observe(
 	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
-	o_no number primary key,
-	odate date default sysdate not null,
+	o_no number primary key, -- 게시글 번호
+	odate date default sysdate not null, -- 게시날짜
+	writer varchar2(30) not null, -- 작성자 이름  ㅇㅇㅇ(ㅇㅇ반)
 	o_content varchar2(4000)
 );
 

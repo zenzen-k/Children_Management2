@@ -174,7 +174,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="<%=path%>/userchildrenPage/observations.jsp">
               <i class="bi bi-circle"></i><span>관찰일지</span>
             </a>
           </li>

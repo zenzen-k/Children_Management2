@@ -12,6 +12,7 @@
 	ArrayList<KindergartenBean> kcntList = kdao.getCountByK(skno); // 유치원 전체 반별 유아 인원 수
 	
 	int sum = 0;
+	
 %> 
 
   <title>Home</title>
@@ -125,84 +126,33 @@
             </div><!-- End 이달의 행사 -->
 			
 			
-			<!-- 출결사항 -->
-			<div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">전체</a></li>
-                <li><a class="dropdown-item" href="#">반별로</a></li>
-              </ul>
-            </div>
-
+			<!-- 유치원 공지사항 -->
+          <div class="card">
             <div class="card-body pb-0">
-              <h5 class="card-title">출결사항 <span>| 전체</span></h5>
+            
+              <h5 class="card-title">유치원 공지사항</h5>
 
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: '출결사항',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: '출석'
-                        },
-                        {
-                          value: 7351,
-                          name: '결석'
-                        },
-                        {
-                          value: 580,
-                          name: '조퇴'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
+              <div class="news">
+                <div class="post-item clearfix">
+                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
+                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                </div>
+              </div>
 
             </div>
-          </div><!-- End 출결사항 -->
+          </div><!-- End  유치원 공지사항 -->
+
+
           
         </div> 
 	  </div><!-- End Left side columns -->
 	   <!-- Right side columns -->
         <div class="col-lg-4">
-	   
+	   	  
           <!-- 시스템 공지사항 -->
           <div class="card">
-          
             <div class="card-body pb-0">
+            
               <h5 class="card-title">시스템 공지사항</h5>
 
               <div class="news">
@@ -211,7 +161,6 @@
                   <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
                   <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
                 </div>
-
               </div><!-- End posts-->
 
             </div>
