@@ -13,7 +13,7 @@
 		text-align: center;
 	}
 	#scrolltable { 
-		height: 480;
+		height: 430;
 		overflow-x: hidden;
 	}
 	#scrolltable table { 
@@ -72,7 +72,9 @@
 		<div class="card">
 			<div class="card-body">
 				<h5 class="card-title">출석정보 조회</h5>
-
+				
+				
+				
 				<form name="f" action="attendProc.jsp" method="post">
 				날짜선택
 				<input type="date" id="dat" name="adate">
@@ -87,13 +89,16 @@
 						<th>No</th>
 						<th>학번</th>
 						<th>이름</th>
-						<th>출석<input type="checkbox" class="form-check-input me-1"  name="allAttend" onclick="allCheckA"></th>
+						<th>출석<input type="checkbox" class="form-check-input me-1" name="allAttend" onclick="allCheckA()"></th>
 						<th>조퇴</th>
 					</tr>
 					</thead>
 					<tbody>
 					
 					<%
+					int todayAttend =0;
+					int todayAbsence =0;
+					int todayEarlier =0;
 					if(scno == 1){
 						out.print("<tr><td colspan='5'> 담당 교실이 없습니다.</td></tr>");
 					}else{
@@ -107,22 +112,52 @@
 							</td>
 							<td><%=alist.get(i).getS_name()%></td>
 							<!-- value에 학번을 넣어서 넘기고 학번이 있으면 -->
-							<td><input type="checkbox" class="form-check-input me-1" name="rowA" value="<%=alist.get(i).getS_no()%>" <%if(alist.get(i).getAttend()==1){%>checked<%}%>></td>
-							<td><input type="checkbox" class="form-check-input me-1" name="rowE" value="<%=alist.get(i).getS_no()%>" <%if(alist.get(i).getEarlier()==1){%>checked<%}%>></td>
+							<td><input type="checkbox" class="form-check-input me-1" name="rowA" value="<%=alist.get(i).getS_no()%>" <%if(alist.get(i).getAttend()==1){ %>checked<%}%>></td>
+							<td><input type="checkbox" class="form-check-input me-1" name="rowE" value="<%=alist.get(i).getS_no()%>" <%if(alist.get(i).getEarlier()==1){ %>checked<%}%>></td>
 						</tr>
 						<%
+							if(alist.get(i).getAttend()==1){
+								todayAttend++;
+							}else if(alist.get(i).getAttend()!=1 && alist.get(i).getEarlier()!=1){
+								todayAbsence++;
+							}
+							if(alist.get(i).getEarlier()==1){
+								todayEarlier++;
+							}
 						}
 					}
 					%>
 					</tbody>
 				</table>
 				</div>
+				
 				</form>
 			</div>
 		</div>
 	</div>
+	
 
 	<div class="col-lg-6" > 
+		<div class="card">
+			<div class="card-body">
+			
+			<table width='100%'>
+				<tr>
+					<td class="card-title"><%=searchDate %> 출석 정보</td>
+				<tr>
+					<td><font color='green'>출석일수 : <%=todayAttend%> </font></td>
+				</tr>
+				<tr>
+					<td><font color='red'>결석일수 : <%=todayAbsence%> </font></td>
+				</tr>
+				<tr>
+					<td><font color='gray'>조퇴일수 : <%=todayEarlier%> </font></td>
+				</tr>
+				</table>
+			
+			</div>
+		</div>
+	
 		<div class="card">
 			<div class="card-body">
 				<h5 class="card-title">개인 출석 정보</h5>
@@ -156,23 +191,44 @@
 							}
 							else{
 								ArrayList<AttendManageBean> alists = adao.getAttendBySno(selectSno, startdate, enddate);
+								
+								int sumAttend = 0;
+								int sumAbsence = 0;
+								int sumEarlier = 0;
+								
 								for(AttendManageBean ab : alists){
 								%>
 								<tr>
 									<td><%=ab.getAdate()%></td>
 									<td>
 									<%
-									if(ab.getAttend()==1)
+									if(ab.getAttend()==1){
 										out.print("<font color='green'>출석</font>");
-									else if(ab.getAbsence()==1)
+										sumAttend++;
+									}
+									else if(ab.getAbsence()==1){
 										out.print("<font color='red'>결석</font>");
-									else if(ab.getEarlier()==1)
+										sumAbsence++;
+									}
+									else if(ab.getEarlier()==1){
 										out.print("<font color='gray'>조퇴</font>");
+										sumEarlier++;
+									}
 									%>
 									</td>
 								</tr>
 								<%
 								}
+								%>
+								<tr>
+									<td colspan="2">
+										기간별 <font color='green'>출석일수 : <%=sumAttend%> </font>
+										<font color='red'>결석일수 : <%=sumAbsence%> </font>
+										<font color='gray'>조퇴일수 : <%=sumEarlier%> </font>
+									</td>
+								</tr>
+								<%
+								
 							}
 							%>
 						</table>

@@ -102,7 +102,7 @@ function searchTable(){
 // 출석 전체선택
 function allCheckA() {
 	var check = document.f.allAttend.checked;
-	alert(check);
+	//alert(check);
 	var chkObj = document.getElementsByName("rowA"); // 배열
 	if(check){
 		for(i=0; i<chkObj.length; i++){
