@@ -21,18 +21,24 @@
 		session.setAttribute("skno", ub.getK_no());
 		session.setAttribute("scno", ub.getC_no());
 		session.setAttribute("sename", edao.getEnameByEnum(ub.getE_no()));
-		msg = "로그인 성공";
-		url = request.getContextPath() + "/userPage/home.jsp";
+		%>
+		<script>
+			location.href="<%=request.getContextPath()%>/userPage/home.jsp";
+		</script>
+		<%
 	}else if(ub!=null && ub.getApproval().equals("N")){
-		msg = "관리자 승인 대기중";
-		url = request.getContextPath() + "/login.jsp";
+		%>
+		<script>
+			alert('관리자 승인 대기중');
+			location.href="<%=request.getContextPath()%>/login.jsp";
+		</script>
+		<%
 	}else{
-		msg = "로그인 실패";
-		url = request.getContextPath() + "/login.jsp";
+		%>
+		<script>
+			alert('로그인 실패');
+			location.href="<%=request.getContextPath()%>/login.jsp";
+		</script>
+		<%
 	}
 %>
-
-<script>
-	alert('<%=msg%>');
-	location.href="<%=url%>";
-</script>
