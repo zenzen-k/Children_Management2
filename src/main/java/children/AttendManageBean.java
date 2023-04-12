@@ -1,12 +1,19 @@
 package children;
 
 public class AttendManageBean {
+	private int k_no;
 	private String s_no;
 	private int attend;
 	private int absence;
 	private int earlier;
 	private String adate;
 	
+	public int getK_no() {
+		return k_no;
+	}
+	public void setK_no(int k_no) {
+		this.k_no = k_no;
+	}
 	public String getS_no() {
 		return s_no;
 	}

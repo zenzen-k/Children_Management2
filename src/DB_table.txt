@@ -326,6 +326,7 @@ commit;
 
 drop table attendManage cascade constraints;
 create table attendManage(
+	k_no number,
 	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
 	attend number default 0 check(attend in(0,1)), -- 출석여부
 	absence number default 0 check(absence in(0,1)), -- 결석여부

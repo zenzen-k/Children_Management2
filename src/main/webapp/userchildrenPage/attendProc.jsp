@@ -13,7 +13,7 @@
 	
 	// DAO 로 객체를 한번에 보낼라햇는데 학생마다 insert, update 가 달라질수있움
 	// 만약 오늘 출석한뒤 새 인원을 추가하면 insert, update가 꼬여버린당, 반복으로 dao 실행해야할듯 ,'???????
-	
+	int skno = (Integer)session.getAttribute("skno");
 	String[] allstudents = request.getParameterValues("allstudents"); // 전체 학생
 	String[] rowA = request.getParameterValues("rowA"); // 출결여부(학번들어가있음)
 	String[] rowE = request.getParameterValues("rowE"); // 조퇴여부
@@ -27,9 +27,11 @@
 	int cnt = -2;
 	for(int i=0; i<allstudents.length; i++){
 		AttendManageBean ab = new AttendManageBean();
+		ab.setK_no(skno);
 		ab.setS_no(allstudents[i]);
 		ab.setAdate(adate);
 		ab.setEarlier(0);
+		
 		
 		if(rowA != null){
 			for(int j=0; j<rowA.length; j++){
@@ -42,6 +44,9 @@
 					ab.setAbsence(1);
 				}
 			}
+		}else{
+			ab.setAttend(0);
+			ab.setAbsence(1);
 		}
 		
 		if(rowE != null){

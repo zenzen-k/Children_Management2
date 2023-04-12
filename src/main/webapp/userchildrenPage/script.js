@@ -114,3 +114,20 @@ function allCheckA() {
 		}
 	}
 }
+
+// 날짜체크
+function dateCheck(){
+	//alert(document.getElementById('start').value);
+	var startDate = document.getElementById('start').value;
+	var endDate = document.getElementById('end').value;
+	var arr = startDate.split("-");
+	var arr2 = endDate.split("-");
+	
+	var sdate = new Date(arr[0], arr[1], arr[2]);
+	var edate = new Date(arr2[0], arr2[1], arr2[2]);
+	
+	if(sdate > edate){
+		alert('시작날짜가 끝나는 날짜보다 큽니다. 다시 선택해주세요');
+		return false;
+	}
+}

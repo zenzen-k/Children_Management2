@@ -45,13 +45,14 @@ public class AttendManageDao {
 		ArrayList<chJoinBean> alist = new ArrayList<chJoinBean>();
 		String sql = "select s.s_no, s_name, attend, absence, earlier, adate from "
 				+ "(select s_no, s_name from student where c_no=? and k_no=?) s "
-				+ "left outer join (select * from ATTENDMANAGE where adate=?) a "
+				+ "left outer join (select * from ATTENDMANAGE where adate=? and k_no=?) a "
 				+ "on a.s_no = s.s_no order by s_name";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, scno);
 			ps.setInt(2, skno);
 			ps.setString(3, adate);
+			ps.setInt(4, skno);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				chJoinBean jb = new chJoinBean();
@@ -83,12 +84,13 @@ public class AttendManageDao {
 		ArrayList<chJoinBean> alist = new ArrayList<chJoinBean>();
 		String sql = "select s.s_no, s_name, attend, absence, earlier, adate from "
 				+ "(select s_no, s_name from student where k_no=?) s "
-				+ "left outer join (select * from ATTENDMANAGE where adate=?) a "
+				+ "left outer join (select * from ATTENDMANAGE where adate=? and k_no=?) a "
 				+ "on a.s_no = s.s_no order by s_name";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, skno);
 			ps.setString(2, adate);
+			ps.setInt(3, skno);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				chJoinBean jb = new chJoinBean();
@@ -170,14 +172,15 @@ public class AttendManageDao {
 	//데이터 삽입
 	public int insertAttend(AttendManageBean ab) {
 		int cnt = -1;
-		String sql = "insert into attendManage values(?, ?, ?, ?, ?)";
+		String sql = "insert into attendManage values(?, ?, ?, ?, ?, ?)";
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, ab.getS_no());
-			ps.setInt(2, ab.getAttend());
-			ps.setInt(3, ab.getAbsence());
-			ps.setInt(4, ab.getEarlier());
-			ps.setString(5, ab.getAdate());
+			ps.setInt(1, ab.getK_no());
+			ps.setString(2, ab.getS_no());
+			ps.setInt(3, ab.getAttend());
+			ps.setInt(4, ab.getAbsence());
+			ps.setInt(5, ab.getEarlier());
+			ps.setString(6, ab.getAdate());
 			cnt = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -190,5 +193,31 @@ public class AttendManageDao {
 			}
 		}
 		return cnt;
+	}
+	
+	// 개인 출석 조회
+	public ArrayList<AttendManageBean> getAttendBySno(String selectSno, String startdate, String enddate) {
+		ArrayList<AttendManageBean> alist = new ArrayList<AttendManageBean>();
+		String sql = "select * from attendManage where s_no=? and (adate between ? and ?) order by adate desc";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, selectSno);
+			ps.setString(2, startdate);
+			ps.setString(3, enddate);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				AttendManageBean ab = new AttendManageBean();
+				ab.setK_no(rs.getInt("k_no"));
+				ab.setS_no(rs.getString("s_no"));
+				ab.setAttend(rs.getInt("attend"));
+				ab.setAbsence(rs.getInt("absence"));
+				ab.setEarlier(rs.getInt("earlier"));
+				ab.setAdate(String.valueOf(rs.getDate("adate")));
+				alist.add(ab);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return alist;
 	}
 }
