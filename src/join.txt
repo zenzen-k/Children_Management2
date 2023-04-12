@@ -36,3 +36,22 @@ select u_name, id, c_no, c_name, c_age, e_name, e_no from
 (select u_name, id, c_no, c_name, c_age, e_no from 
 (select * from users where k_no = 1 and approval='Y') natural join classroom) 
 natural join emp e order by e_no;
+
+
+
+-- 일자별 전체 학생 츌석부(담임)
+select s_no, s_name from student where c_no='2';
+
+select * from ATTENDMANAGE where adate='2023-04-12';
+
+select s.s_no, s_name, attend, absence, earlier, adate from
+(select s_no, s_name from student where c_no=2 and k_no=1) s
+left outer join (select * from ATTENDMANAGE where adate='2023-04-12') a
+on a.s_no = s.s_no;
+
+
+-- 일자별 전체 학생 츌석부(원장)
+select s.s_no, s_name, attend, absence, earlier, adate from
+(select s_no, s_name from student where k_no=1) s
+left outer join (select * from ATTENDMANAGE where adate='2023-04-12') a
+on a.s_no = s.s_no;

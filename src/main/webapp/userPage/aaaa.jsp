@@ -34,7 +34,7 @@
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="<%=path%>/userPage/home.jsp">Home</a></li>
-			<li class="breadcrumb-item"><a href="<%=path%>/userPage/croomMng.jsp">학생관리</a></li>
+			<li class="breadcrumb-item"><a href="<%=path%>/userchildrenPage/children.jsp?searchC_no=0">학생관리</a></li>
 			<li class="breadcrumb-item active">유아조회</li>
 		</ol>
 	</nav>

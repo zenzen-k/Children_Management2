@@ -92,7 +92,6 @@
 				<div id="scrolltable">
 				<table class="table table-striped">
 					<thead>
-						<% //for() %>
 						<tr>
 							<th scope="col">
 								<input class="form-check-input me-1" type="checkbox" name="allchk" onclick="delAll()">

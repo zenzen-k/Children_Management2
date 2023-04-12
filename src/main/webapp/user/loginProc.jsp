@@ -19,6 +19,7 @@
 		session.setAttribute("sid", ub.getId());
 		session.setAttribute("seno", ub.getE_no());
 		session.setAttribute("skno", ub.getK_no());
+		session.setAttribute("scno", ub.getC_no());
 		session.setAttribute("sename", edao.getEnameByEnum(ub.getE_no()));
 		msg = "로그인 성공";
 		url = request.getContextPath() + "/userPage/home.jsp";

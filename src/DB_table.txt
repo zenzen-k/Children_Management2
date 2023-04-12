@@ -330,10 +330,10 @@ create table attendManage(
 	attend number default 0 check(attend in(0,1)), -- 출석여부
 	absence number default 0 check(absence in(0,1)), -- 결석여부
 	earlier number default 0 check(earlier in(0,1)), -- 조퇴여부 
-	classday number default 180, -- 수업일수
 	adate date default sysdate -- 출결날짜관리
 );
 
+-- classday number default 180, -- 수업일수
 
 
 select * from attendManage;

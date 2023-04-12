@@ -18,6 +18,7 @@
 	//세션
 	int seno = (Integer)session.getAttribute("seno"); // 직급번호
 	int skno = (Integer)session.getAttribute("skno");
+	int scno = (Integer)session.getAttribute("scno");
 	String sid = (String)session.getAttribute("sid"); 
 	String sename = (String)session.getAttribute("sename");
 	
@@ -168,8 +169,8 @@
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>출석조회</span>
+            <a href="<%=path%>/userchildrenPage/attendManage.jsp">
+              <i class="bi bi-circle"></i><span>출석관리</span>
             </a>
           </li>
           <li>

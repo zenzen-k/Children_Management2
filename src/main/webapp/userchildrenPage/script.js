@@ -83,3 +83,34 @@ function childCheck(){
 		return false;
 	}
 }
+
+
+// 출석 날짜조회 함수
+function searchTable(){
+	
+	var searchDate = document.getElementById("dat").value;
+	
+	//alert(searchDate);
+	
+	if(searchDate == ""){
+		alert('조회할 날짜를 선택하세요.');
+	}else{
+		location.href="attendManage.jsp?searchDate=" + searchDate;
+	}
+}
+
+// 출석 전체선택
+function allCheckA() {
+	var check = document.f.allAttend.checked;
+	alert(check);
+	var chkObj = document.getElementsByName("rowA"); // 배열
+	if(check){
+		for(i=0; i<chkObj.length; i++){
+			chkObj[i].checked = true;
+		}
+	}else{
+		for(i=0; i<chkObj.length; i++){
+			chkObj[i].checked = false;
+		}
+	}
+}
