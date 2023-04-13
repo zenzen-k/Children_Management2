@@ -54,9 +54,9 @@ public class StudentDao {
 				sb.setK_no(rs.getInt(k_no));
 				sb.setS_no(rs.getString("s_no"));
 				sb.setS_name(rs.getString("s_name"));
-				sb.setS_birth(rs.getString("s_birth"));
+				sb.setS_birth(String.valueOf(rs.getDate("s_birth")));
 				sb.setGender(rs.getString("gender"));
-				sb.setEntran(rs.getString("entran"));
+				sb.setEntran(String.valueOf(rs.getDate("entran")));
 				sb.setAddr1(rs.getString("addr1"));
 				sb.setAddr2(rs.getString("addr2"));
 				sb.setAddr3(rs.getString("addr3"));
@@ -95,9 +95,9 @@ public class StudentDao {
 				sb.setK_no(rs.getInt(k_no));
 				sb.setS_no(rs.getString("s_no"));
 				sb.setS_name(rs.getString("s_name"));
-				sb.setS_birth(rs.getString("s_birth"));
+				sb.setS_birth(String.valueOf(rs.getDate("s_birth")));
 				sb.setGender(rs.getString("gender"));
-				sb.setEntran(rs.getString("entran"));
+				sb.setEntran(String.valueOf(rs.getDate("entran")));
 				sb.setAddr1(rs.getString("addr1"));
 				sb.setAddr2(rs.getString("addr2"));
 				sb.setAddr3(rs.getString("addr3"));

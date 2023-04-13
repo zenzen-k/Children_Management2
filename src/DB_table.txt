@@ -357,10 +357,27 @@ drop table observe cascade constraints;
 create table observe(
 	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
 	o_no number primary key, -- 게시글 번호
+	c_no number,
 	odate date default sysdate not null, -- 게시날짜
-	writer varchar2(30) not null, -- 작성자 이름  ㅇㅇㅇ(ㅇㅇ반)
+	writer varchar2(30) not null, -- 작성자 이름  ㅇㅇㅇ(id)
+	writerid varchar2(30) not null, -- 작성자 id  ㅇㅇㅇ(id)
+	o_title varchar2(30) not null, -- 제목(관찰상황)
 	o_content varchar2(4000)
 );
+
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-14', '김주임', 'kim123', '자유선택활동', 'ㅁㅁ와 ㅇㅇ이 쌓고 있던 블록 옆에 2개를 쌓고 그 위에 자동차를 올려둔다. 그리고 자동차가 보이지 않도록 주위로 블록을 더 쌓는다. (굴뚝처럼) 그리고 ㅇㅇ을 쳐다보더니 자동차를 빼내어 구조물 가장 위에 올려두고는 “친구 나 바로 위에야”라고 말하고 아까 쌓던 블록을 자리에서 일어나 더 높이 쌓고 구멍이 보이지 않게 한다. 그리고 ㅇㅇ과 함께 구조물 가운데 일자로 다리를 놓듯이 만든다. 그리고 ㅁㅁ는 “우와 다됐다!! 여기도 있고 여기도 있고”라며 구조물의 밑과 중간을 손가락으로 집는다. 그리고 자동차 장난감을 구조물의 가운데 놓고 마치 썰매를 타는 것처럼 민다. 자동차가 구조물 밑으로 떨어지자 “야! 떨어지잖아!”라고 ㅇㅇ에게 말한다. ㅇㅇ은 “조금만 기다리라구”라고 말한다. ㅁㅁ는 자동차를 다시 집고는 구조물의 가장 높은 곳에 올리고 밀어서 자동차를 떨어뜨린다.');
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-13', '김주임', 'kim123', '실외활동', 'dd11');
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-12', '김주임', 'kim123', '자유선택활동', 'dd22');
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-10', '김주임', 'kim123', '실외활동', 'dd33');
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-07', '김주임', 'kim123', '현장학습', 'dd44');
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-06', '김주임', 'kim123', '신체활동', 'dd55');
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-05', '김주임', 'kim123', '의사소통', 'dd66');
+insert into observe values('230003', o_seq.nextval, 2, '2023-04-04', '김주임', 'kim123', '자유선택활동', 'dd77');
+insert into observe values('230003', o_seq.nextval, 2, '2023-03-31', '김주임', 'kim123', '자유선택활동', 'dd88');
+insert into observe values('230003', o_seq.nextval, 2, '2023-03-30', '김주임', 'kim123', '자유선택활동', 'dd99');
+insert into observe values('230003', o_seq.nextval, 2, '2023-03-29', '김주임', 'kim123', '자유선택활동', 'dd00');
+insert into observe values('230003', o_seq.nextval, 2, '2023-03-28', '김주임', 'kim123', '자유선택활동', 'aaa');
+insert into observe values('230003', o_seq.nextval, 2, '2023-03-27', '김주임', 'kim123', '자유선택활동', 'bbb');
 
 
 select * from observe;

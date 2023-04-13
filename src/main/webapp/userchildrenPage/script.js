@@ -131,3 +131,59 @@ function dateCheck(){
 		return false;
 	}
 }
+
+// 한글 229, 띄어쓰기 32, 엔터 13, 지우기8
+var byteCheck = 0; // 0이면 ㄴㄴ
+function byteLength(){
+	// 바이트 수 세기, 4000이상이면 못쓰게
+	//alert("key");
+	//var texta = document.getElementById("otext").value;
+	//var len = Buffer.byteLength(texta); //=> node js 설치해야 쓸수있는,,,
+	
+	//alert(e.keyCode);
+	
+	var texta = document.getElementById("otext").value;
+	var count = 0; // byte  수
+	
+	for (var i = 0; i < texta.length; i++) {
+		var chcode = texta.charCodeAt(i); // charCodeAt : 유니코드값 리턴
+		if (chcode <= 127) {
+			count++;
+		} else {
+			count += 3; // 한글 3byte처리(DB)
+		}
+	}
+	
+	//alert(sumbyte);
+	document.getElementById("byteLen").innerHTML = count;
+	if(count>4000){
+		document.getElementById("byteLen").innerHTML = "<font color=red>글자수를 초과했습니다. " + count + "</font>";
+		byteCheck = 0;
+	}else{
+		byteCheck = 1;
+	}
+}
+
+
+function obcheck(){
+	if(obform.title.value == ""){
+		alert("관찰상황(제목)을 입력하세요");
+		obform.title.focus();
+		return false;
+	}
+	if(obform.date.value == ""){
+		alert("작성 날짜를 선택하세요");
+		obform.date.focus();
+		return false;
+	}
+	if(obform.otext.value == ""){
+		alert("내용을 작성하세요");
+		obform.otext.focus();
+		return false;
+	}
+	if(byteCheck==0){
+		alert("입력 가능한 글자수를 초과했습니다. 다시 작성해주세요.");
+		obform.otext.focus();
+		return false;
+	}
+}

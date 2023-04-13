@@ -68,12 +68,11 @@
 <!-- End Page Title -->
 
 <div class="row">
+	<!-- 왼쪽 -->
 	<div class="col-lg-6" >
 		<div class="card">
 			<div class="card-body">
 				<h5 class="card-title">출석정보 조회</h5>
-				
-				
 				
 				<form name="f" action="attendProc.jsp" method="post">
 				날짜선택
@@ -82,6 +81,7 @@
 				<input type="submit" class="btn btn-outline-primary" style="float: right;" value="저장">
 				<br><br>
 				
+				<!-- 스크롤영역 -->
 				<div id="scrolltable">
 				<table class="table table-striped" id="t">
 					<thead>
@@ -134,10 +134,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
-	
-
-	<div class="col-lg-6" > 
+		
 		<div class="card">
 			<div class="card-body">
 			
@@ -145,18 +142,21 @@
 				<tr>
 					<td class="card-title"><%=searchDate %> 출석 정보</td>
 				<tr>
-					<td><font color='green'>출석일수 : <%=todayAttend%> </font></td>
-				</tr>
-				<tr>
-					<td><font color='red'>결석일수 : <%=todayAbsence%> </font></td>
-				</tr>
-				<tr>
-					<td><font color='gray'>조퇴일수 : <%=todayEarlier%> </font></td>
+					<td>
+						<font color='green'>출석인원 : <%=todayAttend%> 명</font>
+						<font color='red'>결석인원 : <%=todayAbsence%> 명</font>
+						<font color='gray'>조퇴인원 : <%=todayEarlier%> 명</font>
+					</td>
 				</tr>
 				</table>
 			
 			</div>
 		</div>
+		
+	</div>
+	
+	<!-- 오른쪽 -->
+	<div class="col-lg-6" > 
 	
 		<div class="card">
 			<div class="card-body">
@@ -180,6 +180,7 @@
 					</form>
 					<div style="margin-top: 30">
 						
+						<div id="scrolltable">
 						<table class="table table-bordered">
 							<tr>
 								<th>날짜</th>
@@ -232,6 +233,7 @@
 							}
 							%>
 						</table>
+						</div>
 					</div>
 				<%
 				} // else(selectSno != null)
