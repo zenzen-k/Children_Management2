@@ -153,4 +153,37 @@ public class ObserveDao {
 		}
 		return cnt;
 	}
+	
+	//글 데이터 가져오기(o_no)
+	public ObserveBean getObserveByOno(String o_no) {
+		ObserveBean ob = new ObserveBean();
+		String sql = "select * from observe where o_no=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, o_no);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				ob.setS_no(rs.getString("s_no"));
+				ob.setO_no(rs.getInt("o_no"));
+				ob.setC_no(rs.getInt("c_no"));
+				ob.setOdate(String.valueOf(rs.getDate("odate")));
+				ob.setWriter(rs.getString("writer"));
+				ob.setWriterid(rs.getString("writerid"));
+				ob.setO_title(rs.getString("o_title"));
+				ob.setO_content(rs.getString("o_content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ob;
+	}
 }

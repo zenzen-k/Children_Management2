@@ -6,6 +6,9 @@
 
 <%@ include file="../userPage/home_top.jsp"%>
 
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/userchildrenPage/script.js"></script>
+
 <title>Home / ChildManagement / Observations</title>
 <div class="pagetitle">
 	<h1>관찰일지</h1>
@@ -77,7 +80,7 @@
 								<tr>
 									<td align="center"><%=count--%></td>
 									<td align="center">
-										<a href=""><%=olist.get(i).getO_title()%></a>
+										<a href="observations_Update.jsp?s_no=<%=s_no%>&s_name=<%=s_name%>&s_birth=<%=s_birth%>&c_no=<%=c_no%>&o_no=<%=olist.get(i).getO_no()%>"><%=olist.get(i).getO_title()%></a>
 									</td>
 									<td align="center"><%=olist.get(i).getWriter()%>(<%=olist.get(i).getWriterid()%>)</td>
 									<td align="center"><%=olist.get(i).getOdate()%></td>
