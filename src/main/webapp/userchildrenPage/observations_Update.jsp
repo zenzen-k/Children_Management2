@@ -9,6 +9,12 @@
 
 <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path%>/userchildrenPage/script.js"></script>
+<script>
+	$(function() {
+		//alert(1);
+		byteLength();
+	});
+</script>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -50,6 +56,7 @@
 					<h5 class="card-title">관찰일지 수정</h5>
 					<form name="obform" method="post" action="observations_UpdateProc.jsp">
 						
+						<input type="hidden" name="o_no" value="<%=o_no%>">
 						<input type="hidden" name="s_no" value="<%=s_no%>">
 						<input type="hidden" name="c_no" value="<%=c_no%>">
 						<input type="hidden" name="writerid" value="<%=sid%>">
@@ -83,7 +90,7 @@
 							</div>
 						</div>
 						<div class="text-center">
-							<button type="submit" class="btn btn-primary" onclick="return obcheck()">등록하기</button>
+							<button type="submit" class="btn btn-primary" onclick="return obcheck()">수정하기</button>
 							<button type="reset" class="btn btn-secondary">취소하기</button>
 						</div>
 					</form>

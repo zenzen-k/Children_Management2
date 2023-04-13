@@ -186,4 +186,29 @@ public class ObserveDao {
 		}
 		return ob;
 	}
+	
+	//글 수정하기
+	public int updateObserve(ObserveBean ob) {
+		int cnt = -1;
+		String sql = "update observe set odate=?, o_title=?, o_content=? where o_no=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, ob.getOdate());
+			ps.setString(2, ob.getO_title());
+			ps.setString(3, ob.getO_content());
+			ps.setInt(4, ob.getO_no());
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
 }
