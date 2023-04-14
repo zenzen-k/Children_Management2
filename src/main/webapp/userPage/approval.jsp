@@ -13,7 +13,7 @@
 	ArrayList<UsersBean> ulist = udao.getApprovalForUser(skno);
 %>
 
-<title>Home / Management / Classroom</title>
+<title>Home / Management / Approval</title>
 <div class="pagetitle">
 	<h1>가입승인</h1>
 	<nav>
@@ -34,7 +34,6 @@
 				<div class="card-body">
 					<h5 class="card-title">가입승인</h5>
 					<button type="button" class="btn btn-outline-primary" style="float: right;" onclick="delSelct()">선택승인</button>
-					<!-- Table with stripped rows -->
 					
 					<form name="f" action="approval_Proc.jsp">
 					<table class="table " style="text-align: center;"><!-- datatable -->
@@ -74,7 +73,6 @@
 						</tbody>
 					</table>
 					</form>
-					<!-- End Table with stripped rows -->
 
 				</div>
 			</div>

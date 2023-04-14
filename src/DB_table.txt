@@ -386,7 +386,7 @@ commit;
 
 
 
--- 발달상황
+-- 발달평가
 
 drop table developmental cascade constraints;
 create table developmental(
@@ -404,13 +404,36 @@ commit;
 
 
 
+-- 평가기간
+
+drop table devDate cascade constraints;
+create table devDate(
+	k_no number references kindergarten(k_no) on delete cascade, 
+	sdate date not null,
+	edate date not null
+);
+
+
+select * from devDate;
+commit;
+
+
+
+
+
 -- 행사
 
 drop table schedule cascade constraints;
 create table schedule(
-	sdate date default sysdate not null,
-	title varchar2(50) not null,
-	s_content varchar2(4000) not null
+	k_no number references kindergarten(k_no) on delete cascade, 
+	syear number not null,
+	smonth number not null,
+	sdate number not null,
+	eyear number default 0,
+	emonth number default 0,
+	edate number default 0,
+	s_title varchar2(50) not null,
+	s_content varchar2(2000)
 );
 
 

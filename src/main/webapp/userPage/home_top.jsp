@@ -1,3 +1,4 @@
+<%@page import="info.ScheduleDao"%>
 <%@page import="children.AttendManageDao"%>
 <%@page import="children.PhysicalDevDao"%>
 <%@page import="children.FamilyDao"%>
@@ -31,10 +32,17 @@
 	FamilyDao fdao = FamilyDao.getInstance();
 	PhysicalDevDao pdao = PhysicalDevDao.getInstance();
 	AttendManageDao adao = AttendManageDao.getInstance();
+	ScheduleDao scdao = ScheduleDao.getInstance();
 	
 	//
 	UsersBean ub = udao.getUserInfo(sid);
 	
+	//
+	String str = null;
+	if(scno==0)
+		str = "전체";
+	else
+		str = "반별";
 %>
 
 <head>
@@ -154,6 +162,11 @@
               <i class="bi bi-circle"></i><span>가입승인</span>
             </a>
           </li>
+          <li>
+            <a href="<%=path%>/userPage/observeApproval.jsp">
+              <i class="bi bi-circle"></i><span>평가관리</span>
+            </a>
+          </li>
         </ul>
       </li><!-- End Components Nav -->
 	<% } %>
@@ -170,45 +183,39 @@
           </li>
           <li>
             <a href="<%=path%>/userchildrenPage/attendManage.jsp">
-              <i class="bi bi-circle"></i><span>출석관리</span>
+              <i class="bi bi-circle"></i><span>출석관리(<%=str%>)</span>
             </a>
           </li>
           <li>
             <a href="<%=path%>/userchildrenPage/observations.jsp">
-              <i class="bi bi-circle"></i><span>관찰일지</span>
+              <i class="bi bi-circle"></i><span>관찰일지(<%=str%>)</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>발달상황</span>
+            <a href="<%=path%>/userchildrenPage/developmental.jsp">
+              <i class="bi bi-circle"></i><span>발달평가(<%=str%>)</span>
             </a>
           </li>
         </ul>
       </li><!-- End Forms Nav -->
 	
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="<%=path%>/schedule/schedule.jsp">
           <i class="bi bi-layout-text-window-reverse"></i><span>행사관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>메모</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-        </a>
-      </li><!-- End Charts Nav -->
-
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="<%=path%>/userPage/user_profile.jsp">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
         </a>
