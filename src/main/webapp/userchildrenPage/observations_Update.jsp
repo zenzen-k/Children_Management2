@@ -7,15 +7,6 @@
 
 <%@ include file="../userPage/home_top.jsp"%>
 
-<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
-<script type="text/javascript" src="<%=path%>/userchildrenPage/script.js"></script>
-<script>
-	$(function() {
-		//alert(1);
-		byteLength();
-	});
-</script>
-
 <%
 	request.setCharacterEncoding("UTF-8");
 
@@ -30,6 +21,22 @@
 	ObserveDao odao = ObserveDao.getInstance();
 	ObserveBean ob = odao.getObserveByOno(o_no);
 %>
+
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/userchildrenPage/script.js"></script>
+<script>
+	$(function() {
+		//alert(1);
+		byteLength();
+	});
+	
+	function delob() {
+		var result = confirm("게시글을 삭제하시겠습니까?");
+		if(result){
+			location.href="observations_DeleteProc.jsp?s_no=<%=s_no%>&s_name=<%=s_name%>&s_birth=<%=s_birth%>&c_no=<%=c_no%>&o_no=<%=o_no%>";
+		}
+	}
+</script>
 
 <title>Home / ChildManagement / Observations</title>
 <div class="pagetitle">
@@ -77,7 +84,7 @@
 							<div class="col-sm-4">
 								<input type="text" class="form-control" id="title" name="o_title" value="<%=ob.getO_title()%>">
 							</div>
-							<label for="date" class="col-sm-2 col-form-label">작성일자</label>
+							<label for="date" class="col-sm-2 col-form-label">관찰일자</label>
 							<div class="col-sm-4">
 								<input type="date" class="form-control" id="date" name="odate" value="<%=ob.getOdate()%>">
 							</div>
@@ -92,6 +99,7 @@
 						<div class="text-center">
 							<button type="submit" class="btn btn-primary" onclick="return obcheck()">수정하기</button>
 							<button type="reset" class="btn btn-secondary">취소하기</button>
+							<button type="button" class="btn btn-secondary" onclick="delob()">삭제하기</button>
 						</div>
 					</form>
 

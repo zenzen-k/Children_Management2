@@ -70,7 +70,7 @@
 									<th scope="col">NO</th>
 									<th scope="col">제목</th>
 									<th scope="col">작성자</th>
-									<th scope="col">작성일</th>
+									<th scope="col">관찰일</th>
 								</tr>
 							</thead>
 							<tbody>	

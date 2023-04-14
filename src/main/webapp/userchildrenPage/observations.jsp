@@ -102,7 +102,7 @@
 					
 					<!-- 글영역 -->
 					<div class="col-lg-6" style="margin-top: 20;">
-							<a href="observations_Board.jsp?s_no=<%=sb.getS_no()%>&s_name=<%=sb.getS_name()%>&s_birth=<%=sb.getS_birth()%>">
+							<a href="observations_Board.jsp?s_no=<%=sb.getS_no()%>&s_name=<%=sb.getS_name()%>&s_birth=<%=sb.getS_birth()%>&c_no=<%=sb.getC_no()%>">
 								<b><%=sb.getS_name() %>(<%=sb.getS_no()%>)</b>
 							</a><br>
 							<b><%=sb.getS_birth()%></b><br>

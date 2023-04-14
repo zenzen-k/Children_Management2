@@ -13,7 +13,7 @@
 <jsp:setProperty property="*" name="ob"/>
 
 <%
-	/*
+	
 	ObserveDao odao = ObserveDao.getInstance();
 	int cnt = odao.updateObserve(ob);
 	
@@ -23,6 +23,13 @@
 			location.href="observations_Board.jsp?s_no=<%=ob.getS_no()%>&s_name=<%=s_name%>&s_birth=<%=s_birth%>&c_no=<%=ob.getC_no()%>";
 		</script>
 	<%
+	}else{
+	%>
+		<script>
+			alert('수정실패');
+			location.href="observations_Board.jsp?s_no=<%=ob.getS_no()%>&s_name=<%=s_name%>&s_birth=<%=s_birth%>&c_no=<%=ob.getC_no()%>";
+		</script>
+	<%
 	}
-	*/
+	
 %>

@@ -211,4 +211,24 @@ public class ObserveDao {
 		return cnt;
 	}
 	
+	// 글 삭제하기
+	public int deleteObserve(String o_no) {
+		int cnt = -1;
+		String sql = "delete observe where o_no=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, o_no);
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
 }

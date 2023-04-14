@@ -67,7 +67,7 @@
 							<div class="col-sm-4">
 								<input type="text" class="form-control" id="title" name="o_title">
 							</div>
-							<label for="date" class="col-sm-2 col-form-label">작성일자</label>
+							<label for="date" class="col-sm-2 col-form-label">관찰일자</label>
 							<div class="col-sm-4">
 								<input type="date" class="form-control" id="date" name="odate" value="<%=sdf.format(now)%>">
 							</div>
