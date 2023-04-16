@@ -1,3 +1,5 @@
+<%@page import="info.ScheduleBean"%>
+<%@page import="java.util.Date"%>
 <%@page import="info.KindergartenBean"%>
 <%@page import="info.EmpBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -12,8 +14,21 @@
 	ArrayList<KindergartenBean> kcntList = kdao.getCountByK(skno); // 유치원 전체 반별 유아 인원 수
 	
 	int sum = 0;
+
+	// 이달의행사
+	String reqMon = request.getParameter("month");
 	
-%> 
+	Date now = new Date();
+	int nowYear = now.getYear() + 1900;
+	int nowMonth = 0;
+	if(reqMon == null){
+		nowMonth = now.getMonth() + 1;
+	}else{
+		nowMonth = Integer.parseInt(reqMon);
+	}
+	
+	ArrayList<ScheduleBean> sclist = scdao.getAllSchedule(skno, nowYear, nowMonth);
+%>
 
   <title>Home</title>
 
@@ -109,16 +124,40 @@
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">3월</a></li>
-                    <li><a class="dropdown-item" href="#">4월</a></li>
-                    <li><a class="dropdown-item" href="#">5월</a></li>
+                    <li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth-1%>"><%=nowMonth-1%>월</a></li>
+                    <li><a class="dropdown-item" href="#"><%=nowMonth%>월</a></li>
+                    <li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth+1%>"><%=nowMonth+1%>월</a></li>
                   </ul>
                 </div>
                
                 <div class="card-body">
-                  <h5 class="card-title">이달의 행사 <span>| 4월</span></h5>
+                  <h5 class="card-title">이달의 행사 <span>| <%=nowMonth%>월</span></h5>
                     <div class="ps-3">
-					  
+					  <table>
+					  	<%
+					  	 if(sclist.size()==0){
+					  		 out.print("<tr class='text-muted small pt-2 ps-1'><td>등록된 일정이 없습니다.</td></tr>");
+					  	 }else{
+					  		 for(ScheduleBean sb : sclist){
+					  			 if(sb.getEdate()!=0){
+				  				 %>
+					  			 <tr class="text-muted small pt-2 ps-1" height="30">
+					  			 	<td width="40%"><%=sb.getSdate()%>일 - <%=sb.getEdate()%>일</td>
+					  			 	<td><%=sb.getS_title()%></td>
+					  			 </tr>
+					  			 <%
+					  			 }else{
+					  			 %>
+					  			 <tr class="text-muted small pt-2 ps-1" height="30">
+					  			 	<td width="40%"><%=sb.getSdate()%>일</td>
+					  			 	<td><%=sb.getS_title()%></td>
+					  			 </tr>
+					  			 <%
+					  			 }
+					  		 }
+					  	 }
+					  	%>
+					  </table>
                     </div>
                 </div>
 

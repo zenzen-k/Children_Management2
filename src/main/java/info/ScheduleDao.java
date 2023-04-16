@@ -42,7 +42,7 @@ public class ScheduleDao {
 	//월별 일정가져오기
 	public ArrayList<ScheduleBean> getAllSchedule(int k_no, int year, int month){
 		ArrayList<ScheduleBean> slist = new ArrayList<ScheduleBean>();
-		String sql = "select * from schedule where k_no=? and syear=? and smonth=? order by smonth, sdate";
+		String sql = "select * from schedule where k_no=? and syear=? and smonth=? order by smonth, sdate, emonth, edate";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, k_no);
@@ -59,7 +59,6 @@ public class ScheduleDao {
 				sb.setEmonth(rs.getInt("emonth"));
 				sb.setEdate(rs.getInt("edate"));
 				sb.setS_title(rs.getString("s_title"));
-				sb.setS_content(rs.getString("s_content"));
 				slist.add(sb);
 			}
 		} catch (SQLException e) {
@@ -130,5 +129,33 @@ public class ScheduleDao {
 			}
 		}
 		return count;
+	}
+	
+	// 일정 등록하기
+	public int insertSchedule(ScheduleBean sb) {
+		int cnt = -1;
+		String sql = "insert into schedule values(?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, sb.getK_no());
+			ps.setInt(2, sb.getSyear());
+			ps.setInt(3, sb.getSmonth());
+			ps.setInt(4, sb.getSdate());
+			ps.setInt(5, sb.getEyear());
+			ps.setInt(6, sb.getEmonth());
+			ps.setInt(7, sb.getEdate());
+			ps.setString(8, sb.getS_title());
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
 	}
 }

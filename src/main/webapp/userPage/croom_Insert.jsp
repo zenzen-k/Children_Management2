@@ -26,7 +26,7 @@
 					<h5 class="card-title">교실 등록하기</h5>
 					<form method="post" action="croom_insertProc.jsp">
 						<div class="row mb-3">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">교실명</label>
+							<label for="inputText" class="col-sm-2 col-form-label">교실명</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="inputText" name="c_name">
 							</div>

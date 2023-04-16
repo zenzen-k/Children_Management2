@@ -9,7 +9,6 @@ public class ScheduleBean {
 	private int emonth;
 	private int edate;
 	private String s_title;
-	private String s_content;
 	
 	public int getK_no() {
 		return k_no;
@@ -58,11 +57,5 @@ public class ScheduleBean {
 	}
 	public void setS_title(String s_title) {
 		this.s_title = s_title;
-	}
-	public String getS_content() {
-		return s_content;
-	}
-	public void setS_content(String s_content) {
-		this.s_content = s_content;
 	}
 }

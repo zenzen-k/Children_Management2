@@ -386,21 +386,46 @@ commit;
 
 
 
+-- 발달평가 시퀀스
+drop sequence d_seq;
+create sequence d_seq
+	increment by 1
+	start with 1
+	minvalue 1
+	nocache;
+
+
+
 -- 발달평가
 
 drop table developmental cascade constraints;
 create table developmental(
 	s_no varchar2(6) references student(s_no) on delete cascade, -- student(s_no)의 자식테이블
-	d_no number primary key,
-	scope varchar2(100),
-	d_content varchar2(4000),
-	ddate date default sysdate not null
+	d_no number primary key, -- 평가지 번호
+	c_age number, -- 연령
+	semester number check(semester in(1,2)), -- 1학기, 2학기
+	writer varchar2(30) not null, -- 작성자 이름  ㅇㅇㅇ(id)
+	writerid varchar2(30) not null, -- 작성자 id  ㅇㅇㅇ(id)
+	approve varchar2(12) not null check(approve in('승인대기','승인완료','승인거절','작성중')),
 );
 
 
 select * from developmental;
 commit;
 
+
+
+-- 발달평가 작성 글
+
+drop table devContent cascade constraints;
+create table developmental(
+	d_no varchar2(6) references developmental(d_no) on delete cascade, -- dno 자식
+	scope varchar2(100),
+	d_content varchar2(4000),
+);
+
+select * from developmental;
+commit;
 
 
 
@@ -432,10 +457,15 @@ create table schedule(
 	eyear number default 0,
 	emonth number default 0,
 	edate number default 0,
-	s_title varchar2(50) not null,
-	s_content varchar2(2000)
+	s_title varchar2(50) not null
 );
 
+insert into schedule values(1, 2023, 1, 9, 2023, 2, 21, '방학 중 방과후 과정 운영');
+insert into schedule values(1, 2023, 3, 2, 0, 0, 0, '입학식');
+insert into schedule values(1, 2023, 3, 13, 2023, 3, 15, '특수학부모 상담기간');
+insert into schedule values(1, 2023, 3, 13, 2023, 2, 17, '1학기 체격검사');
+insert into schedule values(1, 2023, 4, 17, 2023, 4, 21, '숲체험');
+insert into schedule values(1, 2023, 4, 24, 2023, 0, 0, '재난대응훈련(화재)');
 
 select * from schedule;
 commit;
