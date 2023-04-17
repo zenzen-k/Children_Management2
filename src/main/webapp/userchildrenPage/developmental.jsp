@@ -90,7 +90,7 @@
 					<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='dev_insert.jsp'">발달평가 작성하기</button>
 					<%
 				}else{
-					out.print("<font color='red'>평가기간이 아닙니다.</font> <b>" + semester + "학기 평가기간 : " + sdf.format(sdate) + " ~ " + sdf.format(edate) + "</b>");
+					out.print("<font color='red'>평가기간이 아닙니다.</font> <b>" + semester + "학기 평가기간 : " + sdf.format(sdate) + " ~ " + sdf.format(edate) + "</b> " );
 				}
 			%>
 		</div>

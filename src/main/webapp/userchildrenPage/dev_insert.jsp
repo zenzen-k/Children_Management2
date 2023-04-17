@@ -46,41 +46,47 @@
 	<div class="card">
 		<div class="card-body">
 			<h5 class="card-title"><%=year%>년 <%=semester%>학기 발달평가 작성</h5>
-				<button type="button" class="btn btn-primary" style="float: right; display: block;" onclick="location.href='dev_insertForm.jsp'">발달평가 작성하기</button>
-				<p>승인완료된 글은 아래 게시글에서 확인 불가능합니다. <a href="developmental.jsp">발달평가</a>에서 확인바랍니다.</p>
-				<p><font color="blue">승인대기중 : 작성한 게시글이 승인 대기중으로 수정 및 삭제가 불가능합니다.</font></p>
-				<p><font color="red">승인거절 : 승인이 거절된 상태로 수정 및 삭제 가능합니다.</font></p>
-				<p>작성중 : 작성중인 게시글로 작성자만 볼 수 있으며, 수정 및 삭제가 가능합니다.</p>
-				
-				<table class="table datatable">
-					<thead>
-						<tr>
-							<th scope="col">평가지번호</th>
-							<th scope="col">학생이름(학번)</th>
-							<th scope="col">평가실시일</th>
-							<th scope="col">작성자</th>
-							<th scope="col">승인상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-						if(dlist.size() == 0){
-							out.print("<tr><td colspan='5' align='center'>작성된 글이 없습니다.</td</tr>");
-						}
-						for(DevelopmentalBean db : dlist){
-						%>
+				<%if(scno == 0){
+					out.print("관리자는 평가작성이 불가능 합니다.");
+				}else{
+				%>
+					<button type="button" class="btn btn-primary" style="float: right; display: block;" onclick="location.href='dev_insertForm.jsp'">발달평가 작성하기</button>
+					<p>승인완료된 글은 아래 게시글에서 확인 불가능합니다. <a href="developmental.jsp">발달평가</a>에서 확인바랍니다.</p>
+					<p><font color="blue">승인대기중 : 작성한 게시글이 승인 대기중으로 수정 및 삭제가 불가능합니다.</font></p>
+					<p><font color="red">승인거절 : 승인이 거절된 상태로 수정 및 삭제 가능합니다.</font></p>
+					<p>작성중 : 작성중인 게시글로 작성자만 볼 수 있으며, 수정 및 삭제가 가능합니다.</p>
+					
+					<table class="table datatable">
+						<thead>
 							<tr>
-							  <th scope="row"><%=db.getD_no()%></th>
-							  <td><a href="dev_update.jsp?d_no=<%=db.getD_no()%>"><%=db.getS_no()%></a></td>
-							  <td>만 <%=db.getC_age()%>세 <%=db.getSemester()%>학기</td>
-							  <td><%=db.getWriter()%>(<%=db.getWriterid()%>)</td>
-							  <td><%=db.getApprove()%></td>
+								<th scope="col">평가지번호</th>
+								<th scope="col">학생이름(학번)</th>
+								<th scope="col">평가실시일</th>
+								<th scope="col">작성자</th>
+								<th scope="col">승인상태</th>
 							</tr>
-						<%
-						}
-						%>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<%
+							if(dlist.size() == 0){
+								out.print("<tr><td colspan='5' align='center'>작성된 글이 없습니다.</td</tr>");
+							}
+							for(DevelopmentalBean db : dlist){
+							%>
+								<tr>
+								  <th scope="row"><%=db.getD_no()%></th>
+								  <td><a href="dev_update.jsp?d_no=<%=db.getD_no()%>"><%=db.getS_no()%></a></td>
+								  <td>만 <%=db.getC_age()%>세 <%=db.getSemester()%>학기</td>
+								  <td><%=db.getWriter()%>(<%=db.getWriterid()%>)</td>
+								  <td><%=db.getApprove()%></td>
+								</tr>
+							<%
+							}
+							%>
+						</tbody>
+					</table>
+				<%
+				}%>
 			
 		</div>
 	</div>

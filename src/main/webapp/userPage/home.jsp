@@ -26,6 +26,7 @@
 	int nowMonth = 0;
 	if(reqMon == null){
 		nowMonth = now.getMonth() + 1;
+		reqMon = String.valueOf(nowMonth);
 	}else{
 		nowMonth = Integer.parseInt(reqMon);
 	}
@@ -126,10 +127,22 @@
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
-
-                    <li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth-1%>"><%=nowMonth-1%>월</a></li>
+					
+					<%
+					if(Integer.parseInt(reqMon) != 1){
+					%>
+						<li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth-1%>"><%=nowMonth-1%>월</a></li>
+					<%
+					}
+					%>
                     <li><a class="dropdown-item" href="#"><%=nowMonth%>월</a></li>
-                    <li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth+1%>"><%=nowMonth+1%>월</a></li>
+                    <%
+					if(Integer.parseInt(reqMon) != 12){
+					%>
+						<li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth-1%>"><%=nowMonth-1%>월</a></li>
+					<%
+					}
+					%>
                   </ul>
                 </div>
                
@@ -222,7 +235,7 @@
 						out.print("평가기간이 설정되지 않았습니다.");
 					}else if((ndate.after(sdate) && ndate.before(edate)) || sdate.equals(now) || edate.equals(ndate)){
 						%>
-						평가기간입니다. <br><b><%=semester%>학기 평가기간 : <%=sdf.format(sdate)%> ~ <%=sdf.format(edate)%></b>);
+						평가기간입니다. <br><b><%=semester%>학기 평가기간 : <%=sdf.format(sdate)%> ~ <%=sdf.format(edate)%></b>
 						<button type="button" class="btn btn-primary" style="float: center;" onclick="location.href='../userchildrenPage/dev_insert.jsp'">발달평가 작성하기</button>
 						<%
 					}else{
