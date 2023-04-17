@@ -34,18 +34,16 @@
 <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path%>/userchildrenPage/script.js"></script>
 <script>
-	var flug = 0;
-	
 	function plus() {
 		//alert(1);
 		document.getElementById('scopPlus').innerHTML += '<div class="row mb-3" id="plusScop"><label for="scope" class="col-sm-2 col-form-label">영역</label><div class="col-sm-4"><input type="text" class="form-control" id="scope" name="scope"></div></div>';
 		document.getElementById('scopPlus').innerHTML += '<div class="row mb-3" id="plusComent"><label for="title" class="col-sm-2 col-form-label">내용작성</label><div class="col-sm-12"><textarea class="form-control" id="d_content" name="d_content" style="height: 200px; resize: none;"></textarea></div></div>';
-		
-		flug++;
 	}
 	
 	function del() {
-		if(flug == 0){
+		var f = $('#plusScop').length;
+		
+		if(f == 0){
 			alert("영역 최소 한개는 작성해야 합니다.");
 		}else{
 			var slen = $('#plusScop').length;
