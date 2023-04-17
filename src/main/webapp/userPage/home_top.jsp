@@ -163,7 +163,7 @@
             </a>
           </li>
           <li>
-            <a href="<%=path%>/userPage/observeApproval.jsp">
+            <a href="<%=path%>/userPage/devApproval.jsp">
               <i class="bi bi-circle"></i><span>평가관리</span>
             </a>
           </li>
@@ -215,7 +215,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="<%=path%>/userPage/FAQ.jsp">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
         </a>

@@ -55,3 +55,39 @@ select s.s_no, s_name, attend, absence, earlier, adate from
 (select s_no, s_name from student where k_no=1) s
 left outer join (select * from ATTENDMANAGE where adate='2023-04-12') a
 on a.s_no = s.s_no;
+
+
+-- 평가 조회하기(일단 보류)
+--전체
+select s.s_no, s_name, d_no, s.c_age, semester, writer, writerid, approve 
+from developmental d right outer join STUDENT s 
+on d.s_no = s.s_no;
+--반별
+select s.s_no, s_name, d_no, s.c_age, semester, writer, writerid, approve 
+from developmental d right outer join 
+(select * from STUDENT where c_no=2) s
+on d.s_no = s.s_no;
+
+
+-- 학생별 평가 내용
+select s_no, sd.d_no, c_age, semester, writer, writerid, approve, scope, d_content from
+(select * from DEVELOPMENTAL where s_no = '230003') sd
+left outer join DEVCONTENT dc
+on sd.d_no = dc.d_no
+order by c_age, semester;
+
+
+-- 승인
+select s_no, s_name, d_no, c_age, semester, writer, writerid, c_name, approve
+from
+(select s_no, d_no, c_age, semester, writer, writerid, c_name, approve
+from
+(select s_no, d_no, c_age, semester, writer, writerid, c_no, approve
+from
+(select * from developmental where approve='승인대기') d
+inner join
+(select * from users where k_no=1) s
+on s.id = d.writerid)
+natural join
+(select * from classroom where k_no=1))
+natural join student;

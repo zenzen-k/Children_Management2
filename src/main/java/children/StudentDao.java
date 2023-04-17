@@ -289,4 +289,75 @@ public class StudentDao {
 		//System.out.println("cnt : " + cnt);
 		return cnt;
 	}
+	
+	//조인조회
+	public ArrayList<StudentBean> getStuCnameByCno(int k_no, int c_no) {
+		ArrayList<StudentBean> slist = new ArrayList<StudentBean>();
+		String sql = "select k_no, s_no, s_name, c_no, c_name, c_age from "
+				+ "(select * from student where k_no=? and c_no=?) "
+				+ "natural join "
+				+ "classroom order by c_age, c_no, s_name";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, k_no);
+			ps.setInt(2, c_no);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				StudentBean sb = new StudentBean();
+				sb.setK_no(k_no);
+				sb.setS_no(rs.getString("s_no"));
+				sb.setS_name(rs.getString("s_name"));
+				sb.setC_no(c_no);
+				sb.setC_age(rs.getInt("c_age"));
+				sb.setNote(rs.getString("c_name"));
+				slist.add(sb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return slist;
+	}
+	
+	public ArrayList<StudentBean> getStuCnameByCno(int k_no) {
+		ArrayList<StudentBean> slist = new ArrayList<StudentBean>();
+		String sql = "select k_no, s_no, s_name, c_no, c_name, c_age from "
+				+ "(select * from student where k_no=? ) "
+				+ "natural join "
+				+ "classroom order by c_age, c_no, s_name";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, k_no);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				StudentBean sb = new StudentBean();
+				sb.setK_no(k_no);
+				sb.setS_no(rs.getString("s_no"));
+				sb.setS_name(rs.getString("s_name"));
+				sb.setC_no(rs.getInt("c_no"));
+				sb.setNote(rs.getString("c_name"));
+				slist.add(sb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return slist;
+	}
 }

@@ -29,7 +29,6 @@
 		//alert(c_no);		
 		location.href='children.jsp?searchC_no=' + c_no;
 	}
-	
 </script>
 
 <%

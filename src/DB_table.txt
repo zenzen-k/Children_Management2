@@ -70,8 +70,8 @@ create table users(
 
 insert into users values('admin123','aaaa1111', 0, 1, 501, '김원장', '010', '1234', '1234', '123456', '1234567', 'admin123@naver.com', 'Y', 'Y');
 insert into users values('hong123','aaaa1111', 0, 2, 501, '홍원장', '010', '5678', '5678', '123456', '1234567', 'hong123@naver.com', 'Y', 'Y');
-insert into users values('kim123','aaaa1111', 1, 1, 510, '김주임', '010', '1234', '1234', '123456', '1234567', 'kim123@naver.com', 'Y', 'Y');
-insert into users values('park123','aaaa1111', 1, 1, 511, '박교사', '010', '1234', '1234', '123456', '1234567', 'park123@daum.net', 'Y', 'Y');
+insert into users values('kim123','aaaa1111', 2, 1, 510, '김주임', '010', '1234', '1234', '123456', '1234567', 'kim123@naver.com', 'Y', 'Y');
+insert into users values('park123','aaaa1111', 4, 1, 511, '박교사', '010', '1234', '1234', '123456', '1234567', 'park123@daum.net', 'Y', 'Y');
 insert into users values('aaaa1111','aaaa1111', 1, 1, 511, '에이', '010', '1234', '1234', '123456', '1234567', 'aaaa1111@daum.net', 'N', 'Y');
 insert into users values('lee123','aaaa1111', 1, 1, 512, '이교사', '010', '1234', '1234', '123456', '1234567', 'lee123@daum.net', 'N', 'Y');
 insert into users values('kang123','aaaa1111', 1, 1, 513, '강교사', '010', '1234', '1234', '123456', '1234567', 'kang123@daum.net', 'N', 'Y');
@@ -180,18 +180,20 @@ create table student(
 );
 
 
-insert into student values(1, stunum('2023-03-02', p_seq.nextval), '혜인', '2019-02-18', '여', '2023-03-02', '12345', '서울시 강남구' , '포이동', 2, 3, '계란 알러지 있음', '미참여', '');
+insert into student values(1, stunum('2023-03-02', p_seq.nextval), '혜인', '2019-02-18', '여', '2023-03-02', '12345', '서울시 강남구' , '포이동', 2, 3, '계란 알러지 있음', '참여', '');
 insert into student values(1, stunum('2023-03-02', p_seq.nextval), '해린', '2019-12-08', '남', '2023-03-02', '12345', '서울시 강남구' , '양재동', 2, 3, '없음', '미참여', '');
 insert into student values(1, stunum('2023-03-02', p_seq.nextval), '다니엘', '2019-05-19', '여', '2023-03-02', '12345', '서울시 강남구' , '도곡동', 2, 3, '다문화 가정', '미참여', '');
 insert into student values(1, stunum('2022-03-02', p_seq.nextval), '하니', '2018-08-05', '남', '2022-03-02', '12345', '서울시 강남구' , '대치동', 3, 4, '없음', '미참여', '');
-insert into student values(1, stunum('2022-03-02', p_seq.nextval), '민지', '2018-11-02', '여', '2022-03-02', '12345', '서울시 서초구' , '방배동', 3, 4, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
+insert into student values(1, stunum('2022-03-02', p_seq.nextval), '민지', '2018-11-02', '여', '2022-03-02', '12345', '서울시 서초구' , '방배동', 3, 4, '방과 후 태권도 학원에서 데리러 옴', '참여', '');
 insert into student values(1, stunum('2022-03-02', p_seq.nextval), '이서', '2018-04-30', '여', '2022-03-02', '12345', '서울시 서초구' , '방배동', 3, 4, '방과 후 피아노 학원에서 데리러 옴', '미참여', '');
-insert into student values(1, stunum('2021-03-02', p_seq.nextval), '리즈', '2017-08-05', '남', '2021-03-02', '12345', '경기도 성남시 분당구' , '정자동', 4, 5, '없음', '미참여', '');
+insert into student values(1, stunum('2021-03-02', p_seq.nextval), '리즈', '2017-08-05', '남', '2021-03-02', '12345', '경기도 성남시 분당구' , '정자동', 4, 5, '없음', '참여', '');
 insert into student values(1, stunum('2021-03-02', p_seq.nextval), '장원영', '2017-09-25', '남', '2021-03-02', '12345', '경기도 성남시 분당구' , '분당동', 4, 5, '밀가루 알러지 있음', '미참여', '');
 insert into student values(1, stunum('2021-03-02', p_seq.nextval), '레이', '2017-05-13', '여', '2021-03-02', '12345', '경기도 성남시 분당구' , '서현동', 4, 5, '없음', '미참여', '');
 insert into student values(1, stunum('2021-03-02', p_seq.nextval), '미미', '2017-06-03', '남', '2021-03-02', '12345', '인천시 남동구' , '간석동', 4, 5, '없음', '미참여', '');
 insert into student values(1, stunum('2021-03-02', p_seq.nextval), '안유진', '2017-03-21', '여', '2021-03-02', '12345', '인천시 계양구' , '계산동', 4, 5, '없음', '미참여', '');
 insert into student values(1, stunum('2021-03-02', p_seq.nextval), '이영지', '2017-12-05', '남', '2021-03-02', '12345', '인천시 부평구' , '십정동', 4, 5, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
+insert into student values(2, stunum('2021-03-02', p_seq.nextval), '고구마', '2017-12-05', '남', '2021-03-02', '12345', '인천시 부평구' , '십정동', 4, 5, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
+insert into student values(2, stunum('2021-03-02', p_seq.nextval), '감자', '2017-12-05', '여', '2021-03-02', '12345', '인천시 부평구' , '십정동', 4, 5, '방과 후 태권도 학원에서 데리러 옴', '미참여', '');
 
 select * from student;
 commit;
@@ -225,6 +227,8 @@ insert into family values(210009, '모', '김민지', '1989-12-03', '010', '5000
 insert into family values(210010, '부', '김희찰', '1993-06-02', '010', '2222', '3333');
 insert into family values(210011, '부', '신지민', '1981-02-23', '010', '1554', '8984');
 insert into family values(210012, '모', '하지영', '1989-11-13', '010', '2222', '3333');
+insert into family values(210013, '부', '고라니', '1989-12-13', '010', '2222', '3333');
+insert into family values(210014, '모', '감국', '1989-10-13', '010', '2222', '3333');
 
 select * from family;
 commit;
@@ -336,6 +340,78 @@ create table attendManage(
 
 -- classday number default 180, -- 수업일수
 
+insert into attendmanage values(1,'230003',1,0,0,'23/04/17');
+insert into attendmanage values(1,'210009',1,0,0,'23/04/17');
+insert into attendmanage values(1,'210007',1,0,0,'23/04/17');
+insert into attendmanage values(1,'210010',1,0,0,'23/04/17');
+insert into attendmanage values(1,'220005',1,0,0,'23/04/17');
+insert into attendmanage values(1,'210011',1,0,0,'23/04/17');
+insert into attendmanage values(1,'220006',1,0,0,'23/04/17');
+insert into attendmanage values(1,'210012',1,0,0,'23/04/17');
+insert into attendmanage values(1,'210008',1,0,0,'23/04/17');
+insert into attendmanage values(1,'220004',1,0,0,'23/04/17');
+insert into attendmanage values(1,'230002',1,0,0,'23/04/17');
+insert into attendmanage values(1,'230001',1,0,0,'23/04/17');
+insert into attendmanage values(1,'230003',1,0,0,'23/04/14');
+insert into attendmanage values(1,'210009',1,0,0,'23/04/14');
+insert into attendmanage values(1,'210007',1,0,0,'23/04/14');
+insert into attendmanage values(1,'210010',1,0,0,'23/04/14');
+insert into attendmanage values(1,'220005',1,0,0,'23/04/14');
+insert into attendmanage values(1,'210011',1,0,0,'23/04/14');
+insert into attendmanage values(1,'220006',1,0,0,'23/04/14');
+insert into attendmanage values(1,'210012',1,0,0,'23/04/14');
+insert into attendmanage values(1,'210008',1,0,0,'23/04/14');
+insert into attendmanage values(1,'220004',1,0,0,'23/04/14');
+insert into attendmanage values(1,'230002',1,0,0,'23/04/14');
+insert into attendmanage values(1,'230001',1,0,0,'23/04/14');
+insert into attendmanage values(1,'230003',0,0,1,'23/04/13');
+insert into attendmanage values(1,'210009',1,0,0,'23/04/13');
+insert into attendmanage values(1,'210007',1,0,0,'23/04/13');
+insert into attendmanage values(1,'210010',1,0,0,'23/04/13');
+insert into attendmanage values(1,'220005',1,0,0,'23/04/13');
+insert into attendmanage values(1,'210011',1,0,0,'23/04/13');
+insert into attendmanage values(1,'220006',1,0,0,'23/04/13');
+insert into attendmanage values(1,'210012',1,0,0,'23/04/13');
+insert into attendmanage values(1,'210008',1,0,0,'23/04/13');
+insert into attendmanage values(1,'220004',1,0,0,'23/04/13');
+insert into attendmanage values(1,'230002',1,0,0,'23/04/13');
+insert into attendmanage values(1,'230001',1,0,0,'23/04/13');
+insert into attendmanage values(1,'230003',0,1,0,'23/04/12');
+insert into attendmanage values(1,'210009',1,0,0,'23/04/12');
+insert into attendmanage values(1,'210007',1,0,0,'23/04/12');
+insert into attendmanage values(1,'210010',1,0,0,'23/04/12');
+insert into attendmanage values(1,'220005',1,0,0,'23/04/12');
+insert into attendmanage values(1,'210011',1,0,0,'23/04/12');
+insert into attendmanage values(1,'220006',1,0,0,'23/04/12');
+insert into attendmanage values(1,'210012',1,0,0,'23/04/12');
+insert into attendmanage values(1,'210008',1,0,0,'23/04/12');
+insert into attendmanage values(1,'220004',1,0,0,'23/04/12');
+insert into attendmanage values(1,'230002',1,0,0,'23/04/12');
+insert into attendmanage values(1,'230001',1,0,0,'23/04/12');
+insert into attendmanage values(1,'230003',0,1,0,'23/04/11');
+insert into attendmanage values(1,'210009',0,0,1,'23/04/11');
+insert into attendmanage values(1,'210007',1,0,0,'23/04/11');
+insert into attendmanage values(1,'210010',1,0,0,'23/04/11');
+insert into attendmanage values(1,'220005',1,0,0,'23/04/11');
+insert into attendmanage values(1,'210011',1,0,0,'23/04/11');
+insert into attendmanage values(1,'220006',1,0,0,'23/04/11');
+insert into attendmanage values(1,'210012',1,0,0,'23/04/11');
+insert into attendmanage values(1,'210008',1,0,0,'23/04/11');
+insert into attendmanage values(1,'220004',1,0,0,'23/04/11');
+insert into attendmanage values(1,'230002',1,0,0,'23/04/11');
+insert into attendmanage values(1,'230001',1,0,0,'23/04/11');
+insert into attendmanage values(1,'230003',1,0,0,'23/04/10');
+insert into attendmanage values(1,'210009',1,0,0,'23/04/10');
+insert into attendmanage values(1,'210007',1,0,0,'23/04/10');
+insert into attendmanage values(1,'210010',1,0,0,'23/04/10');
+insert into attendmanage values(1,'220005',1,0,0,'23/04/10');
+insert into attendmanage values(1,'210011',1,0,0,'23/04/10');
+insert into attendmanage values(1,'220006',1,0,0,'23/04/10');
+insert into attendmanage values(1,'210012',1,0,0,'23/04/10');
+insert into attendmanage values(1,'210008',1,0,0,'23/04/10');
+insert into attendmanage values(1,'220004',1,0,0,'23/04/10');
+insert into attendmanage values(1,'230002',1,0,0,'23/04/10');
+insert into attendmanage values(1,'230001',1,0,0,'23/04/10');
 
 select * from attendManage;
 commit;
@@ -406,9 +482,16 @@ create table developmental(
 	semester number check(semester in(1,2)), -- 1학기, 2학기
 	writer varchar2(30) not null, -- 작성자 이름  ㅇㅇㅇ(id)
 	writerid varchar2(30) not null, -- 작성자 id  ㅇㅇㅇ(id)
-	approve varchar2(12) not null check(approve in('승인대기','승인완료','승인거절','작성중')),
+	approve varchar2(12) not null check(approve in('승인대기','승인완료','승인거절','작성중'))
 );
 
+
+insert into developmental values('210007',d_seq.nextval,3,1,'김주임','kim123','승인완료');
+insert into developmental values('210007',d_seq.nextval,3,2,'김주임','kim123','승인완료');
+insert into developmental values('230001',d_seq.nextval,3,1,'김주임','kim123','승인대기');
+insert into developmental values('210009',d_seq.nextval,5,1,'박교사','park123','승인대기');
+insert into developmental values('210008',d_seq.nextval,5,1,'박교사','park123','작성중');
+insert into developmental values('210007',d_seq.nextval,5,1,'박교사','park123','승인거절');
 
 select * from developmental;
 commit;
@@ -418,13 +501,34 @@ commit;
 -- 발달평가 작성 글
 
 drop table devContent cascade constraints;
-create table developmental(
-	d_no varchar2(6) references developmental(d_no) on delete cascade, -- dno 자식
+create table devContent(
+	d_no number references developmental(d_no) on delete cascade, -- dno 자식
 	scope varchar2(100),
-	d_content varchar2(4000),
+	d_content varchar2(4000)
 );
 
-select * from developmental;
+insert into devContent values(1, '기본생활', '급간식에 관심을 보이고 포크를 사용해 스스로 먹으며 음식의 질감과 맛을 느끼 고 표현할 수 있음. 새로운 음식을 시도하는 것에 소극적이지만 식재료의 향을 탐색해보며 시도하 나가고 있음.');
+insert into devContent values(1, '신체운동', '신처를 다양하게 움직여서 평균대에서 균형 잡기, 유니바 넘기, 터널 기에서 동 과하기 등 기본운동을 할 수 있으며 몸을 한곳에서 다른 곳으로 옮기는 이동문 동에 즐겁게 참여함.');
+insert into devContent values(1, '의사소통', '상대방의 표정, 몸짓, 말에 관심을 갖고 들으며 상대방의 생각과 의도를 이하 할 수 있으며 감정과 연결하여 인식이 가능함. 교사와 함께 보기를 즐기며 책속에 그림과 등장인물, 사건에 대해 언어로 표현하기를 즐김, ');
+insert into devContent values(1, '사회관계', '또래에게 관심을 보이고 또래 주변에서 놀이하며 좋아하는 놀이를 또래나 고 사에게 저안하고 놀잇감을 나눠주며 함께 놀이하기를 즐김. 자신의 욕구나 감정 을 인식하지만 다른 사람이 알도록 적절한 말과 표정, 행동으로 나타내기위한 노력이 필요함');
+insert into devContent values(1, '예술경험', '익숙한 노래를 따라 부르거나 상황에 맞춰 가사를 개사하여 창의적으로 노래 를 부르며 자신의 생각과 느낌을 자유롭게 표현할 수 있음.');
+insert into devContent values(1, '자연탐구', '일상생활에서 익숙한 문체의 많고 적은 양을 구별하고 수에 관심을 가지, 놀 이와 일상생활에서 놀잇감이나 사물을 일대일 대응하며 1에서 10까지의 숫자 의 이름을 말하며 물체의 수량에 설 수 있음.');
+insert into devContent values(1, '총평', '자신의 경험에 대해 언어로 능숙하게 표현하지만 자신의 감정을 표현할 따라 폭발적으로 표현하거나 감정에 흔돈을 느끼는 경우가 있어 교사와 지속적인 상호작용을 동해 사회기술을 습득히 나가고 있음');
+insert into devContent values(2, '기본생활', '급간식에 관심을 보이고 포크를 사용해 스스로 먹으며 음식의 질감과 맛을 느끼 고 표현할 수 있음. 새로운 음식을 시도하는 것에 소극적이지만 식재료의 향을 탐색해보며 시도하 나가고 있음.');
+insert into devContent values(2, '신체운동', '신처를 다양하게 움직여서 평균대에서 균형 잡기, 유니바 넘기, 터널 기에서 동 과하기 등 기본운동을 할 수 있으며 몸을 한곳에서 다른 곳으로 옮기는 이동문 동에 즐겁게 참여함.');
+insert into devContent values(2, '의사소통', '상대방의 표정, 몸짓, 말에 관심을 갖고 들으며 상대방의 생각과 의도를 이하 할 수 있으며 감정과 연결하여 인식이 가능함. 교사와 함께 보기를 즐기며 책속에 그림과 등장인물, 사건에 대해 언어로 표현하기를 즐김, ');
+insert into devContent values(3, '사회관계', '또래에게 관심을 보이고 또래 주변에서 놀이하며 좋아하는 놀이를 또래나 고 사에게 저안하고 놀잇감을 나눠주며 함께 놀이하기를 즐김. 자신의 욕구나 감정 을 인식하지만 다른 사람이 알도록 적절한 말과 표정, 행동으로 나타내기위한 노력이 필요함');
+insert into devContent values(3, '예술경험', '익숙한 노래를 따라 부르거나 상황에 맞춰 가사를 개사하여 창의적으로 노래 를 부르며 자신의 생각과 느낌을 자유롭게 표현할 수 있음.');
+insert into devContent values(3, '자연탐구', '일상생활에서 익숙한 문체의 많고 적은 양을 구별하고 수에 관심을 가지, 놀 이와 일상생활에서 놀잇감이나 사물을 일대일 대응하며 1에서 10까지의 숫자 의 이름을 말하며 물체의 수량에 설 수 있음.');
+insert into devContent values(4, '기본생활', '급간식에 관심을 보이고 포크를 사용해 스스로 먹으며 음식의 질감과 맛을 느끼 고 표현할 수 있음. 새로운 음식을 시도하는 것에 소극적이지만 식재료의 향을 탐색해보며 시도하 나가고 있음.');
+insert into devContent values(4, '신체운동', '신처를 다양하게 움직여서 평균대에서 균형 잡기, 유니바 넘기, 터널 기에서 동 과하기 등 기본운동을 할 수 있으며 몸을 한곳에서 다른 곳으로 옮기는 이동문 동에 즐겁게 참여함.');
+insert into devContent values(5, '의사소통', '상대방의 표정, 몸짓, 말에 관심을 갖고 들으며 상대방의 생각과 의도를 이하 할 수 있으며 감정과 연결하여 인식이 가능함. 교사와 함께 보기를 즐기며 책속에 그림과 등장인물, 사건에 대해 언어로 표현하기를 즐김, ');
+insert into devContent values(5, '사회관계', '또래에게 관심을 보이고 또래 주변에서 놀이하며 좋아하는 놀이를 또래나 고 사에게 저안하고 놀잇감을 나눠주며 함께 놀이하기를 즐김. 자신의 욕구나 감정 을 인식하지만 다른 사람이 알도록 적절한 말과 표정, 행동으로 나타내기위한 노력이 필요함');
+insert into devContent values(6, '예술경험', '익숙한 노래를 따라 부르거나 상황에 맞춰 가사를 개사하여 창의적으로 노래 를 부르며 자신의 생각과 느낌을 자유롭게 표현할 수 있음.');
+insert into devContent values(6, '자연탐구', '일상생활에서 익숙한 문체의 많고 적은 양을 구별하고 수에 관심을 가지, 놀 이와 일상생활에서 놀잇감이나 사물을 일대일 대응하며 1에서 10까지의 숫자 의 이름을 말하며 물체의 수량에 설 수 있음.');
+
+
+select * from devContent;
 commit;
 
 
@@ -438,6 +542,7 @@ create table devDate(
 	edate date not null
 );
 
+insert into devDate values(1, '2023-04-05', '2023-04-17');
 
 select * from devDate;
 commit;

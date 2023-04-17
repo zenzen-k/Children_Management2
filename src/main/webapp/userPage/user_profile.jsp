@@ -90,7 +90,6 @@
 					<div class="tab-content pt-2">
 
 						<div class="tab-pane fade show active profile-overview" id="profile-overview">
-
 							<h5 class="card-title">내 정보</h5>
 							
 							<div class="row">

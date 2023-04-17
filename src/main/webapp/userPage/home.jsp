@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="children.DevDateBean"%>
+<%@page import="children.DevDateDao"%>
 <%@page import="info.ScheduleBean"%>
 <%@page import="java.util.Date"%>
 <%@page import="info.KindergartenBean"%>
@@ -188,22 +191,46 @@
 	   <!-- Right side columns -->
         <div class="col-lg-4">
 	   	  
-          <!-- 시스템 공지사항 -->
+          <!-- 평가기간 -->
           <div class="card">
             <div class="card-body pb-0">
             
-              <h5 class="card-title">시스템 공지사항</h5>
+              <h5 class="card-title">발달평가</h5>
+				<%
+					DevDateDao dedao = DevDateDao.getInstance();
+					DevDateBean deb = dedao.getAllDevdate(skno);
+					
+					// 학기~
+					int mon = now.getMonth();
 
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="<%=path%>/bootstrap/assets/img/news-1.jpg" alt="">
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-              </div><!-- End posts-->
-
+					//System.out.println("mon : " + mon);
+					String semester = "";
+					if(mon>=2 && mon<=7){
+						semester = "1";
+					}else{
+						semester = "2";
+					}
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					//문자열 -> 날짜로
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					Date ndate = formatter.parse(sdf.format(now));
+					Date sdate = formatter.parse(deb.getSdate());
+					Date edate = formatter.parse(deb.getEdate());
+					
+					if(deb == null){
+						out.print("평가기간이 설정되지 않았습니다.");
+					}else if((ndate.after(sdate) && ndate.before(edate)) || sdate.equals(now) || edate.equals(ndate)){
+						%>
+						평가기간입니다. <br><b><%=semester%>학기 평가기간 : <%=sdf.format(sdate)%> ~ <%=sdf.format(edate)%></b>);
+						<button type="button" class="btn btn-primary" style="float: center;" onclick="location.href='../userchildrenPage/dev_insert.jsp'">발달평가 작성하기</button>
+						<%
+					}else{
+						out.print("<font color='red'>평가기간이 아닙니다.</font><br> <b>" + semester + "학기 평가기간 : " + sdf.format(sdate) + " ~ " + sdf.format(edate) + "</b>");
+					}
+				%>
             </div>
-          </div><!-- End  시스템 공지사항 -->
+          </div><!-- End  평가기간 -->
 
         </div><!-- End Right side columns -->
 
