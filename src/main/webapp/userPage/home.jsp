@@ -26,7 +26,6 @@
 	int nowMonth = 0;
 	if(reqMon == null){
 		nowMonth = now.getMonth() + 1;
-		reqMon = String.valueOf(nowMonth);
 	}else{
 		nowMonth = Integer.parseInt(reqMon);
 	}
@@ -63,6 +62,9 @@
                   <h5 class="card-title">유치원 현황</h5>
                     <div class="ps-3">
 					  
+					  <%if(kcntList.size()==0){
+					  		out.print("학생을 등록해주세요");
+					  	}else{ %>
 					  <table width="100%" >
 					  	<%
 					  	for(KindergartenBean kb : kcntList){
@@ -73,7 +75,7 @@
 						  		<td align="center"><span class="text-success small pt-1 fw-bold"><%=kb.getK_no() %></span>명</td>
 						  	</tr>
 					  	<%
-					  	}
+					  	}//for
 					  	%>
 					  </table>
 					  <hr>
@@ -84,6 +86,11 @@
 					  		<td align="center"><span class="text-success small pt-1 fw-bold"><%=sum %></span>명</td>
 					  	</tr>
 					  </table>
+					  
+					  <%
+					  	}
+					  %>
+					  
                     </div>
                 </div>
                 
@@ -97,6 +104,11 @@
                 <div class="card-body">
                   <h5 class="card-title">교사 현황</h5>
                     <div class="ps-3">
+                    
+                     <%if(ecntList.size()==0){
+					  		out.print("등록된 교사가 없습니다.");
+					  	}else{ %>
+                    
 					  <table width="100%" height="125">
 					  <%//for문사용, 교사직급, count값 
 					  for(EmpBean eb : ecntList){
@@ -108,9 +120,14 @@
 					  		</td>
 					  	</tr>
 					  <%
-					  }
+					  } //for
 					  %>
 					  </table>
+					  
+					  <%
+					  	}//if
+					  %>
+					  
                     </div>
                 </div>
 
@@ -129,7 +146,7 @@
                     </li>
 					
 					<%
-					if(Integer.parseInt(reqMon) != 1){
+					if(nowMonth != 1){
 					%>
 						<li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth-1%>"><%=nowMonth-1%>월</a></li>
 					<%
@@ -137,9 +154,9 @@
 					%>
                     <li><a class="dropdown-item" href="#"><%=nowMonth%>월</a></li>
                     <%
-					if(Integer.parseInt(reqMon) != 12){
+					if(nowMonth != 12){
 					%>
-						<li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth-1%>"><%=nowMonth-1%>월</a></li>
+						<li><a class="dropdown-item" href="home.jsp?month=<%=nowMonth+1%>"><%=nowMonth+1%>월</a></li>
 					<%
 					}
 					%>
@@ -179,25 +196,6 @@
 
               </div>
             </div><!-- End 이달의 행사 -->
-			
-			
-			<!-- 유치원 공지사항 -->
-          <div class="card">
-            <div class="card-body pb-0">
-            
-              <h5 class="card-title">유치원 공지사항</h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End  유치원 공지사항 -->
-
-
           
         </div> 
 	  </div><!-- End Left side columns -->
@@ -228,18 +226,21 @@
 					//문자열 -> 날짜로
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 					Date ndate = formatter.parse(sdf.format(now));
-					Date sdate = formatter.parse(deb.getSdate());
-					Date edate = formatter.parse(deb.getEdate());
 					
 					if(deb == null){
 						out.print("평가기간이 설정되지 않았습니다.");
-					}else if((ndate.after(sdate) && ndate.before(edate)) || sdate.equals(now) || edate.equals(ndate)){
-						%>
-						평가기간입니다. <br><b><%=semester%>학기 평가기간 : <%=sdf.format(sdate)%> ~ <%=sdf.format(edate)%></b>
-						<button type="button" class="btn btn-primary" style="float: center;" onclick="location.href='../userchildrenPage/dev_insert.jsp'">발달평가 작성하기</button>
-						<%
 					}else{
-						out.print("<font color='red'>평가기간이 아닙니다.</font><br> <b>" + semester + "학기 평가기간 : " + sdf.format(sdate) + " ~ " + sdf.format(edate) + "</b>");
+						Date sdate = formatter.parse(deb.getSdate());
+						Date edate = formatter.parse(deb.getEdate());
+						
+						if((ndate.after(sdate) && ndate.before(edate)) || sdate.equals(now) || edate.equals(ndate)){
+							%>
+							평가기간입니다. <br><b><%=semester%>학기 평가기간 : <%=sdf.format(sdate)%> ~ <%=sdf.format(edate)%></b>
+							<button type="button" class="btn btn-primary" style="float: center;" onclick="location.href='../userchildrenPage/dev_insert.jsp'">발달평가 작성하기</button>
+							<%
+						}else{
+							out.print("<font color='red'>평가기간이 아닙니다.</font><br> <b>" + semester + "학기 평가기간 : " + sdf.format(sdate) + " ~ " + sdf.format(edate) + "</b>");
+						}
 					}
 				%>
             </div>

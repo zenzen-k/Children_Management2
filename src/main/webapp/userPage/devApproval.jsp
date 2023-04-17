@@ -144,7 +144,7 @@
 				<tbody>
 					<%
 					if(djlist.size() == 0){
-						out.print("<tr><td colspan='6' align='center'>승인요청된 글이 없습니다.</td></tr>");
+						out.print("<tr><td colspan='7' align='center'>승인요청된 글이 없습니다.</td></tr>");
 					}else{
 						int no = 1;
 						for(DevJoin dj : djlist){

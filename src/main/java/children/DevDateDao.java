@@ -41,12 +41,13 @@ public class DevDateDao {
 	
 	// 날짜 불러오기
 	public DevDateBean getAllDevdate(int k_no) {
-		DevDateBean db = new DevDateBean();
+		DevDateBean db = null;
 		String sql = "select * from devdate where k_no=" + k_no;
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			if(rs.next()) {
+				db = new DevDateBean();
 				db.setK_no(k_no);
 				db.setSdate(String.valueOf(rs.getDate("sdate")));
 				db.setEdate(String.valueOf(rs.getDate("edate")));

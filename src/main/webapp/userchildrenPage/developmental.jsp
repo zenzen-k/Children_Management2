@@ -44,8 +44,9 @@
 	//문자열 -> 날짜로
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	Date ndate = formatter.parse(sdf.format(now));
-	Date sdate = formatter.parse(deb.getSdate());
-	Date edate = formatter.parse(deb.getEdate());
+	if(deb != null){
+		
+	}
 	
 	// 관리자 . 반 구분
 	if(scno == 0){
@@ -84,13 +85,18 @@
 			<%
 				if(deb == null){
 					out.print("평가기간이 설정되지 않았습니다.");
-				}else if((ndate.after(sdate) && ndate.before(edate)) || sdate.equals(now) || edate.equals(ndate)){
-					%>
-					평가기간입니다. <b><%=semester%>학기 평가기간 : <%=sdf.format(sdate)%> ~ <%=sdf.format(edate)%></b>);
-					<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='dev_insert.jsp'">발달평가 작성하기</button>
-					<%
-				}else{
-					out.print("<font color='red'>평가기간이 아닙니다.</font> <b>" + semester + "학기 평가기간 : " + sdf.format(sdate) + " ~ " + sdf.format(edate) + "</b> " );
+				}else{ 
+					Date sdate = formatter.parse(deb.getSdate());
+					Date edate = formatter.parse(deb.getEdate());
+					
+					if((ndate.after(sdate) && ndate.before(edate)) || sdate.equals(now) || edate.equals(ndate)){
+						%>
+						평가기간입니다. <b><%=semester%>학기 평가기간 : <%=sdf.format(sdate)%> ~ <%=sdf.format(edate)%></b>);
+						<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='dev_insert.jsp'">발달평가 작성하기</button>
+						<%
+					}else{
+						out.print("<font color='red'>평가기간이 아닙니다.</font> <b>" + semester + "학기 평가기간 : " + sdf.format(sdate) + " ~ " + sdf.format(edate) + "</b> " );
+					}
 				}
 			%>
 		</div>
@@ -118,7 +124,7 @@
 					if(slist == null){
 						out.print("<tr><td colspan='4'>현재 반 미배정 상태입니다. 유치원 관리자에게 문의바랍니다.</td><tr>");
 					}else if(slist.size() == 0){
-						out.print("<tr><td colspan='4'>등록된 학생이 없습니다.</td><tr>");
+						out.print("<tr><td colspan='4' align='center'>등록된 학생이 없습니다.</td><tr>");
 					}else{
 						int no = 1;
 						for(StudentBean sb : slist){
