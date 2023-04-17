@@ -107,7 +107,7 @@
 								<%
 							} // if
 						} else {
-							if(scb.getEyear()==0){ // 하루일정
+							if(scb.getEmonth()==0){ // 하루일정
 								%>
 								<tr class="sctr">
 									<td><%=scb.getSmonth()%>월 <%=scb.getSdate()%>일</td>
