@@ -93,11 +93,11 @@
 			
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-					<button class="accordion-button collapsed" data-bs-target="#faqsOne-4" type="button" data-bs-toggle="collapse">
+					<button class="accordion-button collapsed" data-bs-target="#faqsOne-5" type="button" data-bs-toggle="collapse">
 					발달평가 작성을 했는데 학생관리 - 발달평가 창에서 해당 학생을 클릭했을 때 나오지 않아요.
 					</button>
 				</h2>
-				<div id="faqsOne-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
+				<div id="faqsOne-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
 					<div class="accordion-body">
 					발달평가의 최종승인이 되지 않았기 때문입니다. 따라서 관리자(원장)에게 승인 요청을 문의하세요.
 					</div>
@@ -106,11 +106,11 @@
 
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-					<button class="accordion-button collapsed" data-bs-target="#faqsOne-5" type="button" data-bs-toggle="collapse">
+					<button class="accordion-button collapsed" data-bs-target="#faqsOne-6" type="button" data-bs-toggle="collapse">
 					발달평가에서 승인 단계가 궁금해요.
 					</button>
 				</h2>
-				<div id="faqsOne-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
+				<div id="faqsOne-6" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
 					<div class="accordion-body">
 						승인 단계에는 작성중 - 승인대기 - 승인완료 - 승인거절 이 존재합니다.<br>
 						<b>작성중</b>은 현재 담당 교사가 발달평가를 작성중이며, 내용의 수정이 가능합니다. 또한 해당 글은 작성자만 볼 수 있습니다.<br>
@@ -124,11 +124,11 @@
 			
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-					<button class="accordion-button collapsed" data-bs-target="#faqsOne-4" type="button" data-bs-toggle="collapse">
+					<button class="accordion-button collapsed" data-bs-target="#faqsOne-7" type="button" data-bs-toggle="collapse">
 					유아 전체 조회에는 학생이 뜨는데, 출석관리, 관찰일지, 발달평가에는 학생이 뜨지 않아요
 					</button>
 				</h2>
-				<div id="faqsOne-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
+				<div id="faqsOne-7" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
 					<div class="accordion-body">
 					유아 전체 조회는 모든 교사가 할 수 있지만 그외 출석관리, 관찰일지, 발달평가 작성은 담당 교실에 한해서만 가능합니다.<br>
 					반 배정에 관해서는 관리자(원장)에게 문의바랍니다.
